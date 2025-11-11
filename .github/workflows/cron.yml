@@ -3,7 +3,7 @@ name: Run Python script every 15 min
 on:
   schedule:
     - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
-  workflow_dispatch:         # bouton "Run workflow" manuel
+  workflow_dispatch:
 
 concurrency:
   group: python-cron
@@ -37,7 +37,6 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # Crée tous les dossiers attendus par ton script
       - name: Ensure required folders exist
         run: |
           mkdir -p data/stats
@@ -48,19 +47,11 @@ jobs:
           mkdir -p images
           mkdir -p staticdata
 
-      # (facultatif) petit debug d’arborescence
-      - name: Debug – show repo tree
-        run: |
-          pwd
-          ls -la
-          echo "--------- tracked files ---------"
-          git ls-files
-
-      # Lance ton script (s'il n'est pas à la racine, remplace main.py par son chemin)
+      # Exécute ton script Python
       - name: Run script
         run: python main.py
 
-      # Commit/push des fichiers générés si le script a modifié quelque chose
+      # Commit/push des fichiers générés (si besoin)
       - name: Commit & push changes (if any)
         run: |
           git config user.name  "github-actions[bot]"
@@ -73,23 +64,16 @@ jobs:
             echo "No changes to commit."
           fi
 
-      # ------------ Notifications Discord (JSON corrigé) ------------
-      - name: Notify Discord (success)
+      # ------------ Envoie l'URL dans Discord ------------
+      - name: Send latest URL to Discord
         if: success()
         run: |
-          MSG="✅ **${REPO}** – run #${RUN_NUMBER} réussi\n\
-          • Actor: ${ACTOR}\n\
-          • Commit: ${SHA}\n\
-          • Logs: https://github.com/${REPO}/actions/runs/${RUN_ID}"
-          PAYLOAD=$(echo "{\"content\": \"$MSG\"}")
-          curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
+          if [ -f latest_leaderboard_url.txt ]; then
+            URL=$(cat latest_leaderboard_url.txt | tr -d '\n\r')
+            MSG="📢 Nouveau leaderboard disponible : ${URL}"
+          else
+            MSG="⚠️ Aucune URL trouvée (fichier latest_leaderboard_url.txt manquant)"
+          fi
 
-      - name: Notify Discord (failure)
-        if: failure()
-        run: |
-          MSG="❌ **${REPO}** – run #${RUN_NUMBER} a échoué\n\
-          • Actor: ${ACTOR}\n\
-          • Commit: ${SHA}\n\
-          • Logs: https://github.com/${REPO}/actions/runs/${RUN_ID}"
           PAYLOAD=$(echo "{\"content\": \"$MSG\"}")
           curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
