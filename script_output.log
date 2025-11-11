@@ -9,69 +9,69 @@ Téléchargement: /Minecraft/usercache.json -> data/usercache/usercache.json
 📁 Listing direct de: /Minecraft/world/stats
 🔄 Traitement de 3f1eb309-0fee-4b85-83ad-27cd928bd167.json
 Téléchargement: /Minecraft/world/stats/3f1eb309-0fee-4b85-83ad-27cd928bd167.json -> data/stats/3f1eb309-0fee-4b85-83ad-27cd928bd167.json
-✓ Succès: 26557 bytes transférés
+✓ Succès: 33820 bytes transférés
 🔄 Traitement de 60a6c606-52a1-41ce-a0b9-91b76d72fb28.json
 Téléchargement: /Minecraft/world/stats/60a6c606-52a1-41ce-a0b9-91b76d72fb28.json -> data/stats/60a6c606-52a1-41ce-a0b9-91b76d72fb28.json
 ✓ Succès: 3888 bytes transférés
 🔄 Traitement de 9337f3e8-0e5a-449d-97fd-37d1356c72c0.json
 Téléchargement: /Minecraft/world/stats/9337f3e8-0e5a-449d-97fd-37d1356c72c0.json -> data/stats/9337f3e8-0e5a-449d-97fd-37d1356c72c0.json
-✓ Succès: 9082 bytes transférés
+✓ Succès: 9484 bytes transférés
 🔄 Traitement de 9728a164-b9f6-4cb8-958c-b9b02b363a15.json
 Téléchargement: /Minecraft/world/stats/9728a164-b9f6-4cb8-958c-b9b02b363a15.json -> data/stats/9728a164-b9f6-4cb8-958c-b9b02b363a15.json
-✓ Succès: 1687 bytes transférés
+✓ Succès: 2250 bytes transférés
 🔄 Traitement de c39183a4-3276-412f-8a0a-959438dddf62.json
 Téléchargement: /Minecraft/world/stats/c39183a4-3276-412f-8a0a-959438dddf62.json -> data/stats/c39183a4-3276-412f-8a0a-959438dddf62.json
-✓ Succès: 12135 bytes transférés
+✓ Succès: 12729 bytes transférés
 🔄 Traitement de d003e788-5098-45bf-b5f6-8e5b7c1098b3.json
 Téléchargement: /Minecraft/world/stats/d003e788-5098-45bf-b5f6-8e5b7c1098b3.json -> data/stats/d003e788-5098-45bf-b5f6-8e5b7c1098b3.json
-✓ Succès: 5503 bytes transférés
+✓ Succès: 5850 bytes transférés
 🔄 Traitement de d7c0d5f8-050d-405f-96af-8bb842d4ef48.json
 Téléchargement: /Minecraft/world/stats/d7c0d5f8-050d-405f-96af-8bb842d4ef48.json -> data/stats/d7c0d5f8-050d-405f-96af-8bb842d4ef48.json
-✓ Succès: 14060 bytes transférés
+✓ Succès: 16895 bytes transférés
 📁 Listing direct de: /Minecraft/world/playerdata
 🔄 Traitement de 3f1eb309-0fee-4b85-83ad-27cd928bd167.dat
 Téléchargement: /Minecraft/world/playerdata/3f1eb309-0fee-4b85-83ad-27cd928bd167.dat -> data/playerdata/3f1eb309-0fee-4b85-83ad-27cd928bd167.dat
-✓ Succès: 29279 bytes transférés
+✓ Succès: 31459 bytes transférés
 🔄 Traitement de 60a6c606-52a1-41ce-a0b9-91b76d72fb28.dat
 Téléchargement: /Minecraft/world/playerdata/60a6c606-52a1-41ce-a0b9-91b76d72fb28.dat -> data/playerdata/60a6c606-52a1-41ce-a0b9-91b76d72fb28.dat
 ✓ Succès: 5690 bytes transférés
 🔄 Traitement de 9337f3e8-0e5a-449d-97fd-37d1356c72c0.dat
 Téléchargement: /Minecraft/world/playerdata/9337f3e8-0e5a-449d-97fd-37d1356c72c0.dat -> data/playerdata/9337f3e8-0e5a-449d-97fd-37d1356c72c0.dat
-✓ Succès: 9064 bytes transférés
+✓ Succès: 8479 bytes transférés
 🔄 Traitement de 9728a164-b9f6-4cb8-958c-b9b02b363a15.dat
 Téléchargement: /Minecraft/world/playerdata/9728a164-b9f6-4cb8-958c-b9b02b363a15.dat -> data/playerdata/9728a164-b9f6-4cb8-958c-b9b02b363a15.dat
-✓ Succès: 2834 bytes transférés
+✓ Succès: 4790 bytes transférés
 🔄 Traitement de c39183a4-3276-412f-8a0a-959438dddf62.dat
 Téléchargement: /Minecraft/world/playerdata/c39183a4-3276-412f-8a0a-959438dddf62.dat -> data/playerdata/c39183a4-3276-412f-8a0a-959438dddf62.dat
-✓ Succès: 10053 bytes transférés
+✓ Succès: 9987 bytes transférés
 🔄 Traitement de d003e788-5098-45bf-b5f6-8e5b7c1098b3.dat
 Téléchargement: /Minecraft/world/playerdata/d003e788-5098-45bf-b5f6-8e5b7c1098b3.dat -> data/playerdata/d003e788-5098-45bf-b5f6-8e5b7c1098b3.dat
-✓ Succès: 5195 bytes transférés
+✓ Succès: 5357 bytes transférés
 🔄 Traitement de d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat
 Téléchargement: /Minecraft/world/playerdata/d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat -> data/playerdata/d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat
-✓ Succès: 23953 bytes transférés
+✓ Succès: 25496 bytes transférés
 📁 Listing direct de: /Minecraft/world/advancements
 🔄 Traitement de 3f1eb309-0fee-4b85-83ad-27cd928bd167.json
 Téléchargement: /Minecraft/world/advancements/3f1eb309-0fee-4b85-83ad-27cd928bd167.json -> data/advancements/3f1eb309-0fee-4b85-83ad-27cd928bd167.json
-✓ Succès: 299193 bytes transférés
+✓ Succès: 321643 bytes transférés
 🔄 Traitement de 60a6c606-52a1-41ce-a0b9-91b76d72fb28.json
 Téléchargement: /Minecraft/world/advancements/60a6c606-52a1-41ce-a0b9-91b76d72fb28.json -> data/advancements/60a6c606-52a1-41ce-a0b9-91b76d72fb28.json
 ✓ Succès: 54881 bytes transférés
 🔄 Traitement de 9337f3e8-0e5a-449d-97fd-37d1356c72c0.json
 Téléchargement: /Minecraft/world/advancements/9337f3e8-0e5a-449d-97fd-37d1356c72c0.json -> data/advancements/9337f3e8-0e5a-449d-97fd-37d1356c72c0.json
-✓ Succès: 107383 bytes transférés
+✓ Succès: 118002 bytes transférés
 🔄 Traitement de 9728a164-b9f6-4cb8-958c-b9b02b363a15.json
 Téléchargement: /Minecraft/world/advancements/9728a164-b9f6-4cb8-958c-b9b02b363a15.json -> data/advancements/9728a164-b9f6-4cb8-958c-b9b02b363a15.json
-✓ Succès: 16603 bytes transférés
+✓ Succès: 40943 bytes transférés
 🔄 Traitement de c39183a4-3276-412f-8a0a-959438dddf62.json
 Téléchargement: /Minecraft/world/advancements/c39183a4-3276-412f-8a0a-959438dddf62.json -> data/advancements/c39183a4-3276-412f-8a0a-959438dddf62.json
 ✓ Succès: 133788 bytes transférés
 🔄 Traitement de d003e788-5098-45bf-b5f6-8e5b7c1098b3.json
 Téléchargement: /Minecraft/world/advancements/d003e788-5098-45bf-b5f6-8e5b7c1098b3.json -> data/advancements/d003e788-5098-45bf-b5f6-8e5b7c1098b3.json
-✓ Succès: 57232 bytes transférés
+✓ Succès: 58774 bytes transférés
 🔄 Traitement de d7c0d5f8-050d-405f-96af-8bb842d4ef48.json
 Téléchargement: /Minecraft/world/advancements/d7c0d5f8-050d-405f-96af-8bb842d4ef48.json -> data/advancements/d7c0d5f8-050d-405f-96af-8bb842d4ef48.json
-✓ Succès: 239540 bytes transférés
+✓ Succès: 257229 bytes transférés
 Stats saved to total.csv
 
 Generating top leaderboards image...

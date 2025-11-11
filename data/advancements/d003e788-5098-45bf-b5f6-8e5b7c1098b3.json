@@ -41,10 +41,12 @@
       "silver_birch_forest": "2025-11-10 15:05:44 +0100",
       "temperate_grove": "2025-11-11 03:15:04 +0100",
       "cold_river": "2025-11-10 12:02:03 +0100",
+      "ashen_woodland": "2025-11-11 22:16:37 +0100",
       "shrubland": "2025-11-11 03:18:13 +0100",
       "pine_slopes": "2025-11-11 03:15:25 +0100",
       "old_growth_bayou": "2025-11-11 03:22:53 +0100",
       "scorching_caves": "2025-11-10 14:42:09 +0100",
+      "grassy_beach": "2025-11-11 22:03:19 +0100",
       "boreal_forest": "2025-11-10 14:35:35 +0100",
       "rocky_meadow": "2025-11-10 14:25:39 +0100",
       "blackwood_taiga": "2025-11-10 14:18:59 +0100",
@@ -65,9 +67,11 @@
       "silver_birch_forest": "2025-11-10 15:05:44 +0100",
       "temperate_grove": "2025-11-11 03:15:04 +0100",
       "cold_river": "2025-11-10 12:02:03 +0100",
+      "ashen_woodland": "2025-11-11 22:16:37 +0100",
       "shrubland": "2025-11-11 03:18:13 +0100",
       "pine_slopes": "2025-11-11 03:15:25 +0100",
       "old_growth_bayou": "2025-11-11 03:22:53 +0100",
+      "grassy_beach": "2025-11-11 22:03:19 +0100",
       "boreal_forest": "2025-11-10 14:35:35 +0100",
       "rocky_meadow": "2025-11-10 14:25:39 +0100",
       "blackwood_taiga": "2025-11-10 14:18:59 +0100",
@@ -249,6 +253,8 @@
     "criteria": {
       "minecraft:cold_ocean": "2025-11-10 20:20:27 +0100",
       "minecraft:flower_forest": "2025-11-11 03:22:33 +0100",
+      "minecraft:dark_forest": "2025-11-11 21:45:38 +0100",
+      "minecraft:mushroom_fields": "2025-11-11 22:06:10 +0100",
       "minecraft:forest": "2025-11-10 12:35:03 +0100",
       "minecraft:deep_ocean": "2025-11-10 20:22:09 +0100",
       "minecraft:river": "2025-11-10 12:02:04 +0100",
@@ -270,7 +276,9 @@
     "criteria": {
       "roseate_ball": "2025-11-10 19:39:15 +0100",
       "poke_ball": "2025-11-10 12:02:18 +0100",
-      "premier_ball": "2025-11-10 17:51:16 +0100"
+      "premier_ball": "2025-11-10 17:51:16 +0100",
+      "azure_ball": "2025-11-11 22:04:48 +0100",
+      "citrine_ball": "2025-11-11 22:00:57 +0100"
     },
     "done": false
   },
@@ -280,7 +288,9 @@
       "lure_ball": "2025-11-10 22:05:02 +0100",
       "poke_ball": "2025-11-10 12:02:18 +0100",
       "master_ball": "2025-11-10 14:37:55 +0100",
-      "premier_ball": "2025-11-10 17:51:16 +0100"
+      "premier_ball": "2025-11-10 17:51:16 +0100",
+      "azure_ball": "2025-11-11 22:04:48 +0100",
+      "citrine_ball": "2025-11-11 22:00:57 +0100"
     },
     "done": false
   },
@@ -682,6 +692,7 @@
   },
   "biomeswevegone:biomeswevegone/adventure/oh_the_biomes_weve_gone": {
     "criteria": {
+      "biomeswevegone:cika_woods": "2025-11-11 21:30:36 +0100",
       "biomeswevegone:maple_taiga": "2025-11-10 12:35:28 +0100",
       "biomeswevegone:allium_shrubland": "2025-11-10 12:45:00 +0100"
     },
@@ -2098,6 +2109,12 @@
     },
     "done": true
   },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_something": "2025-11-11 15:54:39 +0100"
+    },
+    "done": true
+  },
   "mega_showdown:recipes/misc/lisia_mega_tiara": {
     "criteria": {
       "has_keystone": "2025-11-11 17:18:30 +0100"
@@ -2107,12 +2124,6 @@
   "mega_showdown:mega_showdown/mega/find_keystone": {
     "criteria": {
       "obtained_keystone": "2025-11-11 17:18:30 +0100"
-    },
-    "done": true
-  },
-  "cobblemon_ultrabeast:root": {
-    "criteria": {
-      "enter_dimension": "2025-11-11 17:20:37 +0100"
     },
     "done": true
   },
@@ -2176,12 +2187,6 @@
     },
     "done": true
   },
-  "minecraft:adventure/root": {
-    "criteria": {
-      "killed_something": "2025-11-11 15:54:39 +0100"
-    },
-    "done": true
-  },
   "mega_showdown:recipes/misc/megabracelet": {
     "criteria": {
       "has_keystone": "2025-11-11 17:18:30 +0100"
@@ -2200,12 +2205,6 @@
     },
     "done": true
   },
-  "mega_showdown:mega_showdown/mega/mega_evolve": {
-    "criteria": {
-      "mega_evo_any": "2025-11-11 17:19:11 +0100"
-    },
-    "done": true
-  },
   "mega_showdown:recipes/misc/may_bracelet": {
     "criteria": {
       "has_keystone": "2025-11-11 17:18:30 +0100"
@@ -2217,6 +2216,60 @@
       "has_keystone": "2025-11-11 17:18:30 +0100"
     },
     "done": true
+  },
+  "mega_showdown:mega_showdown/mega/mega_evolve": {
+    "criteria": {
+      "mega_evo_any": "2025-11-11 17:19:11 +0100"
+    },
+    "done": true
+  },
+  "cobblemon_ultrabeast:root": {
+    "criteria": {
+      "enter_dimension": "2025-11-11 17:20:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/arrow": {
+    "criteria": {
+      "has_feather": "2025-11-11 21:55:13 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:first_shiny_catch": {
+    "criteria": {
+      "catch": "2025-11-11 21:55:58 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/citrine_rod": {
+    "criteria": {
+      "has_ball": "2025-11-11 22:00:57 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/cherish_rod": {
+    "criteria": {
+      "has_ball": "2025-11-11 22:00:57 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/azure_rod": {
+    "criteria": {
+      "has_ball": "2025-11-11 22:04:48 +0100"
+    },
+    "done": false
+  },
+  "lootr:50loot": {
+    "criteria": {
+      "opened_50": "2025-11-11 22:04:52 +0100"
+    },
+    "done": true
+  },
+  "hopo:minecraft/adventure/locate_all_underwater_structures": {
+    "criteria": {
+      "locate_shipwreck": "2025-11-11 22:20:43 +0100"
+    },
+    "done": false
   },
   "DataVersion": 3955
 }
