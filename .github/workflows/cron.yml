@@ -1,9 +1,9 @@
-name: Run Python script every 15 min
+name: Run Python script every 15 min (robust)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
-  workflow_dispatch:         # pour tester à la main
+    - cron: "*/5 * * * *"     # tick toutes les 5 min (UTC), fiabilise les déclenchements
+  workflow_dispatch:           # pour tester à la main
 
 concurrency:
   group: python-cron
@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     env:
       WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
 
@@ -22,17 +21,34 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Gate 15-minute marks only
+        id: gate
+        run: |
+          MIN=$(date -u +%M)
+          echo "UTC minute: $MIN"
+          # éviter l'interprétation octale: 10#$MIN
+          if [ $((10#$MIN % 15)) -eq 0 ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "Proceeding (quarter-hour mark)."
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Not a quarter-hour mark, will skip heavy steps."
+          fi
+
       - name: Set up Python
+        if: steps.gate.outputs.run == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
+        if: steps.gate.outputs.run == 'true'
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Ensure required folders exist
+        if: steps.gate.outputs.run == 'true'
         run: |
           mkdir -p data/stats
           mkdir -p data/usercache
@@ -43,12 +59,14 @@ jobs:
           mkdir -p staticdata
 
       - name: Run script
+        if: steps.gate.outputs.run == 'true'
         run: |
           set -o pipefail
           python main.py | tee script_output.log
 
-      # Push robuste (évite les erreurs "non fast-forward")
+      # Push robuste (évite les non fast-forward)
       - name: Commit & push changes (if any)
+        if: steps.gate.outputs.run == 'true'
         run: |
           set -e
           git config user.name  "github-actions[bot]"
@@ -63,9 +81,9 @@ jobs:
             echo "No changes to commit."
           fi
 
-      # --- Envoi uniquement du lien stable jsDelivr sur Discord (pas d'image jointe) ---
+      # Envoi UNIQUEMENT du lien jsDelivr (fixe) quand c'est un run auto
       - name: Send stable link to Discord
-        if: success() && github.event_name == 'schedule'
+        if: steps.gate.outputs.run == 'true' && github.event_name == 'schedule' && success()
         run: |
           set -e
           REPO_PATH="${GITHUB_REPOSITORY}"   # ex: NeliKkTv/cobbledex-leaderboardV4
@@ -73,3 +91,8 @@ jobs:
           MSG="🏆 Leaderboard mis à jour :\n${STABLE_URL}"
           PAYLOAD=$(printf '{"content":"%s"}' "$MSG")
           curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
+
+      # Log clair quand on skip (utile dans l'historique)
+      - name: Skipped (not a quarter-hour)
+        if: steps.gate.outputs.run != 'true'
+        run: echo "Skip run: not on a 15-minute boundary (UTC)."
