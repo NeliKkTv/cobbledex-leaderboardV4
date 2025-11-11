@@ -27,7 +27,7 @@ Téléchargement: /Minecraft/world/stats/d003e788-5098-45bf-b5f6-8e5b7c1098b3.js
 ✓ Succès: 5850 bytes transférés
 🔄 Traitement de d7c0d5f8-050d-405f-96af-8bb842d4ef48.json
 Téléchargement: /Minecraft/world/stats/d7c0d5f8-050d-405f-96af-8bb842d4ef48.json -> data/stats/d7c0d5f8-050d-405f-96af-8bb842d4ef48.json
-✓ Succès: 16895 bytes transférés
+✓ Succès: 17036 bytes transférés
 📁 Listing direct de: /Minecraft/world/playerdata
 🔄 Traitement de 3f1eb309-0fee-4b85-83ad-27cd928bd167.dat
 Téléchargement: /Minecraft/world/playerdata/3f1eb309-0fee-4b85-83ad-27cd928bd167.dat -> data/playerdata/3f1eb309-0fee-4b85-83ad-27cd928bd167.dat
@@ -43,13 +43,13 @@ Téléchargement: /Minecraft/world/playerdata/9728a164-b9f6-4cb8-958c-b9b02b363a
 ✓ Succès: 4790 bytes transférés
 🔄 Traitement de c39183a4-3276-412f-8a0a-959438dddf62.dat
 Téléchargement: /Minecraft/world/playerdata/c39183a4-3276-412f-8a0a-959438dddf62.dat -> data/playerdata/c39183a4-3276-412f-8a0a-959438dddf62.dat
-✓ Succès: 9987 bytes transférés
+✓ Succès: 9988 bytes transférés
 🔄 Traitement de d003e788-5098-45bf-b5f6-8e5b7c1098b3.dat
 Téléchargement: /Minecraft/world/playerdata/d003e788-5098-45bf-b5f6-8e5b7c1098b3.dat -> data/playerdata/d003e788-5098-45bf-b5f6-8e5b7c1098b3.dat
 ✓ Succès: 5357 bytes transférés
 🔄 Traitement de d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat
 Téléchargement: /Minecraft/world/playerdata/d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat -> data/playerdata/d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat
-✓ Succès: 25496 bytes transférés
+✓ Succès: 25545 bytes transférés
 📁 Listing direct de: /Minecraft/world/advancements
 🔄 Traitement de 3f1eb309-0fee-4b85-83ad-27cd928bd167.json
 Téléchargement: /Minecraft/world/advancements/3f1eb309-0fee-4b85-83ad-27cd928bd167.json -> data/advancements/3f1eb309-0fee-4b85-83ad-27cd928bd167.json
@@ -71,7 +71,7 @@ Téléchargement: /Minecraft/world/advancements/d003e788-5098-45bf-b5f6-8e5b7c10
 ✓ Succès: 58774 bytes transférés
 🔄 Traitement de d7c0d5f8-050d-405f-96af-8bb842d4ef48.json
 Téléchargement: /Minecraft/world/advancements/d7c0d5f8-050d-405f-96af-8bb842d4ef48.json -> data/advancements/d7c0d5f8-050d-405f-96af-8bb842d4ef48.json
-✓ Succès: 257229 bytes transférés
+✓ Succès: 257853 bytes transférés
 Stats saved to total.csv
 
 Generating top leaderboards image...
