@@ -2,8 +2,8 @@ name: Run Python script every 15 min (robust)
 
 on:
   schedule:
-    - cron: "*/5 * * * *"     # tick toutes les 5 min (UTC), fiabilise les déclenchements
-  workflow_dispatch:           # pour tester à la main
+    - cron: "*/5 * * * *"   # tick toutes les 5 min (UTC)
+  workflow_dispatch:         # pour tester à la main
 
 concurrency:
   group: python-cron
@@ -21,18 +21,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # Porte d'entrée : on ne lance le lourd que si l'heure UTC tombe sur un multiple de 15
       - name: Gate 15-minute marks only
         id: gate
         run: |
           MIN=$(date -u +%M)
           echo "UTC minute: $MIN"
-          # éviter l'interprétation octale: 10#$MIN
           if [ $((10#$MIN % 15)) -eq 0 ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
             echo "Proceeding (quarter-hour mark)."
           else
             echo "run=false" >> "$GITHUB_OUTPUT"
-            echo "Not a quarter-hour mark, will skip heavy steps."
+            echo "Not a quarter-hour mark, skipping heavy steps."
           fi
 
       - name: Set up Python
@@ -64,7 +64,6 @@ jobs:
           set -o pipefail
           python main.py | tee script_output.log
 
-      # Push robuste (évite les non fast-forward)
       - name: Commit & push changes (if any)
         if: steps.gate.outputs.run == 'true'
         run: |
@@ -81,7 +80,6 @@ jobs:
             echo "No changes to commit."
           fi
 
-      # Envoi UNIQUEMENT du lien jsDelivr (fixe) quand c'est un run auto
       - name: Send stable link to Discord
         if: steps.gate.outputs.run == 'true' && github.event_name == 'schedule' && success()
         run: |
@@ -92,7 +90,6 @@ jobs:
           PAYLOAD=$(printf '{"content":"%s"}' "$MSG")
           curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
 
-      # Log clair quand on skip (utile dans l'historique)
       - name: Skipped (not a quarter-hour)
         if: steps.gate.outputs.run != 'true'
         run: echo "Skip run: not on a 15-minute boundary (UTC)."
