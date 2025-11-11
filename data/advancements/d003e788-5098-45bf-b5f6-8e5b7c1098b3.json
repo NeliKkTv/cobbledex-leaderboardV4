@@ -2098,9 +2098,123 @@
     },
     "done": true
   },
+  "mega_showdown:recipes/misc/lisia_mega_tiara": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:mega_showdown/mega/find_keystone": {
+    "criteria": {
+      "obtained_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "cobblemon_ultrabeast:root": {
+    "criteria": {
+      "enter_dimension": "2025-11-11 17:20:37 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/megabracelet_pink": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/archie_anchor": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/megabracelet_green": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/megabracelet_blue": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/megabracelet_black": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/megabracelet_red": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/keystone_block": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/lysandre_ring": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/brendan_mega_cuff": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/korrina_glove": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
   "minecraft:adventure/root": {
     "criteria": {
       "killed_something": "2025-11-11 15:54:39 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/megabracelet": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/megaring": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/megabracelet_yellow": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:mega_showdown/mega/mega_evolve": {
+    "criteria": {
+      "mega_evo_any": "2025-11-11 17:19:11 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/may_bracelet": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/maxie_glasses": {
+    "criteria": {
+      "has_keystone": "2025-11-11 17:18:30 +0100"
     },
     "done": true
   },

@@ -2884,6 +2884,7 @@
   },
   "regions_unexplored:got_wood": {
     "criteria": {
+      "magnolia_log": "2025-11-11 16:30:22 +0100",
       "pine_log": "2025-11-11 12:23:16 +0100",
       "willow_log": "2025-11-11 15:52:39 +0100",
       "blackwood_log": "2025-11-10 14:27:04 +0100"
@@ -4842,7 +4843,8 @@
       "obtain_rindo_berry": "2025-11-11 12:23:05 +0100",
       "obtain_oran_berry": "2025-11-10 17:39:12 +0100",
       "obtain_rawst_berry": "2025-11-11 12:23:05 +0100",
-      "obtain_payapa_berry": "2025-11-11 12:31:50 +0100"
+      "obtain_payapa_berry": "2025-11-11 12:31:50 +0100",
+      "obtain_razz_berry": "2025-11-11 16:28:03 +0100"
     },
     "done": false
   },
@@ -9772,9 +9774,93 @@
     },
     "done": true
   },
+  "stoneworks:recipes/building_blocks/granite_plates_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_tile_stairs_from_granite_or_granite_tiles_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_tiles": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mangrove_sink_counter": {
+    "criteria": {
+      "has_packed_mud": "2025-11-11 16:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/granite_slab_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_tile_wall_from_granite_or_granite_tiles_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_tiles": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/granite_wall_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_plate_wall_from_granite_or_granite_plates_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_plates": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/cobbled_granite_wall_from_granite_or_cobbled_granite_stonecutting": {
+    "criteria": {
+      "has_granite_or_cobbled_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/granite_slab": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/misc/yellow_dye_from_yellow_lupine": {
+    "criteria": {
+      "has_yellow_lupine": "2025-11-11 16:37:39 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/pumpkin_pie": {
+    "criteria": {
+      "has_pumpkin": "2025-11-11 16:55:53 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_pavers_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
   "regions_unexplored:recipes/decorations/birch_shrub": {
     "criteria": {
       "has_birch_sapling": "2025-11-11 15:50:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/flower_banner_pattern": {
+    "criteria": {
+      "has_oxeye_daisy": "2025-11-11 16:23:46 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_brick_stairs_from_granite_or_granite_bricks_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_bricks": "2025-11-11 16:44:48 +0100"
     },
     "done": true
   },
@@ -9784,11 +9870,65 @@
     },
     "done": true
   },
+  "cobblemon_ultrabeast:root": {
+    "criteria": {
+      "enter_dimension": "2025-11-11 17:18:48 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/granite_pillar_trim": {
+    "criteria": {
+      "has_granite_pillar_trim": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
   "another_furniture:recipes/dark_oak_shutter": {
     "criteria": {
       "has_slab": "2025-11-11 16:06:41 +0100"
     },
     "done": true
+  },
+  "cobblemon:recipes/consumables/jolly_mint": {
+    "criteria": {
+      "has_benefit_mint": "2025-11-11 16:33:50 +0100"
+    },
+    "done": false
+  },
+  "handcrafted:recipes/misc/granite_corner_trim": {
+    "criteria": {
+      "has_granite_corner_trim": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_shingle_slab_from_granite_or_granite_shingles_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_shingles": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/misc/red_dye_from_red_lupine": {
+    "criteria": {
+      "has_red_lupine": "2025-11-11 16:35:28 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_tiles_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mud_bricks": {
+    "criteria": {
+      "has_packed_mud": "2025-11-11 16:23:16 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:obtain_all_mints": {
+    "criteria": {
+      "obtain_green_mint_leaf": "2025-11-11 16:33:50 +0100"
+    },
+    "done": false
   },
   "minecraft:recipes/misc/blend_type/forest": {
     "criteria": {
@@ -9802,9 +9942,33 @@
     },
     "done": true
   },
+  "minecraft:recipes/building_blocks/polished_granite_stairs_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_granite_bricks_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/building_blocks/magnolia_wood": {
+    "criteria": {
+      "has_log": "2025-11-11 16:30:22 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/misc/blend_type/old_growth_birch_forest": {
     "criteria": {
       "has_ingredients": "2025-11-11 15:50:48 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mangrove_storage_counter": {
+    "criteria": {
+      "has_packed_mud": "2025-11-11 16:23:16 +0100"
     },
     "done": true
   },
@@ -9814,9 +9978,39 @@
     },
     "done": true
   },
+  "stoneworks:recipes/building_blocks/mossy_cobbled_granite_wall_from_granite_or_mossy_cobbled_granite_stonecutting": {
+    "criteria": {
+      "has_granite_or_mossy_cobbled_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/iron_ingot_from_blasting_iron_ore": {
+    "criteria": {
+      "has_iron_ore": "2025-11-11 16:33:46 +0100"
+    },
+    "done": true
+  },
+  "cobblemon_ultrabeast:ultra_beast_master": {
+    "criteria": {
+      "guzzlord": "2025-11-11 17:20:26 +0100"
+    },
+    "done": false
+  },
   "minecraft:recipes/building_blocks/spruce_wood": {
     "criteria": {
       "has_log": "2025-11-11 15:54:35 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/yellow_dye_from_dandelion": {
+    "criteria": {
+      "has_dandelion": "2025-11-11 16:21:50 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_plate_slab_from_granite_or_granite_plates_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_plates": "2025-11-11 16:44:48 +0100"
     },
     "done": true
   },
@@ -9832,15 +10026,105 @@
     },
     "done": true
   },
+  "cozyhome:recipes/building_blocks/mangrove_counter": {
+    "criteria": {
+      "has_packed_mud": "2025-11-11 16:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/polished_granite": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/misc/purple_dye_from_purple_lupine": {
+    "criteria": {
+      "has_purple_lupine": "2025-11-11 16:22:48 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/relaxed_mint": {
+    "criteria": {
+      "has_detriment_mint": "2025-11-11 16:33:50 +0100"
+    },
+    "done": false
+  },
   "regions_unexplored:recipes/building_blocks/willow_slab": {
     "criteria": {
       "has_willow_planks": "2025-11-11 15:56:18 +0100"
     },
     "done": true
   },
+  "minecraft:recipes/misc/blend_type/meadow": {
+    "criteria": {
+      "has_ingredients": "2025-11-11 16:23:46 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_shingle_wall_from_granite_or_granite_shingles_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_shingles": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/misc/blend_type/birch_forest": {
     "criteria": {
       "has_ingredients": "2025-11-11 15:50:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/cobbled_granite_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/cracked_granite_bricks_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/cracked_granite_tiles_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/building_blocks/magnolia_planks": {
+    "criteria": {
+      "has_the_recipe": "2025-11-11 16:30:15 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_granite_brick_wall_from_granite_or_mossy_granite_bricks_stonecutting": {
+    "criteria": {
+      "has_granite_or_mossy_granite_bricks": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_paver_wall_from_granite_or_granite_pavers_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_pavers": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_brick_wall_from_granite_or_granite_bricks_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_bricks": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/polished_granite_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_cobbled_granite_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
     },
     "done": true
   },
@@ -9856,9 +10140,93 @@
     },
     "done": true
   },
+  "stoneworks:recipes/building_blocks/cobbled_granite_slab_from_granite_or_cobbled_granite_stonecutting": {
+    "criteria": {
+      "has_granite_or_cobbled_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/granite_stairs": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/granite_stairs_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/iron_ingot_from_smelting_iron_ore": {
+    "criteria": {
+      "has_iron_ore": "2025-11-11 16:33:46 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_bricks_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/granite_wall": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/polished_granite_slab_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
   "regions_unexplored:recipes/decorations/spruce_branch_from_spruce_log": {
     "criteria": {
       "has_log": "2025-11-11 15:54:35 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/timid_mint": {
+    "criteria": {
+      "has_benefit_mint": "2025-11-11 16:33:50 +0100"
+    },
+    "done": false
+  },
+  "biomeswevegone:recipes/decorations/wreath": {
+    "criteria": {
+      "has_leaves": "2025-11-11 17:08:40 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/yellow_dye_from_sunflower": {
+    "criteria": {
+      "has_sunflower": "2025-11-11 16:24:53 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:obtain_mint": {
+    "criteria": {
+      "check_inv": "2025-11-11 16:33:50 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/naive_mint": {
+    "criteria": {
+      "has_benefit_mint": "2025-11-11 16:33:50 +0100"
+    },
+    "done": false
+  },
+  "stoneworks:recipes/building_blocks/mossy_granite_brick_stairs_from_granite_or_mossy_granite_bricks_stonecutting": {
+    "criteria": {
+      "has_granite_or_mossy_granite_bricks": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/held/power_anklet": {
+    "criteria": {
+      "has_mint": "2025-11-11 16:33:50 +0100"
     },
     "done": true
   },
@@ -9868,15 +10236,51 @@
     },
     "done": true
   },
+  "stoneworks:recipes/building_blocks/cobbled_granite_stairs_from_granite_or_cobbled_granite_stonecutting": {
+    "criteria": {
+      "has_granite_or_cobbled_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/hasty_mint": {
+    "criteria": {
+      "has_benefit_mint": "2025-11-11 16:33:50 +0100"
+    },
+    "done": false
+  },
   "regions_unexplored:recipes/decorations/willow_sign": {
     "criteria": {
       "has_willow_planks": "2025-11-11 15:56:18 +0100"
     },
     "done": true
   },
+  "cobblemon:recipes/consumables/brave_mint": {
+    "criteria": {
+      "has_detriment_mint": "2025-11-11 16:33:50 +0100"
+    },
+    "done": false
+  },
   "regions_unexplored:recipes/redstone/willow_fence_gate": {
     "criteria": {
       "has_willow_planks": "2025-11-11 15:56:18 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_cobbled_granite_stairs_from_granite_or_mossy_cobbled_granite_stonecutting": {
+    "criteria": {
+      "has_granite_or_mossy_cobbled_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/pumpkin_seeds": {
+    "criteria": {
+      "has_pumpkin": "2025-11-11 16:55:53 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/misc/blue_dye_from_blue_lupine": {
+    "criteria": {
+      "has_blue_lupine": "2025-11-11 16:27:32 +0100"
     },
     "done": true
   },
@@ -9889,6 +10293,18 @@
   "cozyhome:recipes/building_blocks/dark_oak_wall_clock": {
     "criteria": {
       "has_dark_oak_slab": "2025-11-11 16:06:41 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_brick_slab_from_granite_or_granite_bricks_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_bricks": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_shingles_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
     },
     "done": true
   },
@@ -9922,6 +10338,12 @@
     },
     "done": true
   },
+  "cobblemon:recipes/consumables/sassy_mint": {
+    "criteria": {
+      "has_detriment_mint": "2025-11-11 16:33:50 +0100"
+    },
+    "done": false
+  },
   "regions_unexplored:recipes/building_blocks/willow_stairs": {
     "criteria": {
       "has_willow_planks": "2025-11-11 15:56:18 +0100"
@@ -9931,6 +10353,84 @@
   "cozyhome:recipes/building_blocks/dark_oak_sofa": {
     "criteria": {
       "has_dark_oak_slab": "2025-11-11 16:06:41 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_paver_stairs_from_granite_or_granite_pavers_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_pavers": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_shingle_stairs_from_granite_or_granite_shingles_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_shingles": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_paver_slab_from_granite_or_granite_pavers_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_pavers": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_cobbled_granite_slab_from_granite_or_mossy_cobbled_granite_stonecutting": {
+    "criteria": {
+      "has_granite_or_mossy_cobbled_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/quiet_mint": {
+    "criteria": {
+      "has_detriment_mint": "2025-11-11 16:33:50 +0100"
+    },
+    "done": false
+  },
+  "stoneworks:recipes/building_blocks/granite_pillar_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_plate_stairs_from_granite_or_granite_plates_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_plates": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_oxeye_daisy": {
+    "criteria": {
+      "has_oxeye_daisy": "2025-11-11 16:23:46 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/decorations/magnolia_branch_from_magnolia_log": {
+    "criteria": {
+      "has_log": "2025-11-11 16:30:22 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/chiseled_granite_from_granite_stonecutting": {
+    "criteria": {
+      "has_granite": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/misc/light_blue_dye_from_felicia_daisy": {
+    "criteria": {
+      "has_felicia_daisy": "2025-11-11 16:21:58 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_granite_brick_slab_from_granite_or_mossy_granite_bricks_stonecutting": {
+    "criteria": {
+      "has_granite_or_mossy_granite_bricks": "2025-11-11 16:44:48 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/granite_tile_slab_from_granite_or_granite_tiles_stonecutting": {
+    "criteria": {
+      "has_granite_or_granite_tiles": "2025-11-11 16:44:48 +0100"
     },
     "done": true
   },

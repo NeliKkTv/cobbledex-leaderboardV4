@@ -44,12 +44,15 @@
       "cold_river": "2025-11-10 20:50:01 +0100",
       "shrubland": "2025-11-11 16:17:06 +0100",
       "pine_slopes": "2025-11-11 14:34:02 +0100",
+      "deciduous_forest": "2025-11-11 16:22:43 +0100",
       "grassy_beach": "2025-11-11 02:16:21 +0100",
       "scorching_caves": "2025-11-11 01:51:33 +0100",
       "boreal_forest": "2025-11-11 00:15:39 +0100",
       "blackwood_taiga": "2025-11-10 20:44:52 +0100",
       "rocky_meadow": "2025-11-11 02:57:44 +0100",
       "pine_taiga": "2025-11-11 02:19:46 +0100",
+      "ochard": "2025-11-11 16:24:48 +0100",
+      "flower_fields": "2025-11-11 16:42:20 +0100",
       "gravel_beach": "2025-11-11 02:12:57 +0100",
       "highland_fields": "2025-11-10 20:45:39 +0100",
       "maple_forest": "2025-11-10 20:37:02 +0100",
@@ -69,11 +72,14 @@
       "cold_river": "2025-11-10 20:50:01 +0100",
       "shrubland": "2025-11-11 16:17:06 +0100",
       "pine_slopes": "2025-11-11 14:34:02 +0100",
+      "deciduous_forest": "2025-11-11 16:22:43 +0100",
       "grassy_beach": "2025-11-11 02:16:21 +0100",
       "boreal_forest": "2025-11-11 00:15:39 +0100",
       "blackwood_taiga": "2025-11-10 20:44:52 +0100",
       "rocky_meadow": "2025-11-11 02:57:44 +0100",
       "pine_taiga": "2025-11-11 02:19:46 +0100",
+      "ochard": "2025-11-11 16:24:48 +0100",
+      "flower_fields": "2025-11-11 16:42:20 +0100",
       "gravel_beach": "2025-11-11 02:12:57 +0100",
       "highland_fields": "2025-11-10 20:45:39 +0100",
       "maple_forest": "2025-11-10 20:37:02 +0100",
@@ -766,6 +772,7 @@
       "minecraft:old_growth_birch_forest": "2025-11-10 23:05:51 +0100",
       "minecraft:deep_dark": "2025-11-10 21:28:09 +0100",
       "minecraft:ocean": "2025-11-11 02:40:43 +0100",
+      "minecraft:sunflower_plains": "2025-11-11 16:26:55 +0100",
       "minecraft:grove": "2025-11-11 14:26:44 +0100",
       "minecraft:meadow": "2025-11-10 21:01:24 +0100",
       "minecraft:birch_forest": "2025-11-10 21:56:23 +0100",
@@ -789,7 +796,8 @@
   "regions_unexplored:got_wood": {
     "criteria": {
       "magnolia_log": "2025-11-11 05:49:10 +0100",
-      "silver_birch_log": "2025-11-10 20:54:03 +0100"
+      "silver_birch_log": "2025-11-10 20:54:03 +0100",
+      "maple_log": "2025-11-11 17:00:22 +0100"
     },
     "done": false
   },
@@ -8240,6 +8248,372 @@
   "cozyhome:recipes/building_blocks/mud_fountain_shaped": {
     "criteria": {
       "has_mud": "2025-11-11 16:11:19 +0100"
+    },
+    "done": true
+  },
+  "hopo:minecraft/adventure/locate_all_underwater_structures": {
+    "criteria": {
+      "locate_shipwreck": "2025-11-11 16:21:46 +0100"
+    },
+    "done": false
+  },
+  "display:recipes/decorations/display_stand_up": {
+    "criteria": {
+      "has_bamboo": "2025-11-11 16:22:18 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/stick_from_bamboo_item": {
+    "criteria": {
+      "has_bamboo": "2025-11-11 16:22:18 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/bamboo_block": {
+    "criteria": {
+      "has_bamboo": "2025-11-11 16:22:18 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/bamboo_large_stump": {
+    "criteria": {
+      "has_bamboo": "2025-11-11 16:22:18 +0100"
+    },
+    "done": true
+  },
+  "display:recipes/decorations/display_stand_down": {
+    "criteria": {
+      "has_bamboo": "2025-11-11 16:22:18 +0100"
+    },
+    "done": true
+  },
+  "display:recipes/decorations/display/bamboo": {
+    "criteria": {
+      "has_bamboo": "2025-11-11 16:22:18 +0100"
+    },
+    "done": true
+  },
+  "chimes:recipe/decorations/bamboo_chimes": {
+    "criteria": {
+      "has_planks": "2025-11-11 16:22:18 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/scaffolding": {
+    "criteria": {
+      "has_bamboo": "2025-11-11 16:22:18 +0100"
+    },
+    "done": true
+  },
+  "templates:recipes/decorations/templates": {
+    "criteria": {
+      "has_bamboo": "2025-11-11 16:22:18 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/iron": {
+    "criteria": {
+      "has_brew": "2025-11-11 16:24:18 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:medicinal_brew": {
+    "criteria": {
+      "check_inv": "2025-11-11 16:24:18 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/calcium": {
+    "criteria": {
+      "has_brew": "2025-11-11 16:24:18 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/zinc": {
+    "criteria": {
+      "has_brew": "2025-11-11 16:24:18 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/carbos": {
+    "criteria": {
+      "has_brew": "2025-11-11 16:24:18 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/protein": {
+    "criteria": {
+      "has_brew": "2025-11-11 16:24:18 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/hp_up": {
+    "criteria": {
+      "has_brew": "2025-11-11 16:24:18 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/pp_up": {
+    "criteria": {
+      "has_brew": "2025-11-11 16:24:18 +0100"
+    },
+    "done": true
+  },
+  "beautify:candelabras": {
+    "criteria": {
+      "requirement": "2025-11-11 16:24:51 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:craft_remedy": {
+    "criteria": {
+      "check_inv": "2025-11-11 16:32:21 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/fine_remedy": {
+    "criteria": {
+      "has_remedy": "2025-11-11 16:32:21 +0100"
+    },
+    "done": true
+  },
+  "minecraft:adventure/sleep_in_bed": {
+    "criteria": {
+      "slept_in_bed": "2025-11-11 16:33:33 +0100"
+    },
+    "done": true
+  },
+  "pokeblocks:recipes/decorations/gigantic_pokedoll_drifloon": {
+    "criteria": {
+      "has_pokedoll_drifloon": "2025-11-11 16:34:56 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_cobblestone_stairs_from_mossy_cobblestone_stonecutting": {
+    "criteria": {
+      "has_mossy_cobblestone": "2025-11-11 16:40:02 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/building_blocks/mossy_stone_from_blasting_mossy_cobblestone": {
+    "criteria": {
+      "has_mossy_cobblestone": "2025-11-11 16:40:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_cobblestone_slab": {
+    "criteria": {
+      "has_mossy_cobblestone": "2025-11-11 16:40:02 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/building_blocks/mossy_stone_from_smelting_mossy_cobblestone": {
+    "criteria": {
+      "has_mossy_cobblestone": "2025-11-11 16:40:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/mossy_cobblestone_wall": {
+    "criteria": {
+      "has_mossy_cobblestone": "2025-11-11 16:40:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/mossy_cobblestone_wall_from_mossy_cobblestone_stonecutting": {
+    "criteria": {
+      "has_mossy_cobblestone": "2025-11-11 16:40:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/blend_type/old_growth_spruce_taiga": {
+    "criteria": {
+      "has_ingredients": "2025-11-11 16:40:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/blend_type/old_growth_pine_taiga": {
+    "criteria": {
+      "has_ingredients": "2025-11-11 16:40:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_cobblestone_stairs": {
+    "criteria": {
+      "has_mossy_cobblestone": "2025-11-11 16:40:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_cobblestone_slab_from_mossy_cobblestone_stonecutting": {
+    "criteria": {
+      "has_mossy_cobblestone": "2025-11-11 16:40:02 +0100"
+    },
+    "done": true
+  },
+  "sootychimneys:recipe/decorations/brick_chimney": {
+    "criteria": {
+      "has_brick": "2025-11-11 16:43:32 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/decorated_pot_simple": {
+    "criteria": {
+      "has_brick": "2025-11-11 16:43:32 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/oven": {
+    "criteria": {
+      "has_oven": "2025-11-11 16:43:32 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/bricks": {
+    "criteria": {
+      "has_brick": "2025-11-11 16:43:32 +0100"
+    },
+    "done": true
+  },
+  "potleaves:recipes/misc/pot_desert_pot": {
+    "criteria": {
+      "has_pot_desert_pot": "2025-11-11 16:43:32 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/flower_pot": {
+    "criteria": {
+      "has_brick": "2025-11-11 16:43:32 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/cushion": {
+    "criteria": {
+      "has_spyglass": "2025-11-11 16:49:07 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/telescope": {
+    "criteria": {
+      "has_spyglass": "2025-11-11 16:49:07 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/hay_cushion": {
+    "criteria": {
+      "has_spyglass": "2025-11-11 16:49:07 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/white_dye": {
+    "criteria": {
+      "has_bone_meal": "2025-11-11 16:53:55 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/bone_block": {
+    "criteria": {
+      "has_bone_meal": "2025-11-11 16:53:55 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/decorations/maple_branch_from_maple_log": {
+    "criteria": {
+      "has_log": "2025-11-11 17:00:22 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/building_blocks/maple_wood": {
+    "criteria": {
+      "has_log": "2025-11-11 17:00:22 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/building_blocks/maple_planks": {
+    "criteria": {
+      "has_logs": "2025-11-11 17:00:22 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/oak_hanging_sign": {
+    "criteria": {
+      "has_stripped_logs": "2025-11-11 17:02:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stripped_oak_wood": {
+    "criteria": {
+      "has_log": "2025-11-11 17:02:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_red_rock_bricks_from_moss_block": {
+    "criteria": {
+      "has_moss_block": "2025-11-11 17:13:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/blend_type/lush_caves": {
+    "criteria": {
+      "has_ingredients": "2025-11-11 17:13:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_stone_from_moss_block": {
+    "criteria": {
+      "has_moss_block": "2025-11-11 17:13:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_stone_bricks_from_moss_block": {
+    "criteria": {
+      "has_moss_block": "2025-11-11 17:13:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_cobblestone_from_moss_block": {
+    "criteria": {
+      "has_moss_block": "2025-11-11 17:13:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_dacite_bricks_from_moss_block": {
+    "criteria": {
+      "has_moss_block": "2025-11-11 17:13:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/moss_carpet": {
+    "criteria": {
+      "has_moss_block": "2025-11-11 17:13:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_white_dacite_bricks_from_moss_block": {
+    "criteria": {
+      "has_moss_block": "2025-11-11 17:13:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/silence_armor_trim_smithing_template_smithing_trim": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 19:20:33 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/blocks/leaf_stone_block": {
+    "criteria": {
+      "has_leaf_stone": "2025-11-11 19:18:05 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/silence_armor_trim_smithing_template": {
+    "criteria": {
+      "has_silence_armor_trim_smithing_template": "2025-11-11 19:20:33 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/held/miracle_seed": {
+    "criteria": {
+      "has_leaf": "2025-11-11 19:18:05 +0100"
     },
     "done": true
   },
