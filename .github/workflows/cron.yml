@@ -21,49 +21,43 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Gate quarter-hour window
-        id: gate
+      # Décide si on exécute (fenêtre de 3 min après 00/15/30/45 UTC)
+      - name: Decide window
         run: |
           TS=$(date -u +%s)
           REM=$(( (TS/60) % 15 ))
-          echo "UTC now: $(date -u) | remainder=$REM"
+          echo "UTC now: $(date -u)  remainder=$REM"
           if [ $REM -le 2 ]; then
-            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "SHOULD_RUN=true" >> "$GITHUB_ENV"
           else
-            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "SHOULD_RUN=false" >> "$GITHUB_ENV"
           fi
 
       - name: Set up Python
-        if: ${{ steps.gate.outputs.run == 'true' }}
+        if: env.SHOULD_RUN == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
-        if: ${{ steps.gate.outputs.run == 'true' }}
+        if: env.SHOULD_RUN == 'true'
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Ensure required folders exist
-        if: ${{ steps.gate.outputs.run == 'true' }}
+        if: env.SHOULD_RUN == 'true'
         run: |
-          mkdir -p data/stats
-          mkdir -p data/usercache
-          mkdir -p data/playerdata
-          mkdir -p data/cobblemonplayerdata
-          mkdir -p data/vanilla
-          mkdir -p images
-          mkdir -p staticdata
+          mkdir -p data/stats data/usercache data/playerdata data/cobblemonplayerdata data/vanilla images staticdata
 
       - name: Run script
-        if: ${{ steps.gate.outputs.run == 'true' }}
+        if: env.SHOULD_RUN == 'true'
         run: |
           set -o pipefail
           python main.py | tee script_output.log
 
       - name: Commit & push changes (if any)
-        if: ${{ steps.gate.outputs.run == 'true' }}
+        if: env.SHOULD_RUN == 'true'
         run: |
           set -e
           git config user.name  "github-actions[bot]"
@@ -79,14 +73,13 @@ jobs:
           fi
 
       - name: Send stable link to Discord
-        if: ${{ steps.gate.outputs.run == 'true' && github.event_name == 'schedule' && success() }}
+        if: env.SHOULD_RUN == 'true' && github.event_name == 'schedule'
         run: |
           REPO_PATH="${GITHUB_REPOSITORY}"
           STABLE_URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
-          MSG="Leaderboard updated: ${STABLE_URL}"
-          PAYLOAD=$(printf '{"content":"%s"}' "$MSG")
-          curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
+          JSON_PAYLOAD=$(printf '{"content":"Leaderboard updated: %s"}' "$STABLE_URL")
+          curl -s -H "Content-Type: application/json" -X POST -d "$JSON_PAYLOAD" "$WEBHOOK"
 
       - name: Skipped (outside window)
-        if: ${{ steps.gate.outputs.run != 'true' }}
+        if: env.SHOULD_RUN != 'true'
         run: echo "Skipped: not within 3-min window after 00/15/30/45 UTC."
