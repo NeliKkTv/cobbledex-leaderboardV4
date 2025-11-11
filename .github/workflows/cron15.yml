@@ -2,65 +2,83 @@ name: cron15
 
 on:
   schedule:
+    # Exécution toutes les 5 minutes
     - cron: "*/5 * * * *"
-  workflow_dispatch:
+  workflow_dispatch: # Permet de le lancer manuellement si besoin
 
 jobs:
   r:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    env:
-      WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Set up job
+        run: echo "🚀 Starting the CobbleDex Leaderboard automation"
 
-      - id: gate
-        run: |
-          TS=$(date -u +%s)
-          REM=$(( (TS/60) % 15 ))
-          if [ $REM -le 2 ]; then echo "do=1" >> $GITHUB_ENV; else echo "do=0" >> $GITHUB_ENV; fi
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - if: env.do == '1'
+      - name: Set timestamp variable
+        id: time
+        run: echo "TS=$(date -u +%s)" >> $GITHUB_ENV
+
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.x'
 
-      - if: env.do == '1'
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install -r requirements.txt
 
-      - if: env.do == '1'
+      - name: Ensure required folders exist
         run: |
-          mkdir -p data/stats data/usercache data/playerdata data/cobblemonplayerdata data/vanilla images staticdata
+          mkdir -p data/stats data/usercache data/playerdata data/cobblemonplayerdata data/vanilla data/staticdata images
 
-      - if: env.do == '1'
-        run: |
-          set -o pipefail
-          python main.py | tee script_output.log
-
-      - if: env.do == '1'
+      - name: Gate 15-minute marks only
         run: |
           set -e
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git pull --rebase --autostash origin main || true
-          git add -A
-          if ! git diff --cached --quiet; then
-            git commit -m "cron $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-            git push || { git pull --rebase --autostash origin main && git push; }
-          fi
+          TS=$(date -u +%s)
+          MINUTE=$(date -u +%M)
+          echo "⏱️ Current UTC minute: $MINUTE"
+          case "$MINUTE" in
+            00|15|30|45)
+              echo "✅ In valid 15-minute window, continuing..."
+              ;;
+            *)
+              echo "⏭️ Not in 15-minute window (00/15/30/45 UTC) — skipping run."
+              exit 0
+              ;;
+          esac
 
-      - if: env.do == '1' && github.event_name == 'schedule'
+      - name: Run main Python script
         run: |
-          REPO_PATH="${GITHUB_REPOSITORY}"
-          URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
-          curl -s -H "Content-Type: application/json" \
-               -X POST -d "{\"content\":\"Leaderboard updated: ${URL}\"}" \
-               "$WEBHOOK"
+          echo "🐍 Running main.py..."
+          python main.py
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
 
-      - if: env.do != '1'
-        run: echo "skip (not in 3-min window after 00/15/30/45 UTC)"
+      - name: Commit & push changes (if any)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add images/top3.png || true
+          git commit -m "Auto-update leaderboard image from cron" || echo "No changes to commit"
+          git push origin main || echo "No push needed"
+
+      - name: Send image link to Discord
+        if: success()
+        run: |
+          echo "📤 Sending update to Discord..."
+          curl -H "Content-Type: application/json" \
+               -d "{\"content\":\"✅ New leaderboard image generated! \n🔗 https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/images/top3.png\"}" \
+               ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      - name: Log execution time (UTC + France)
+        run: |
+          echo "✅ Script executed successfully."
+          echo "🕓 Current UTC time: $(date -u '+%H:%M:%S (UTC)')"
+          echo "🇫🇷 Current France time: $(TZ='Europe/Paris' date '+%H:%M:%S (FR)')"
+
+      - name: Complete job
+        run: echo "🎉 Job completed successfully!"
