@@ -1,6 +1,6 @@
 # Latest Leaderboard
 
-![Minecraft Leaderboard](https://raw.githubusercontent.com/NeliKkTv/cobbledex-leaderboardV3/main/leaderboard.png?token=BZ462AWLXSQNHZ3SIBAO2ITJCN75G)
+![Minecraft Leaderboard](https://raw.githubusercontent.com/NeliKkTv/cobbledex-leaderboardV3/main/leaderboard.png?token=BZ462AUFHDE2SFRKXTN76MDJCOAOA)
 
-**URL directe:** https://raw.githubusercontent.com/NeliKkTv/cobbledex-leaderboardV3/main/leaderboard.png?token=BZ462AWLXSQNHZ3SIBAO2ITJCN75G
-*Généré le 2025-11-11 18:25:28*
+**URL directe:** https://raw.githubusercontent.com/NeliKkTv/cobbledex-leaderboardV3/main/leaderboard.png?token=BZ462AUFHDE2SFRKXTN76MDJCOAOA
+*Généré le 2025-11-11 18:29:56*
