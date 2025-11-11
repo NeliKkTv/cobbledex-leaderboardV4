@@ -9,7 +9,7 @@ Téléchargement: /Minecraft/usercache.json -> data/usercache/usercache.json
 📁 Listing direct de: /Minecraft/world/stats
 🔄 Traitement de 3f1eb309-0fee-4b85-83ad-27cd928bd167.json
 Téléchargement: /Minecraft/world/stats/3f1eb309-0fee-4b85-83ad-27cd928bd167.json -> data/stats/3f1eb309-0fee-4b85-83ad-27cd928bd167.json
-✓ Succès: 26346 bytes transférés
+✓ Succès: 26351 bytes transférés
 🔄 Traitement de 60a6c606-52a1-41ce-a0b9-91b76d72fb28.json
 Téléchargement: /Minecraft/world/stats/60a6c606-52a1-41ce-a0b9-91b76d72fb28.json -> data/stats/60a6c606-52a1-41ce-a0b9-91b76d72fb28.json
 ✓ Succès: 3888 bytes transférés
@@ -21,7 +21,7 @@ Téléchargement: /Minecraft/world/stats/9728a164-b9f6-4cb8-958c-b9b02b363a15.js
 ✓ Succès: 1687 bytes transférés
 🔄 Traitement de c39183a4-3276-412f-8a0a-959438dddf62.json
 Téléchargement: /Minecraft/world/stats/c39183a4-3276-412f-8a0a-959438dddf62.json -> data/stats/c39183a4-3276-412f-8a0a-959438dddf62.json
-✓ Succès: 11932 bytes transférés
+✓ Succès: 12128 bytes transférés
 🔄 Traitement de d003e788-5098-45bf-b5f6-8e5b7c1098b3.json
 Téléchargement: /Minecraft/world/stats/d003e788-5098-45bf-b5f6-8e5b7c1098b3.json -> data/stats/d003e788-5098-45bf-b5f6-8e5b7c1098b3.json
 ✓ Succès: 5503 bytes transférés
@@ -31,29 +31,29 @@ Téléchargement: /Minecraft/world/stats/d7c0d5f8-050d-405f-96af-8bb842d4ef48.js
 📁 Listing direct de: /Minecraft/world/playerdata
 🔄 Traitement de 3f1eb309-0fee-4b85-83ad-27cd928bd167.dat
 Téléchargement: /Minecraft/world/playerdata/3f1eb309-0fee-4b85-83ad-27cd928bd167.dat -> data/playerdata/3f1eb309-0fee-4b85-83ad-27cd928bd167.dat
-✓ Succès: 29315 bytes transférés
+✓ Succès: 29497 bytes transférés
 🔄 Traitement de 60a6c606-52a1-41ce-a0b9-91b76d72fb28.dat
 Téléchargement: /Minecraft/world/playerdata/60a6c606-52a1-41ce-a0b9-91b76d72fb28.dat -> data/playerdata/60a6c606-52a1-41ce-a0b9-91b76d72fb28.dat
 ✓ Succès: 5690 bytes transférés
 🔄 Traitement de 9337f3e8-0e5a-449d-97fd-37d1356c72c0.dat
 Téléchargement: /Minecraft/world/playerdata/9337f3e8-0e5a-449d-97fd-37d1356c72c0.dat -> data/playerdata/9337f3e8-0e5a-449d-97fd-37d1356c72c0.dat
-✓ Succès: 9064 bytes transférés
+✓ Succès: 9063 bytes transférés
 🔄 Traitement de 9728a164-b9f6-4cb8-958c-b9b02b363a15.dat
 Téléchargement: /Minecraft/world/playerdata/9728a164-b9f6-4cb8-958c-b9b02b363a15.dat -> data/playerdata/9728a164-b9f6-4cb8-958c-b9b02b363a15.dat
 ✓ Succès: 2834 bytes transférés
 🔄 Traitement de c39183a4-3276-412f-8a0a-959438dddf62.dat
 Téléchargement: /Minecraft/world/playerdata/c39183a4-3276-412f-8a0a-959438dddf62.dat -> data/playerdata/c39183a4-3276-412f-8a0a-959438dddf62.dat
-✓ Succès: 10037 bytes transférés
+✓ Succès: 10004 bytes transférés
 🔄 Traitement de d003e788-5098-45bf-b5f6-8e5b7c1098b3.dat
 Téléchargement: /Minecraft/world/playerdata/d003e788-5098-45bf-b5f6-8e5b7c1098b3.dat -> data/playerdata/d003e788-5098-45bf-b5f6-8e5b7c1098b3.dat
 ✓ Succès: 5195 bytes transférés
 🔄 Traitement de d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat
 Téléchargement: /Minecraft/world/playerdata/d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat -> data/playerdata/d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat
-✓ Succès: 23953 bytes transférés
+✓ Succès: 23954 bytes transférés
 📁 Listing direct de: /Minecraft/world/advancements
 🔄 Traitement de 3f1eb309-0fee-4b85-83ad-27cd928bd167.json
 Téléchargement: /Minecraft/world/advancements/3f1eb309-0fee-4b85-83ad-27cd928bd167.json -> data/advancements/3f1eb309-0fee-4b85-83ad-27cd928bd167.json
-✓ Succès: 298005 bytes transférés
+✓ Succès: 298926 bytes transférés
 🔄 Traitement de 60a6c606-52a1-41ce-a0b9-91b76d72fb28.json
 Téléchargement: /Minecraft/world/advancements/60a6c606-52a1-41ce-a0b9-91b76d72fb28.json -> data/advancements/60a6c606-52a1-41ce-a0b9-91b76d72fb28.json
 ✓ Succès: 54881 bytes transférés
@@ -90,14 +90,25 @@ Loading font: /home/runner/work/cobbledex-leaderboardV4/cobbledex-leaderboardV4/
 Loading font: /home/runner/work/cobbledex-leaderboardV4/cobbledex-leaderboardV4/fonts/Minecraft-Seven_v2.ttf
 ✅ Modern Minecraft-style leaderboard saved to images/top3.png
 📤 Upload de l'image: images/top3.png
+Erreur GitHub _get_file_sha: 401 - {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+❌ Erreur upload GitHub: 401 - {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+📝 Utilisation de l'URL de commit: https://github.com/NeliKkTv/cobbledex-leaderboardV3/blob/main/leaderboard.png?raw=true
 📝 URL sauvegardée dans latest_leaderboard_url.txt
 
-🌐 Leaderboard disponible sur GitHub: https://raw.githubusercontent.com/NeliKkTv/cobbledex-leaderboardV3/main/leaderboard.png?token=BZ462ARJSFMTO56ZLB5KABTJCOICU
+🌐 Leaderboard disponible sur GitHub: https://github.com/NeliKkTv/cobbledex-leaderboardV3/blob/main/leaderboard.png?raw=true
 📋 Lien direct pour partager:
-   https://raw.githubusercontent.com/NeliKkTv/cobbledex-leaderboardV3/main/leaderboard.png?token=BZ462ARJSFMTO56ZLB5KABTJCOICU
+   https://github.com/NeliKkTv/cobbledex-leaderboardV3/blob/main/leaderboard.png?raw=true
 
 🖼️  Preview:
-   ![Leaderboard](https://raw.githubusercontent.com/NeliKkTv/cobbledex-leaderboardV3/main/leaderboard.png?token=BZ462ARJSFMTO56ZLB5KABTJCOICU)
+   ![Leaderboard](https://github.com/NeliKkTv/cobbledex-leaderboardV3/blob/main/leaderboard.png?raw=true)
 
 Closing connection...
 
