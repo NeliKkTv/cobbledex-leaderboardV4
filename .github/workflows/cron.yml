@@ -47,7 +47,7 @@ jobs:
           set -o pipefail
           python main.py | tee script_output.log
 
-      # push robuste (évite les erreurs de type non fast-forward)
+      # Push robuste (évite les erreurs "non fast-forward")
       - name: Commit & push changes (if any)
         run: |
           set -e
@@ -63,26 +63,13 @@ jobs:
             echo "No changes to commit."
           fi
 
-      # --- envoie le lien jsDelivr (fixe) + l'image jointe (seulement en 'schedule') ---
-      - name: Send stable link + image to Discord
+      # --- Envoi uniquement du lien stable jsDelivr sur Discord (pas d'image jointe) ---
+      - name: Send stable link to Discord
         if: success() && github.event_name == 'schedule'
         run: |
           set -e
-          # URL stable (repo public requis)
           REPO_PATH="${GITHUB_REPOSITORY}"   # ex: NeliKkTv/cobbledex-leaderboardV4
           STABLE_URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
-
-          # 1) message avec lien fixe
-          MSG="🏆 Leaderboard mis à jour\n${STABLE_URL}"
+          MSG="🏆 Leaderboard mis à jour :\n${STABLE_URL}"
           PAYLOAD=$(printf '{"content":"%s"}' "$MSG")
           curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
-
-          # 2) image en pièce jointe (aperçu dans Discord)
-          if [ -f images/top3.png ]; then
-            curl -s -X POST \
-              -F "payload_json={\"content\":\"\"}" \
-              -F "file=@images/top3.png;type=image/png" \
-              "$WEBHOOK"
-          else
-            echo "images/top3.png introuvable; envoi uniquement du lien."
-          fi
