@@ -47,34 +47,37 @@ jobs:
           set -o pipefail
           python main.py | tee script_output.log
 
+      # push robuste (évite les erreurs de type non fast-forward)
       - name: Commit & push changes (if any)
         run: |
+          set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git pull --rebase --autostash origin main || true
           git add -A
           if ! git diff --cached --quiet; then
             git commit -m "Auto-update from cron: $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-            git push
+            git push || { git pull --rebase --autostash origin main && git push; }
           else
             echo "No changes to commit."
           fi
 
-      # --- Envoie le lien jsDelivr (fixe) + l'image en pièce jointe sur Discord ---
+      # --- envoie le lien jsDelivr (fixe) + l'image jointe (seulement en 'schedule') ---
       - name: Send stable link + image to Discord
         if: success() && github.event_name == 'schedule'
         run: |
           set -e
-          # URL stable jsDelivr: toujours la même
-          # (format: https://cdn.jsdelivr.net/gh/USER/REPO@BRANCH/PATH)
+          # URL stable (repo public requis)
           REPO_PATH="${GITHUB_REPOSITORY}"   # ex: NeliKkTv/cobbledex-leaderboardV4
           STABLE_URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
 
-          # 1) Envoi du message avec l'URL fixe (utile pour Projector)
+          # 1) message avec lien fixe
           MSG="🏆 Leaderboard mis à jour\n${STABLE_URL}"
           PAYLOAD=$(printf '{"content":"%s"}' "$MSG")
           curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
 
-          # 2) Envoi de l'image en pièce jointe (aperçu dans Discord)
+          # 2) image en pièce jointe (aperçu dans Discord)
           if [ -f images/top3.png ]; then
             curl -s -X POST \
               -F "payload_json={\"content\":\"\"}" \
