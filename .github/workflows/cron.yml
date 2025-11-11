@@ -21,7 +21,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # Porte d'entrée : on ne lance le lourd que si l'heure UTC tombe sur un multiple de 15
+      # Porte d'entrée : on ne lance le lourd que si l'heure UTC est sur 00/15/30/45
       - name: Gate 15-minute marks only
         id: gate
         run: |
