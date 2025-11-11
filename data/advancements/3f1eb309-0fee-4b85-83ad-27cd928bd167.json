@@ -10434,5 +10434,47 @@
     },
     "done": false
   },
+  "cobblemon:recipes/balls/dream_ball": {
+    "criteria": {
+      "has_pink_apricorn": "2025-11-11 19:54:17 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/heal_ball": {
+    "criteria": {
+      "has_pink_apricorn": "2025-11-11 19:54:17 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/agriculture/pink_apricorn_smelt_to_dye": {
+    "criteria": {
+      "has_apricorn": "2025-11-11 19:54:17 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/level_ball": {
+    "criteria": {
+      "has_pink_apricorn": "2025-11-11 19:54:17 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:harvest_apricorn": {
+    "criteria": {
+      "check_inv": "2025-11-11 19:54:17 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/love_ball": {
+    "criteria": {
+      "has_pink_apricorn": "2025-11-11 19:54:17 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/roseate_ball": {
+    "criteria": {
+      "has_pink_apricorn": "2025-11-11 19:54:17 +0100"
+    },
+    "done": true
+  },
   "DataVersion": 3955
 }
