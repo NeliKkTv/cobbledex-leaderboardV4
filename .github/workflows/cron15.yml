@@ -2,83 +2,90 @@ name: cron15
 
 on:
   schedule:
-    # Exécution toutes les 5 minutes
     - cron: "*/5 * * * *"
-  workflow_dispatch: # Permet de le lancer manuellement si besoin
+  workflow_dispatch:
 
 jobs:
   r:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write        # <-- IMPORTANT : autorise l'écriture via API/GITHUB_TOKEN
+
+    env:
+      WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
 
     steps:
-      - name: Set up job
-        run: echo "🚀 Starting the CobbleDex Leaderboard automation"
-
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set timestamp variable
-        id: time
-        run: echo "TS=$(date -u +%s)" >> $GITHUB_ENV
+      # Fenêtre de 3 minutes après 00/15/30/45 (UTC)
+      - name: Decide window
+        run: |
+          TS=$(date -u +%s)
+          REM=$(( (TS/60) % 15 ))
+          echo "UTC now: $(date -u)  remainder=$REM"
+          if [ $REM -le 2 ]; then
+            echo "SHOULD_RUN=true" >> "$GITHUB_ENV"
+          else
+            echo "SHOULD_RUN=false" >> "$GITHUB_ENV"
+          fi
 
       - name: Set up Python
+        if: env.SHOULD_RUN == 'true'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.11"
 
       - name: Install dependencies
+        if: env.SHOULD_RUN == 'true'
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Ensure required folders exist
+        if: env.SHOULD_RUN == 'true'
         run: |
-          mkdir -p data/stats data/usercache data/playerdata data/cobblemonplayerdata data/vanilla data/staticdata images
+          mkdir -p data/stats data/usercache data/playerdata data/cobblemonplayerdata data/vanilla images staticdata
 
-      - name: Gate 15-minute marks only
+      - name: Run script
+        if: env.SHOULD_RUN == 'true'
         run: |
-          set -e
-          TS=$(date -u +%s)
-          MINUTE=$(date -u +%M)
-          echo "⏱️ Current UTC minute: $MINUTE"
-          case "$MINUTE" in
-            00|15|30|45)
-              echo "✅ In valid 15-minute window, continuing..."
-              ;;
-            *)
-              echo "⏭️ Not in 15-minute window (00/15/30/45 UTC) — skipping run."
-              exit 0
-              ;;
-          esac
-
-      - name: Run main Python script
-        run: |
-          echo "🐍 Running main.py..."
-          python main.py
+          set -o pipefail
+          python main.py | tee script_output.log
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          # <-- Passe le token et le repo à ton script Python
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       - name: Commit & push changes (if any)
+        if: env.SHOULD_RUN == 'true'
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add images/top3.png || true
-          git commit -m "Auto-update leaderboard image from cron" || echo "No changes to commit"
-          git push origin main || echo "No push needed"
+          set -e
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git pull --rebase --autostash origin main || true
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "cron $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git push || { git pull --rebase --autostash origin main && git push; }
+          fi
 
-      - name: Send image link to Discord
-        if: success()
+      - name: Send stable link to Discord
+        if: env.SHOULD_RUN == 'true' && github.event_name == 'schedule'
         run: |
-          echo "📤 Sending update to Discord..."
-          curl -H "Content-Type: application/json" \
-               -d "{\"content\":\"✅ New leaderboard image generated! \n🔗 https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/images/top3.png\"}" \
-               ${{ secrets.DISCORD_WEBHOOK_URL }}
+          REPO_PATH="${GITHUB_REPOSITORY}"
+          URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
+          curl -s -H "Content-Type: application/json" \
+               -X POST -d "{\"content\":\"Leaderboard updated: ${URL}\"}" \
+               "$WEBHOOK"
 
-      - name: Log execution time (UTC + France)
+      - name: Log execution time
+        if: env.SHOULD_RUN == 'true'
         run: |
-          echo "✅ Script executed successfully."
-          echo "🕓 Current UTC time: $(date -u '+%H:%M:%S (UTC)')"
-          echo "🇫🇷 Current France time: $(TZ='Europe/Paris' date '+%H:%M:%S (FR)')"
+          echo "UTC:    $(date -u '+%Y-%m-%d %H:%M:%S')"
+          echo "France: $(TZ='Europe/Paris' date '+%Y-%m-%d %H:%M:%S')"
 
-      - name: Complete job
-        run: echo "🎉 Job completed successfully!"
+      - name: Skipped (outside window)
+        if: env.SHOULD_RUN != 'true'
+        run: echo "Skipped: not within 3-min window after 00/15/30/45 UTC."
