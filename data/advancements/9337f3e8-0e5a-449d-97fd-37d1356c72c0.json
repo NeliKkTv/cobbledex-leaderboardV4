@@ -164,6 +164,7 @@
       "slate_ball": "2025-11-10 23:13:10 +0100",
       "poke_ball": "2025-11-10 14:51:18 +0100",
       "premier_ball": "2025-11-10 17:30:32 +0100",
+      "master_ball": "2025-11-11 19:50:47 +0100",
       "azure_ball": "2025-11-10 23:08:43 +0100",
       "verdant_ball": "2025-11-10 23:33:12 +0100",
       "citrine_ball": "2025-11-10 23:18:13 +0100"
@@ -3773,9 +3774,10 @@
   },
   "cobblemon:recipes/misc/master_rod": {
     "criteria": {
-      "has_smithing_trim_template": "2025-11-10 23:36:54 +0100"
+      "has_smithing_trim_template": "2025-11-10 23:36:54 +0100",
+      "has_ball": "2025-11-11 19:50:47 +0100"
     },
-    "done": false
+    "done": true
   },
   "cobblemon:recipes/misc/park_rod": {
     "criteria": {
@@ -4129,6 +4131,18 @@
   "cobblemon:trade_pokemon": {
     "criteria": {
       "trade": "2025-11-11 01:06:00 +0100"
+    },
+    "done": true
+  },
+  "minecraft:nether/get_wither_skull": {
+    "criteria": {
+      "wither_skull": "2025-11-11 19:50:47 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/skull_banner_pattern": {
+    "criteria": {
+      "has_wither_skeleton_skull": "2025-11-11 19:50:47 +0100"
     },
     "done": true
   },
