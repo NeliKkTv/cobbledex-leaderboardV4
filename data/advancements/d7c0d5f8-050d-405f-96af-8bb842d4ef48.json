@@ -252,7 +252,8 @@
       "azure_ball": "2025-11-10 20:37:39 +0100",
       "dream_ball": "2025-11-11 02:47:30 +0100",
       "verdant_ball": "2025-11-11 02:13:08 +0100",
-      "citrine_ball": "2025-11-11 04:46:40 +0100"
+      "citrine_ball": "2025-11-11 04:46:40 +0100",
+      "ultra_ball": "2025-11-11 20:15:25 +0100"
     },
     "done": false
   },
@@ -763,11 +764,13 @@
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
+      "minecraft:cold_ocean": "2025-11-11 20:20:04 +0100",
       "minecraft:snowy_slopes": "2025-11-11 14:26:05 +0100",
       "minecraft:beach": "2025-11-10 23:33:16 +0100",
       "minecraft:dark_forest": "2025-11-10 21:59:02 +0100",
       "minecraft:forest": "2025-11-10 20:49:26 +0100",
       "minecraft:river": "2025-11-10 20:47:48 +0100",
+      "minecraft:stony_shore": "2025-11-11 20:16:41 +0100",
       "minecraft:dripstone_caves": "2025-11-10 21:54:24 +0100",
       "minecraft:old_growth_birch_forest": "2025-11-10 23:05:51 +0100",
       "minecraft:deep_dark": "2025-11-10 21:28:09 +0100",
@@ -6801,7 +6804,9 @@
   },
   "biomeswevegone:biomeswevegone/adventure/oh_the_biomes_weve_gone": {
     "criteria": {
-      "biomeswevegone:allium_shrubland": "2025-11-11 02:19:25 +0100"
+      "biomeswevegone:maple_taiga": "2025-11-11 20:03:50 +0100",
+      "biomeswevegone:allium_shrubland": "2025-11-11 02:19:25 +0100",
+      "biomeswevegone:coconino_meadow": "2025-11-11 20:16:27 +0100"
     },
     "done": false
   },
@@ -8593,6 +8598,12 @@
     },
     "done": true
   },
+  "cobblemon:recipes/balls/dream_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:23:14 +0100"
+    },
+    "done": false
+  },
   "minecraft:recipes/misc/silence_armor_trim_smithing_template_smithing_trim": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-11 19:20:33 +0100"
@@ -8605,9 +8616,155 @@
     },
     "done": true
   },
+  "pokeblocks:recipes/decorations/gigantic_pokedoll_shiny_snorunt": {
+    "criteria": {
+      "has_pokedoll_shiny_snorunt": "2025-11-11 20:15:49 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/misc/silence_armor_trim_smithing_template": {
     "criteria": {
       "has_silence_armor_trim_smithing_template": "2025-11-11 19:20:33 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/armor_stand": {
+    "criteria": {
+      "has_stone_slab": "2025-11-11 20:10:12 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/blocks/apricorn_wood": {
+    "criteria": {
+      "has_log": "2025-11-11 20:17:26 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/agriculture/blue_apricorn_smelt_to_dye": {
+    "criteria": {
+      "has_apricorn": "2025-11-11 20:23:14 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/repeat_ball": {
+    "criteria": {
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/moon_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:23:14 +0100",
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/blocks/apricorn_planks": {
+    "criteria": {
+      "has_apricorn_log": "2025-11-11 20:17:26 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/ultra_ball": {
+    "criteria": {
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/safari_ball": {
+    "criteria": {
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/friend_ball": {
+    "criteria": {
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/great_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:23:14 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/luxury_ball": {
+    "criteria": {
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/dive_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:23:14 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/heavy_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:23:14 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/level_ball": {
+    "criteria": {
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/nest_ball": {
+    "criteria": {
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:harvest_apricorn": {
+    "criteria": {
+      "check_inv": "2025-11-11 20:06:26 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/quick_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:23:14 +0100",
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/azure_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:23:14 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/lure_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:23:14 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/agriculture/yellow_apricorn_smelt_to_dye": {
+    "criteria": {
+      "has_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/ultra_rod": {
+    "criteria": {
+      "has_ball": "2025-11-11 20:15:25 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/fast_ball": {
+    "criteria": {
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/citrine_ball": {
+    "criteria": {
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
     },
     "done": true
   },
@@ -8616,6 +8773,12 @@
       "has_leaf": "2025-11-11 19:18:05 +0100"
     },
     "done": true
+  },
+  "cobblemon:recipes/balls/net_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:23:14 +0100"
+    },
+    "done": false
   },
   "DataVersion": 3955
 }
