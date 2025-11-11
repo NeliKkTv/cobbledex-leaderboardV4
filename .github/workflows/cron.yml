@@ -47,11 +47,9 @@ jobs:
           mkdir -p images
           mkdir -p staticdata
 
-      # Exécute ton script Python
       - name: Run script
         run: python main.py
 
-      # Commit/push des fichiers générés (si besoin)
       - name: Commit & push changes (if any)
         run: |
           git config user.name  "github-actions[bot]"
@@ -64,16 +62,37 @@ jobs:
             echo "No changes to commit."
           fi
 
-      # ------------ Envoie l'URL dans Discord ------------
-      - name: Send latest URL to Discord
+      # --- Envoie l'URL partageable dans Discord ---
+      - name: Send shareable URL to Discord
         if: success()
+        env:
+          PUBLIC_BASE_URL: ${{ vars.PUBLIC_BASE_URL }}   # optionnel: Settings > Variables
         run: |
           if [ -f latest_leaderboard_url.txt ]; then
-            URL=$(cat latest_leaderboard_url.txt | tr -d '\n\r')
-            MSG="📢 Nouveau leaderboard disponible : ${URL}"
+            RAW=$(tr -d '\r\n' < latest_leaderboard_url.txt)
           else
-            MSG="⚠️ Aucune URL trouvée (fichier latest_leaderboard_url.txt manquant)"
+            RAW=""
           fi
 
-          PAYLOAD=$(echo "{\"content\": \"$MSG\"}")
+          if echo "$RAW" | grep -Eiq '^https?://'; then
+            URL="$RAW"
+          else
+            REL="${RAW#./}"; REL="${REL#/}"
+            if [ -n "$PUBLIC_BASE_URL" ]; then
+              BASE="${PUBLIC_BASE_URL%/}"
+              URL="$BASE/$REL"
+            else
+              OWNER="${GITHUB_REPOSITORY_OWNER}"
+              REPO_NAME="$(echo "${GITHUB_REPOSITORY}" | awk -F/ '{print $2}')"
+              URL="https://${OWNER}.github.io/${REPO_NAME}/${REL}"
+            fi
+          fi
+
+          if [ -z "$URL" ]; then
+            MSG="⚠️ Aucune URL à envoyer (latest_leaderboard_url.txt manquant ou vide)."
+          else
+            MSG="$URL"
+          fi
+
+          PAYLOAD=$(printf '{"content":"%s"}' "$MSG")
           curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
