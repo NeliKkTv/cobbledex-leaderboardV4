@@ -2075,6 +2075,7 @@
       "obtain_full_heal": "2025-11-11 04:45:46 +0100",
       "obtain_potion": "2025-11-10 23:28:55 +0100",
       "obtain_awakening": "2025-11-10 20:57:49 +0100",
+      "obtain_antidote": "2025-11-11 20:24:41 +0100",
       "obtain_paralyze_heal": "2025-11-11 02:18:22 +0100",
       "obtain_full_restore": "2025-11-11 01:35:22 +0100",
       "obtain_elixir": "2025-11-11 04:46:42 +0100",
@@ -8744,6 +8745,12 @@
     },
     "done": false
   },
+  "cobblemon:recipes/blocks/moon_stone_block": {
+    "criteria": {
+      "has_moon_stone": "2025-11-11 20:27:06 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/agriculture/yellow_apricorn_smelt_to_dye": {
     "criteria": {
       "has_apricorn": "2025-11-11 20:06:26 +0100"
@@ -8779,6 +8786,12 @@
       "has_blue_apricorn": "2025-11-11 20:23:14 +0100"
     },
     "done": false
+  },
+  "mega_showdown:recipes/misc/n_lunarizer": {
+    "criteria": {
+      "has_moonstone": "2025-11-11 20:27:06 +0100"
+    },
+    "done": true
   },
   "DataVersion": 3955
 }

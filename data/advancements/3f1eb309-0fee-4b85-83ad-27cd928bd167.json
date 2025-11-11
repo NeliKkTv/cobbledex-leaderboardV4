@@ -47,6 +47,7 @@
       "scorching_caves": "2025-11-10 14:31:32 +0100",
       "grassy_beach": "2025-11-10 22:02:55 +0100",
       "boreal_forest": "2025-11-10 14:13:48 +0100",
+      "fen": "2025-11-11 20:32:40 +0100",
       "grassland": "2025-11-11 01:53:40 +0100",
       "rocky_meadow": "2025-11-10 14:59:50 +0100",
       "blackwood_taiga": "2025-11-10 14:14:37 +0100",
@@ -74,6 +75,7 @@
       "pine_slopes": "2025-11-10 20:54:53 +0100",
       "grassy_beach": "2025-11-10 22:02:55 +0100",
       "boreal_forest": "2025-11-10 14:13:48 +0100",
+      "fen": "2025-11-11 20:32:40 +0100",
       "grassland": "2025-11-11 01:53:40 +0100",
       "rocky_meadow": "2025-11-10 14:59:50 +0100",
       "blackwood_taiga": "2025-11-10 14:14:37 +0100",
@@ -232,6 +234,7 @@
   "cobblemon:craft_all_balls": {
     "criteria": {
       "roseate_ball": "2025-11-10 13:57:51 +0100",
+      "lure_ball": "2025-11-11 20:26:08 +0100",
       "great_ball": "2025-11-10 17:59:57 +0100",
       "slate_ball": "2025-11-10 18:13:57 +0100",
       "poke_ball": "2025-11-10 13:54:24 +0100",
@@ -270,9 +273,10 @@
   },
   "cobblemon:recipes/misc/azure_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 12:06:33 +0100"
     },
-    "done": false
+    "done": true
   },
   "cobblemon:recipes/misc/pokedex_yellow": {
     "criteria": {
@@ -1264,9 +1268,10 @@
   },
   "cobblemon:recipes/misc/master_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 13:54:24 +0100"
     },
-    "done": false
+    "done": true
   },
   "waystones:recipes/decorations/mossy_waystone_from_vines": {
     "criteria": {
@@ -1282,9 +1287,10 @@
   },
   "cobblemon:recipes/misc/poke_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 13:54:24 +0100"
     },
-    "done": false
+    "done": true
   },
   "lootr:social": {
     "criteria": {
@@ -1823,9 +1829,10 @@
   },
   "cobblemon:recipes/misc/roseate_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 13:57:51 +0100"
     },
-    "done": false
+    "done": true
   },
   "cobblemon:recipes/consumables/hp_up": {
     "criteria": {
@@ -3567,9 +3574,10 @@
   },
   "cobblemon:recipes/misc/citrine_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 15:01:53 +0100"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/misc/raw_iron": {
     "criteria": {
@@ -3957,9 +3965,10 @@
   },
   "cobblemon:recipes/misc/verdant_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 16:23:50 +0100"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/building_blocks/brown_terracotta": {
     "criteria": {
@@ -4163,9 +4172,10 @@
   },
   "cobblemon:recipes/misc/cherish_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 16:32:09 +0100"
     },
-    "done": false
+    "done": true
   },
   "handcrafted:recipes/misc/fancy_painting": {
     "criteria": {
@@ -4235,9 +4245,10 @@
   },
   "cobblemon:recipes/misc/premier_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 16:46:21 +0100"
     },
-    "done": false
+    "done": true
   },
   "beautify:bookstack": {
     "criteria": {
@@ -4882,15 +4893,17 @@
   },
   "cobblemon:recipes/misc/great_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 17:59:57 +0100"
     },
-    "done": false
+    "done": true
   },
   "cobblemon:recipes/misc/ultra_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 18:00:47 +0100"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/misc/eye_armor_trim_smithing_template_smithing_trim": {
     "criteria": {
@@ -5308,9 +5321,10 @@
   },
   "cobblemon:recipes/misc/slate_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
       "has_ball": "2025-11-10 18:13:57 +0100"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/misc/map": {
     "criteria": {
@@ -10436,11 +10450,97 @@
     },
     "done": false
   },
-  "cobblemon:recipes/balls/dream_ball": {
+  "cobblemon:recipes/misc/ancient_ivory_rod": {
     "criteria": {
-      "has_pink_apricorn": "2025-11-11 19:54:17 +0100"
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
     },
     "done": false
+  },
+  "cobblemon:recipes/agriculture/black_apricorn_smelt_to_dye": {
+    "criteria": {
+      "has_apricorn": "2025-11-11 20:30:20 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/dream_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:30:36 +0100",
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100",
+      "has_pink_apricorn": "2025-11-11 19:54:17 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/ancient_great_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_origin_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/safari_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/friend_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_ultra_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_feather_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_roseate_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "regions_unexplored:recipes/decorations/larch_shrub": {
+    "criteria": {
+      "has_larch_sapling": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/love_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/sport_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/blocks/apricorn_wood": {
+    "criteria": {
+      "has_log": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/poke_ball": {
+    "criteria": {
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
   },
   "cobblemon:recipes/balls/heal_ball": {
     "criteria": {
@@ -10448,39 +10548,148 @@
     },
     "done": false
   },
+  "cobblemon:recipes/misc/repeat_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/agriculture/blue_apricorn_smelt_to_dye": {
+    "criteria": {
+      "has_apricorn": "2025-11-11 20:30:36 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/beast_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
   "cobblemon:recipes/balls/repeat_ball": {
     "criteria": {
+      "has_black_apricorn": "2025-11-11 20:30:20 +0100",
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100",
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/ancient_poke_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
     },
     "done": false
   },
   "cobblemon:recipes/balls/moon_ball": {
     "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:30:36 +0100",
+      "has_black_apricorn": "2025-11-11 20:30:20 +0100",
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/dusk_ball": {
+    "criteria": {
+      "has_black_apricorn": "2025-11-11 20:30:20 +0100",
+      "has_green_apricorn": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/ancient_heavy_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/blocks/apricorn_planks": {
+    "criteria": {
+      "has_apricorn_log": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/park_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
     },
     "done": false
   },
   "cobblemon:recipes/balls/ultra_ball": {
     "criteria": {
+      "has_black_apricorn": "2025-11-11 20:30:20 +0100",
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/heal_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
     },
     "done": false
   },
   "cobblemon:recipes/balls/safari_ball": {
     "criteria": {
+      "has_green_apricorn": "2025-11-11 20:24:43 +0100",
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
     },
     "done": false
   },
+  "cobblemon:recipes/agriculture/red_apricorn_smelt_to_dye": {
+    "criteria": {
+      "has_apricorn": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/balls/friend_ball": {
     "criteria": {
+      "has_green_apricorn": "2025-11-11 20:24:43 +0100",
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100",
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/great_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:30:36 +0100",
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/verdant_ball": {
+    "criteria": {
+      "has_green_apricorn": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/ancient_leaden_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
     },
     "done": false
   },
   "cobblemon:recipes/balls/luxury_ball": {
     "criteria": {
+      "has_black_apricorn": "2025-11-11 20:30:20 +0100",
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100",
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/sport_ball": {
+    "criteria": {
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/timer_ball": {
+    "criteria": {
+      "has_black_apricorn": "2025-11-11 20:30:20 +0100",
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_gigaton_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
     },
     "done": false
   },
@@ -10490,18 +10699,70 @@
     },
     "done": true
   },
+  "cobblemon:recipes/misc/quick_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/dive_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:30:36 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/timer_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/dream_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/heavy_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:30:36 +0100",
+      "has_black_apricorn": "2025-11-11 20:30:20 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/level_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/net_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
   "cobblemon:recipes/balls/level_ball": {
     "criteria": {
+      "has_black_apricorn": "2025-11-11 20:30:20 +0100",
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100",
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100",
       "has_pink_apricorn": "2025-11-11 19:54:17 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:craft_apricorn_balls": {
+    "criteria": {
+      "lure_ball": "2025-11-11 20:26:08 +0100"
     },
     "done": false
   },
   "cobblemon:recipes/balls/nest_ball": {
     "criteria": {
+      "has_green_apricorn": "2025-11-11 20:24:43 +0100",
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
     },
-    "done": false
+    "done": true
   },
   "cobblemon:harvest_apricorn": {
     "criteria": {
@@ -10509,11 +10770,50 @@
     },
     "done": true
   },
-  "cobblemon:recipes/balls/quick_ball": {
+  "cobblemon:recipes/balls/slate_ball": {
     "criteria": {
-      "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
+      "has_black_apricorn": "2025-11-11 20:30:20 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/nest_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
     },
     "done": false
+  },
+  "cobblemon:recipes/balls/quick_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:30:36 +0100",
+      "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/azure_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:30:36 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/ancient_citrine_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/lure_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:30:36 +0100",
+      "has_green_apricorn": "2025-11-11 20:24:43 +0100",
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/pokerod_smithing_template": {
+    "criteria": {
+      "has_pokerod_smithing_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": true
   },
   "cobblemon:recipes/balls/love_ball": {
     "criteria": {
@@ -10521,9 +10821,34 @@
     },
     "done": false
   },
+  "cobblemon:recipes/misc/ancient_azure_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/agriculture/green_apricorn_smelt_to_dye": {
+    "criteria": {
+      "has_apricorn": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/agriculture/yellow_apricorn_smelt_to_dye": {
     "criteria": {
       "has_apricorn": "2025-11-11 20:14:33 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/dusk_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/lure_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100",
+      "has_ball": "2025-11-11 20:26:08 +0100"
     },
     "done": true
   },
@@ -10535,7 +10860,32 @@
   },
   "cobblemon:recipes/balls/fast_ball": {
     "criteria": {
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100",
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_jet_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/dive_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/luxury_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/fast_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
     },
     "done": false
   },
@@ -10544,6 +10894,50 @@
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
     },
     "done": true
+  },
+  "cobblemon:recipes/misc/ancient_slate_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/heavy_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/net_ball": {
+    "criteria": {
+      "has_blue_apricorn": "2025-11-11 20:30:36 +0100",
+      "has_black_apricorn": "2025-11-11 20:30:20 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/balls/park_ball": {
+    "criteria": {
+      "has_green_apricorn": "2025-11-11 20:24:43 +0100",
+      "has_red_apricorn": "2025-11-11 20:24:43 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/ancient_wing_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/moon_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_verdant_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-11 20:26:08 +0100"
+    },
+    "done": false
   },
   "DataVersion": 3955
 }
