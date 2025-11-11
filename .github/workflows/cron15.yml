@@ -9,7 +9,7 @@ jobs:
   r:
     runs-on: ubuntu-latest
     permissions:
-      contents: write        # <-- IMPORTANT : autorise l'écriture via API/GITHUB_TOKEN
+      contents: write
 
     env:
       WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -18,12 +18,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # Fenêtre de 3 minutes après 00/15/30/45 (UTC)
       - name: Decide window
         run: |
           TS=$(date -u +%s)
           REM=$(( (TS/60) % 15 ))
-          echo "UTC now: $(date -u)  remainder=$REM"
+          echo "UTC now: $(date -u) remainder=$REM"
           if [ $REM -le 2 ]; then
             echo "SHOULD_RUN=true" >> "$GITHUB_ENV"
           else
@@ -53,7 +52,6 @@ jobs:
           set -o pipefail
           python main.py | tee script_output.log
         env:
-          # <-- Passe le token et le repo à ton script Python
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
 
@@ -76,16 +74,16 @@ jobs:
         run: |
           REPO_PATH="${GITHUB_REPOSITORY}"
           URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
-          curl -s -H "Content-Type: application/json" \
-               -X POST -d "{\"content\":\"Leaderboard updated: ${URL}\"}" \
+          curl -s -H "Content-Type: application/json" -X POST \
+               -d "{\"content\":\"Leaderboard updated: ${URL}\"}" \
                "$WEBHOOK"
 
       - name: Log execution time
         if: env.SHOULD_RUN == 'true'
         run: |
           echo "UTC:    $(date -u '+%Y-%m-%d %H:%M:%S')"
-          echo "France: $(TZ='Europe/Paris' date '+%Y-%m-%d %H:%M:%S')"
+          echo "FR:     $(TZ='Europe/Paris' date '+%Y-%m-%d %H:%M:%S')"
 
       - name: Skipped (outside window)
         if: env.SHOULD_RUN != 'true'
-        run: echo "Skipped: not within 3-min window after 00/15/30/45 UTC."
+        run: echo "skip (not in 3-min window after 00/15/30/45 UTC)"
