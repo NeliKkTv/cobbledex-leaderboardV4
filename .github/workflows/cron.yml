@@ -2,8 +2,8 @@ name: Run Python script every 15 min
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
-  workflow_dispatch:
+    - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
+  workflow_dispatch:         # bouton "Run workflow" manuel
 
 concurrency:
   group: python-cron
@@ -13,7 +13,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write   # nécessaire si on commit/push des fichiers générés
 
     steps:
       - name: Checkout repo
@@ -29,9 +29,29 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      # --- crée tous les dossiers dont ton script a besoin ---
+      - name: Ensure required folders exist
+        run: |
+          mkdir -p data/stats
+          mkdir -p data/usercache
+          mkdir -p data/cobblemonplayerdata
+          mkdir -p data/vanilla
+          mkdir -p images
+          mkdir -p staticdata
+
+      # (facultatif mais utile au débogage)
+      - name: Debug – show repo tree
+        run: |
+          pwd
+          ls -la
+          echo "--------- tracked files ---------"
+          git ls-files
+
+      # Exécute ton script (à la racine du repo)
       - name: Run script
         run: python main.py
 
+      # (Optionnel) Commit & push des fichiers modifiés/générés (CSV, images, txt…)
       - name: Commit & push changes (if any)
         run: |
           git config user.name  "github-actions[bot]"
