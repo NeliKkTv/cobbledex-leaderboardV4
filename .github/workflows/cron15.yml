@@ -22,11 +22,15 @@ jobs:
         run: |
           TS=$(date -u +%s)
           REM=$(( (TS/60) % 15 ))
-          echo "UTC now: $(date -u) remainder=$REM"
-          if [ $REM -le 2 ]; then
+          MIN=$(date -u +%M)
+          echo "UTC now: $(date -u) | minute=$MIN | remainder=$REM (0..14)"
+          # Fenêtre élargie : on accepte 0..4 (= jusqu'à +5 min après 00/15/30/45)
+          if [ $REM -le 4 ]; then
             echo "SHOULD_RUN=true" >> "$GITHUB_ENV"
+            echo "Inside 5-min window after a quarter-hour -> will run."
           else
             echo "SHOULD_RUN=false" >> "$GITHUB_ENV"
+            echo "Outside window -> skip heavy steps."
           fi
 
       - name: Set up Python
@@ -69,13 +73,14 @@ jobs:
             git push || { git pull --rebase --autostash origin main && git push; }
           fi
 
-      - name: Send stable link to Discord
+      - name: Send stable link + image to Discord
         if: env.SHOULD_RUN == 'true' && github.event_name == 'schedule'
         run: |
           REPO_PATH="${GITHUB_REPOSITORY}"
           URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
+          echo "📤 Envoi du lien stable sur Discord : $URL"
           curl -s -H "Content-Type: application/json" -X POST \
-               -d "{\"content\":\"Leaderboard updated: ${URL}\"}" \
+               -d "{\"content\":\"🏆 Nouveau leaderboard généré : ${URL}\"}" \
                "$WEBHOOK"
 
       - name: Log execution time
@@ -86,4 +91,4 @@ jobs:
 
       - name: Skipped (outside window)
         if: env.SHOULD_RUN != 'true'
-        run: echo "skip (not in 3-min window after 00/15/30/45 UTC)"
+        run: echo "skip (not in 5-min window after 00/15/30/45 UTC)"
