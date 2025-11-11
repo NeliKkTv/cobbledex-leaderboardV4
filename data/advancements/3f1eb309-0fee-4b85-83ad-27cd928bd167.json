@@ -50,6 +50,7 @@
       "temperate_grove": "2025-11-10 17:35:25 +0100",
       "cold_river": "2025-11-10 12:14:40 +0100",
       "pine_slopes": "2025-11-10 20:54:53 +0100",
+      "old_growth_bayou": "2025-11-11 20:39:51 +0100",
       "scorching_caves": "2025-11-10 14:31:32 +0100",
       "grassy_beach": "2025-11-10 22:02:55 +0100",
       "grassland": "2025-11-11 01:53:40 +0100",
@@ -67,27 +68,28 @@
   },
   "regions_unexplored:pioneer": {
     "criteria": {
-      "willow_forest": "2025-11-10 13:47:22 +0100",
       "mountains": "2025-11-10 20:54:54 +0100",
       "silver_birch_forest": "2025-11-10 15:09:41 +0100",
-      "temperate_grove": "2025-11-10 17:35:25 +0100",
-      "cold_river": "2025-11-10 12:14:40 +0100",
       "shrubland": "2025-11-10 18:44:58 +0100",
-      "pine_slopes": "2025-11-10 20:54:53 +0100",
-      "grassy_beach": "2025-11-10 22:02:55 +0100",
       "boreal_forest": "2025-11-10 14:13:48 +0100",
       "fen": "2025-11-11 20:32:40 +0100",
+      "pine_taiga": "2025-11-10 18:56:12 +0100",
+      "muddy_river": "2025-11-10 18:05:11 +0100",
+      "autumnal_maple_forest": "2025-11-11 11:04:23 +0100",
+      "towering_cliffs": "2025-11-11 20:38:50 +0100",
+      "willow_forest": "2025-11-10 13:47:22 +0100",
+      "temperate_grove": "2025-11-10 17:35:25 +0100",
+      "cold_river": "2025-11-10 12:14:40 +0100",
+      "pine_slopes": "2025-11-10 20:54:53 +0100",
+      "old_growth_bayou": "2025-11-11 20:39:51 +0100",
+      "grassy_beach": "2025-11-10 22:02:55 +0100",
       "grassland": "2025-11-11 01:53:40 +0100",
       "rocky_meadow": "2025-11-10 14:59:50 +0100",
       "blackwood_taiga": "2025-11-10 14:14:37 +0100",
-      "pine_taiga": "2025-11-10 18:56:12 +0100",
       "ochard": "2025-11-10 18:33:44 +0100",
       "flower_fields": "2025-11-10 22:08:34 +0100",
       "highland_fields": "2025-11-10 15:03:15 +0100",
       "maple_forest": "2025-11-10 12:14:16 +0100",
-      "muddy_river": "2025-11-10 18:05:11 +0100",
-      "autumnal_maple_forest": "2025-11-11 11:04:23 +0100",
-      "towering_cliffs": "2025-11-11 20:38:50 +0100",
       "golden_boreal_taiga": "2025-11-11 20:21:56 +0100",
       "magnolia_highlands": "2025-11-10 12:04:12 +0100",
       "lupine_plains": "2025-11-10 14:14:06 +0100"
@@ -10627,6 +10629,12 @@
     "criteria": {
       "has_black_apricorn": "2025-11-11 20:30:20 +0100",
       "has_yellow_apricorn": "2025-11-11 20:14:33 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/black_dye_from_wither_rose": {
+    "criteria": {
+      "has_wither_rose": "2025-11-11 20:40:08 +0100"
     },
     "done": true
   },
