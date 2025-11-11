@@ -2,7 +2,7 @@ name: Run Python script every 15 min (robust)
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/5 * * * *"    # tick toutes les 5 min
   workflow_dispatch:
 
 concurrency:
@@ -21,14 +21,19 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Gate 15-minute marks only
+      # Fenêtre tolérante: on exécute dans les 3 minutes qui suivent 00/15/30/45 (UTC)
+      - name: Gate quarter-hour window
         id: gate
         run: |
-          MIN=$(date -u +%M)
-          if [ $((10#$MIN % 15)) -eq 0 ]; then
+          TS=$(date -u +%s)
+          REM=$(( (TS/60) % 15 ))
+          echo "UTC now: $(date -u) | remainder=$REM (0..14)"
+          if [ $REM -le 2 ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "Inside 3-min window after a quarter-hour: proceeding."
           else
             echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Outside window: skip heavy steps."
           fi
 
       - name: Set up Python
@@ -46,13 +51,7 @@ jobs:
       - name: Ensure required folders exist
         if: ${{ steps.gate.outputs.run == 'true' }}
         run: |
-          mkdir -p data/stats
-          mkdir -p data/usercache
-          mkdir -p data/playerdata
-          mkdir -p data/cobblemonplayerdata
-          mkdir -p data/vanilla
-          mkdir -p images
-          mkdir -p staticdata
+          mkdir -p data/stats data/usercache data/playerdata data/cobblemonplayerdata data/vanilla images staticdata
 
       - name: Run script
         if: ${{ steps.gate.outputs.run == 'true' }}
@@ -84,3 +83,7 @@ jobs:
           MSG="🏆 Leaderboard mis à jour :\n${STABLE_URL}"
           PAYLOAD=$(printf '{"content":"%s"}' "$MSG")
           curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
+
+      - name: Skipped (outside quarter-hour window)
+        if: ${{ steps.gate.outputs.run != 'true' }}
+        run: echo "Skipped: not within 3-min window after 00/15/30/45 (UTC)."
