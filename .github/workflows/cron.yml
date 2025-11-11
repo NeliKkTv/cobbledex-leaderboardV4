@@ -3,7 +3,7 @@ name: Run Python script every 15 min
 on:
   schedule:
     - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
-  workflow_dispatch:
+  workflow_dispatch:         # pour tester à la main
 
 concurrency:
   group: python-cron
@@ -59,71 +59,27 @@ jobs:
             echo "No changes to commit."
           fi
 
-      # ---- Construire une URL STABLE et l'envoyer sur Discord (ou uploader le fichier en fallback)
-      - name: Send stable link to Discord (or upload file)
-        if: success()
+      # --- Envoie le lien jsDelivr (fixe) + l'image en pièce jointe sur Discord ---
+      - name: Send stable link + image to Discord
+        if: success() && github.event_name == 'schedule'
         run: |
           set -e
+          # URL stable jsDelivr: toujours la même
+          # (format: https://cdn.jsdelivr.net/gh/USER/REPO@BRANCH/PATH)
+          REPO_PATH="${GITHUB_REPOSITORY}"   # ex: NeliKkTv/cobbledex-leaderboardV4
+          STABLE_URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
 
-          # 1) Récupère l'URL écrite par le script ou trouvée dans les logs
-          URL=""
-          if [ -f latest_leaderboard_url.txt ]; then
-            URL=$(tr -d '\r\n' < latest_leaderboard_url.txt)
-          fi
-          if [ -z "$URL" ] && [ -f script_output.log ]; then
-            URL=$(grep -Eo 'https?://[^ )>"'\''\r\n]+' script_output.log | tail -n 1 || true)
-          fi
-
-          # 2) Nettoie l'URL: enlève tout après ? (token éphémère)
-          CLEAN_URL="$URL"
-          if [ -n "$CLEAN_URL" ]; then
-            CLEAN_URL="${CLEAN_URL%%\?*}"
-          fi
-
-          # 3) Essaie de convertir en URL jsDelivr (stable) si c'est un raw GitHub
-          #    raw.githubusercontent.com/USER/REPO/BRANCH/PATH -> cdn.jsdelivr.net/gh/USER/REPO@BRANCH/PATH
-          CDN_URL=""
-          if echo "$CLEAN_URL" | grep -q '^https://raw.githubusercontent.com/'; then
-            PARTS="$(echo "$CLEAN_URL" | sed -E 's#https://raw\.githubusercontent\.com/([^/]+)/([^/]+)/([^/]+)/(.*)#\1 \2 \3 \4#')"
-            USER="$(echo "$PARTS" | awk '{print $1}')"
-            REPO="$(echo "$PARTS" | awk '{print $2}')"
-            BRANCH="$(echo "$PARTS" | awk '{print $3}')"
-            FILEPATH="$(echo "$PARTS" | cut -d' ' -f4-)"
-            CDN_URL="https://cdn.jsdelivr.net/gh/${USER}/${REPO}@${BRANCH}/${FILEPATH}"
-          fi
-
-          # 4) Choisit la meilleure URL qui répond (200)
-          STABLE_URL=""
-          if [ -n "$CDN_URL" ]; then
-            if curl -sI "$CDN_URL" | head -n 1 | grep -qE ' 200| 302'; then
-              STABLE_URL="$CDN_URL"
-            fi
-          fi
-          if [ -z "$STABLE_URL" ] && [ -n "$CLEAN_URL" ]; then
-            if curl -sI "$CLEAN_URL" | head -n 1 | grep -qE ' 200| 302'; then
-              STABLE_URL="$CLEAN_URL"
-            fi
-          fi
-
-          # 5) Si aucune URL publique ne marche (repo privé), on uploade directement le fichier image sur Discord
-          if [ -z "$STABLE_URL" ]; then
-            echo "No public URL works; trying to upload file directly..."
-            # essaie de deviner le fichier généré le plus récent dans images/
-            CANDIDATE="$(ls -t images/*.png 2>/dev/null | head -n 1 || true)"
-            if [ -n "$CANDIDATE" ] && [ -f "$CANDIDATE" ]; then
-              curl -s -X POST \
-                -F "payload_json={\"content\":\"🏆 Nouveau leaderboard (upload direct)\"}" \
-                -F "file=@${CANDIDATE};type=image/png" \
-                "$WEBHOOK"
-              exit 0
-            else
-              MSG="⚠️ Impossible de produire un lien stable et aucun fichier image trouvé pour upload."
-              PAYLOAD=$(printf '{"content":"%s"}' "$MSG")
-              curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
-              exit 0
-            fi
-          fi
-
-          # 6) Envoi de l'URL stable choisie
-          PAYLOAD=$(printf '{"content":"%s"}' "$STABLE_URL")
+          # 1) Envoi du message avec l'URL fixe (utile pour Projector)
+          MSG="🏆 Leaderboard mis à jour\n${STABLE_URL}"
+          PAYLOAD=$(printf '{"content":"%s"}' "$MSG")
           curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
+
+          # 2) Envoi de l'image en pièce jointe (aperçu dans Discord)
+          if [ -f images/top3.png ]; then
+            curl -s -X POST \
+              -F "payload_json={\"content\":\"\"}" \
+              -F "file=@images/top3.png;type=image/png" \
+              "$WEBHOOK"
+          else
+            echo "images/top3.png introuvable; envoi uniquement du lien."
+          fi
