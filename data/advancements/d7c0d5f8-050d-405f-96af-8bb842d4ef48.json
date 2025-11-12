@@ -43,6 +43,7 @@
       "deciduous_forest": "2025-11-11 16:22:43 +0100",
       "cold_deciduous_forest": "2025-11-12 01:25:42 +0100",
       "boreal_forest": "2025-11-11 00:15:39 +0100",
+      "fen": "2025-11-12 03:09:26 +0100",
       "pine_taiga": "2025-11-11 02:19:46 +0100",
       "muddy_river": "2025-11-10 23:42:10 +0100",
       "autumnal_maple_forest": "2025-11-10 23:42:45 +0100",
@@ -54,6 +55,7 @@
       "pine_slopes": "2025-11-11 14:34:02 +0100",
       "grassy_beach": "2025-11-11 02:16:21 +0100",
       "scorching_caves": "2025-11-11 01:51:33 +0100",
+      "spires": "2025-11-12 03:10:27 +0100",
       "blackwood_taiga": "2025-11-10 20:44:52 +0100",
       "rocky_meadow": "2025-11-11 02:57:44 +0100",
       "ochard": "2025-11-11 16:24:48 +0100",
@@ -77,6 +79,7 @@
       "deciduous_forest": "2025-11-11 16:22:43 +0100",
       "cold_deciduous_forest": "2025-11-12 01:25:42 +0100",
       "boreal_forest": "2025-11-11 00:15:39 +0100",
+      "fen": "2025-11-12 03:09:26 +0100",
       "pine_taiga": "2025-11-11 02:19:46 +0100",
       "muddy_river": "2025-11-10 23:42:10 +0100",
       "autumnal_maple_forest": "2025-11-10 23:42:45 +0100",
@@ -87,6 +90,7 @@
       "cold_river": "2025-11-10 20:50:01 +0100",
       "pine_slopes": "2025-11-11 14:34:02 +0100",
       "grassy_beach": "2025-11-11 02:16:21 +0100",
+      "spires": "2025-11-12 03:10:27 +0100",
       "blackwood_taiga": "2025-11-10 20:44:52 +0100",
       "rocky_meadow": "2025-11-11 02:57:44 +0100",
       "ochard": "2025-11-11 16:24:48 +0100",
@@ -808,6 +812,7 @@
       "minecraft:old_growth_birch_forest": "2025-11-10 23:05:51 +0100",
       "minecraft:deep_dark": "2025-11-10 21:28:09 +0100",
       "minecraft:grove": "2025-11-11 14:26:44 +0100",
+      "minecraft:swamp": "2025-11-12 03:06:03 +0100",
       "minecraft:meadow": "2025-11-10 21:01:24 +0100",
       "minecraft:windswept_gravelly_hills": "2025-11-12 02:54:54 +0100",
       "minecraft:plains": "2025-11-10 20:54:45 +0100",
@@ -2594,6 +2599,7 @@
       "obtain_persim_berry": "2025-11-11 02:06:46 +0100",
       "obtain_rindo_berry": "2025-11-10 21:10:22 +0100",
       "obtain_oran_berry": "2025-11-11 22:40:57 +0100",
+      "obtain_aspear_berry": "2025-11-12 03:09:19 +0100",
       "obtain_chesto_berry": "2025-11-11 23:36:02 +0100"
     },
     "done": false
@@ -9473,6 +9479,18 @@
     },
     "done": false
   },
+  "stoneworks:recipes/building_blocks/mossy_blackstone_brick_stairs_from_blackstone_or_mossy_blackstone_bricks_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_mossy_blackstone_bricks": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_shingle_stairs_from_blackstone_or_blackstone_shingles_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_shingles": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cozyhome:recipes/building_blocks/iron_sink": {
     "criteria": {
       "has_iron_bars": "2025-11-12 02:45:55 +0100"
@@ -9516,6 +9534,12 @@
     },
     "done": false
   },
+  "minecraft:recipes/decorations/blackstone_wall": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cozyhome:recipes/building_blocks/jungle_large_stump": {
     "criteria": {
       "has_jungle_log": "2025-11-12 02:47:32 +0100"
@@ -9528,11 +9552,29 @@
     },
     "done": true
   },
+  "cozyhome:recipes/building_blocks/stone_brick_fountain_stonecutting": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/mossy_stone_brick_wall": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_great_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "minecraft:recipes/building_blocks/polished_blackstone_brick_stairs_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
   },
   "cobblemon:recipes/misc/ancient_origin_rod": {
     "criteria": {
@@ -9565,9 +9607,63 @@
     },
     "done": false
   },
+  "cozyhome:recipes/building_blocks/blackstone_bathtub": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_fountain_spout_stonecutting": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/blackstone_stairs": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/blackstone_fountain_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_cobbled_blackstone_wall_from_blackstone_or_mossy_cobbled_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_mossy_cobbled_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_pillar_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/chiseled_stone_bricks_from_stone_bricks_stonecutting": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_plate_slab_from_blackstone_or_blackstone_plates_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_plates": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/consumables/max_revive": {
     "criteria": {
       "has_revive": "2025-11-12 02:51:39 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/polished_blackstone_brick_slab_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
     },
     "done": true
   },
@@ -9588,6 +9684,12 @@
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "stoneworks:recipes/building_blocks/cobbled_blackstone_wall_from_blackstone_or_cobbled_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_cobbled_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
   },
   "regions_unexplored:recipes/decorations/jungle_branch_from_jungle_log": {
     "criteria": {
@@ -9613,6 +9715,18 @@
     },
     "done": false
   },
+  "cozyhome:recipes/building_blocks/stone_brick_fountain_shaped": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_pavers_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "minecraft:nether/obtain_crying_obsidian": {
     "criteria": {
       "crying_obsidian": "2025-11-12 02:54:19 +0100"
@@ -9637,17 +9751,47 @@
     },
     "done": false
   },
+  "stoneworks:recipes/building_blocks/blackstone_tile_slab_from_blackstone_or_blackstone_tiles_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_tiles": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_shingle_wall_from_blackstone_or_blackstone_shingles_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_shingles": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_poke_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
   },
+  "stoneworks:recipes/building_blocks/cobbled_blackstone_stairs_from_blackstone_or_cobbled_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_cobbled_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_heavy_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_fountain_shaped": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_shingles_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
   },
   "cobblemon:recipes/misc/park_rod": {
     "criteria": {
@@ -9658,6 +9802,12 @@
   "minecraft:recipes/building_blocks/copper_grate_from_copper_block_stonecutting": {
     "criteria": {
       "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_bathtub": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
     },
     "done": true
   },
@@ -9673,15 +9823,63 @@
     },
     "done": true
   },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_fountain_stonecutting": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/cobbled_blackstone_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/misc/iron_ingot_from_smelting_deepslate_iron_ore": {
     "criteria": {
       "has_deepslate_iron_ore": "2025-11-12 02:48:27 +0100"
     },
     "done": true
   },
+  "stoneworks:recipes/building_blocks/blackstone_paver_slab_from_blackstone_or_blackstone_pavers_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_pavers": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/held/choice_band": {
     "criteria": {
       "has_band": "2025-11-12 00:39:20 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_tiles_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/blackstone_chimney": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_plates_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_blackstone_bricks_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_brick_slab_from_stone_bricks_stonecutting": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
     },
     "done": true
   },
@@ -9697,11 +9895,41 @@
     },
     "done": true
   },
+  "minecraft:recipes/building_blocks/mossy_stone_brick_stairs": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_tile_stairs_from_blackstone_or_blackstone_tiles_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_tiles": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_blackstone_brick_wall_from_blackstone_or_mossy_blackstone_bricks_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_mossy_blackstone_bricks": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/polished_blackstone_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_leaden_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "regions_unexplored:recipes/building_blocks/blackstone_cluster": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
   },
   "minecraft:recipes/misc/iron_ingot_from_blasting_deepslate_iron_ore": {
     "criteria": {
@@ -9709,9 +9937,33 @@
     },
     "done": true
   },
+  "minecraft:recipes/decorations/blackstone_wall_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/sea_lantern": {
     "criteria": {
       "has_prismarine_crystals": "2025-11-11 23:29:29 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/blackstone_fountain_spout_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_cobbled_blackstone_stairs_from_blackstone_or_mossy_cobbled_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_mossy_cobbled_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/blackstone_fountain_shaped": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
     },
     "done": true
   },
@@ -9727,17 +9979,77 @@
     },
     "done": false
   },
+  "cozyhome:recipes/building_blocks/stone_brick_chimney": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_tile_wall_from_blackstone_or_blackstone_tiles_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_tiles": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/blackstone_stairs_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/stone_brick_fountain_spout_shaped": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_plate_stairs_from_blackstone_or_blackstone_plates_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_plates": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/quick_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
   },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_chimney": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_cobbled_blackstone_slab_from_blackstone_or_mossy_cobbled_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_mossy_cobbled_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/timer_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "pokeblocks:recipes/decorations/gigantic_pokedoll_rellor": {
+    "criteria": {
+      "has_pokedoll_rellor": "2025-11-12 02:59:23 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/cracked_blackstone_tiles_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_brick_stairs": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
   },
   "cobblemon:recipes/misc/level_rod": {
     "criteria": {
@@ -9764,6 +10076,18 @@
     },
     "done": true
   },
+  "minecraft:recipes/building_blocks/polished_blackstone_bricks_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_stone_brick_slab": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
   "cozyhome:recipes/building_blocks/birch_large_stump": {
     "criteria": {
       "has_birch_log": "2025-11-12 02:47:32 +0100"
@@ -9776,9 +10100,33 @@
     },
     "done": true
   },
+  "minecraft:recipes/building_blocks/polished_blackstone_stairs_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/blackstone_pillar_trim": {
+    "criteria": {
+      "has_blackstone_pillar_trim": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/chiseled_copper_from_copper_block_stonecutting": {
     "criteria": {
       "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/blackstone_fountain_spout_shaped": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/blackstone_sink": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
     },
     "done": true
   },
@@ -9788,15 +10136,45 @@
     },
     "done": true
   },
+  "stoneworks:recipes/building_blocks/blackstone_plate_wall_from_blackstone_or_blackstone_plates_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_plates": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_fountain_spout_shaped": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/nest_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
   },
+  "stoneworks:recipes/building_blocks/mossy_cobbled_blackstone_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/polished_blackstone_slab_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/redstone/copper_bulb": {
     "criteria": {
       "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_brick_slab": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
     },
     "done": true
   },
@@ -9806,15 +10184,69 @@
     },
     "done": true
   },
+  "minecraft:recipes/building_blocks/blackstone_slab": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_citrine_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
   },
+  "cozyhome:recipes/building_blocks/stone_brick_bathtub": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_stone_brick_stairs_from_mossy_stone_brick_stonecutting": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_paver_wall_from_blackstone_or_blackstone_pavers_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_pavers": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_stone_brick_slab_from_mossy_stone_brick_stonecutting": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/pokerod_smithing_template": {
     "criteria": {
       "has_pokerod_smithing_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/stone_brick_wall": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/polished_blackstone_brick_wall_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cracked_stone_bricks": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_brick_stairs_from_stone_bricks_stonecutting": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
     },
     "done": true
   },
@@ -9824,17 +10256,53 @@
     },
     "done": false
   },
+  "handcrafted:recipes/misc/blackstone_corner_trim": {
+    "criteria": {
+      "has_blackstone_corner_trim": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_azure_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
   },
+  "minecraft:recipes/building_blocks/chiseled_stone_bricks": {
+    "criteria": {
+      "has_tag": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/lure_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "stoneworks:recipes/building_blocks/blackstone_shingle_slab_from_blackstone_or_blackstone_shingles_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_shingles": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/stone_brick_wall_from_stone_bricks_stonecutting": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/polished_blackstone_wall_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/blackstone_paver_stairs_from_blackstone_or_blackstone_pavers_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_blackstone_pavers": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
   },
   "cobblemon:craft_ancient_balls": {
     "criteria": {
@@ -9848,10 +10316,22 @@
     },
     "done": false
   },
+  "minecraft:recipes/building_blocks/chiseled_polished_blackstone_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/dive_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-12 01:27:51 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_sink": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
     },
     "done": true
   },
@@ -9870,6 +10350,18 @@
   "minecraft:recipes/building_blocks/dark_oak_planks": {
     "criteria": {
       "has_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/stone_brick_sink": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/blackstone_slab_from_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
     },
     "done": true
   },
@@ -9903,6 +10395,18 @@
     },
     "done": true
   },
+  "minecraft:recipes/building_blocks/polished_blackstone": {
+    "criteria": {
+      "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "stoneworks:recipes/building_blocks/mossy_blackstone_brick_slab_from_blackstone_or_mossy_blackstone_bricks_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_mossy_blackstone_bricks": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
   "cozyhome:recipes/building_blocks/iron_bathtub": {
     "criteria": {
       "has_iron_bars": "2025-11-12 02:45:55 +0100"
@@ -9915,11 +10419,29 @@
     },
     "done": true
   },
+  "cozyhome:recipes/building_blocks/stone_brick_fountain_spout_stonecutting": {
+    "criteria": {
+      "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_wing_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "stoneworks:recipes/building_blocks/cobbled_blackstone_slab_from_blackstone_or_cobbled_blackstone_stonecutting": {
+    "criteria": {
+      "has_blackstone_or_cobbled_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/mossy_stone_brick_wall_from_mossy_stone_brick_stonecutting": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
   },
   "cobblemon:recipes/misc/moon_rod": {
     "criteria": {
