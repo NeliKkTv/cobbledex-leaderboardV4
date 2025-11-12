@@ -1,71 +1,110 @@
-name: Run Python script every 15 min
+https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/images/top3.png
+```)  
+est un **lien CDN** (Content Delivery Network).
+
+Ce type de lien sert à accélérer le chargement, mais il **garde une copie en cache** pendant un moment.  
+Résultat :  
+🔸 l’image est bien mise à jour dans ton dépôt GitHub  
+🔸 mais jsDelivr affiche encore l’ancienne pendant quelques secondes (parfois 1 à 2 minutes maximum).
+
+---
+
+## ⚙️ Solution n°1 : Forcer la mise à jour (purge du cache jsDelivr)
+On va dire au workflow GitHub de “vider” le cache du CDN après chaque mise à jour.  
+Ajoute cette version **complète** de ton fichier `.github/workflows/cron15.yml` :  
+
+---
+
+### 🧾 Nouveau code complet (en français)
+```yaml
+name: Exécuter le script Python toutes les 15 minutes
 
 on:
   schedule:
     - cron: "*/15 * * * *"     # toutes les 15 minutes (UTC)
-  workflow_dispatch:           # exécution manuelle possible
+  workflow_dispatch:           # permet aussi de le lancer à la main
 
 permissions:
-  contents: write              # permet le push GitHub
+  contents: write              # autorise le push vers le repo
 
 jobs:
   run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Récupérer le dépôt
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Installer Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies (if any)
+      - name: Installer les dépendances (si besoin)
         run: |
           if [ -f requirements.txt ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
           fi
 
-      - name: Ensure required folders exist
+      - name: Créer les dossiers nécessaires
         run: |
           mkdir -p images
           mkdir -p fonts
           mkdir -p data
 
-      - name: Run script
+      - name: Exécuter le script principal
         run: python main.py
 
-      - name: Commit & push changes (if any)
+      - name: Commit & push des changements (si besoin)
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add -A
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo "Aucun changement détecté."
             echo "CHANGED=false" >> $GITHUB_ENV
           else
-            git commit -m "Auto-update from cron: ${{ github.run_number }}"
+            git commit -m "Mise à jour automatique depuis le cron #${{ github.run_number }}"
             git push
             echo "CHANGED=true" >> $GITHUB_ENV
           fi
 
-      - name: Send stable link + image to Discord (optional)
+      - name: Vider le cache jsDelivr
+        if: env.CHANGED == 'true'
+        env:
+          OWNER: ${{ github.repository_owner }}
+          REPO:  ${{ github.event.repository.name }}
+        run: |
+          CDN_PATH="gh/${OWNER}/${REPO}@main/images/top3.png"
+          echo "Purge du cache jsDelivr pour ${CDN_PATH}"
+          curl -sS "https://purge.jsdelivr.net/${CDN_PATH}"
+          sleep 2   # petite pause pour laisser le CDN se rafraîchir
+
+      - name: Envoyer l'image sur Discord
         if: env.CHANGED == 'true'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           OWNER: ${{ github.repository_owner }}
           REPO:  ${{ github.event.repository.name }}
+          RUN_ID: ${{ github.run_id }}
         run: |
           if [ -n "$DISCORD_WEBHOOK_URL" ]; then
-            CDN_URL="https://cdn.jsdelivr.net/gh/${OWNER}/${REPO}@main/images/top3.png"
-            MSG="🔁 **Leaderboard mis à jour automatiquement !**\n${CDN_URL}"
+            STABLE="https://cdn.jsdelivr.net/gh/${OWNER}/${REPO}@main/images/top3.png"
+            # Ajoute un paramètre ?v= pour forcer la mise à jour de l'image
+            NOCACHE="${STABLE}?v=${RUN_ID}"
+
+            MSG="🔁 **Leaderboard mis à jour automatiquement !**\n🔗 Lien fixe : ${STABLE}\n🚀 Version à jour : ${NOCACHE}"
             curl -sS -H "Content-Type: application/json" \
                  -d "{\"content\":\"${MSG}\"}" \
                  "$DISCORD_WEBHOOK_URL"
+
+            if [ -f "images/top3.png" ]; then
+              curl -sS -X POST \
+                -F "payload_json={\"content\":\"\"}" \
+                -F "file=@images/top3.png" \
+                "$DISCORD_WEBHOOK_URL"
+            fi
           else
-            echo "Pas de DISCORD_WEBHOOK_URL configuré — étape ignorée."
+            echo "Aucun webhook Discord trouvé — envoi ignoré."
           fi
-          
