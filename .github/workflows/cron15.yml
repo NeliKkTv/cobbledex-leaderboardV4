@@ -39,16 +39,31 @@ jobs:
       - name: Run script
         run: python main.py
 
+      # ✅ Step robuste: ne plante pas si rien à commiter
       - name: Commit & push changes (if any)
+        id: commit
         run: |
-          git config user.name "github-actions[bot]"
+          set -e
+          git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add images/top3.png
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update leaderboard from cron: ${{ github.run_id }}" && git push)
 
-      # 🧹 Purge le cache jsDelivr après mise à jour
+          # On stage tout le repo (y compris images/top3.png si changé)
+          git add -A
+
+          # S'il n'y a RIEN de staged, on n'essaie pas de commit
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git commit -m "Auto-update leaderboard from cron: ${{ github.run_id }}"
+          git push
+          echo "committed=true" >> "$GITHUB_OUTPUT"
+
+      # 🧹 Purge jsDelivr uniquement si on a poussé une nouvelle image
       - name: Purger le cache jsDelivr + réchauffer
-        if: env.SHOULD_RUN == 'true' || true
+        if: steps.commit.outputs.committed == 'true'
         run: |
           set -e
           FILE="images/top3.png"
@@ -63,8 +78,9 @@ jobs:
           echo "Warm jsDelivr: $FIX_URL"
           curl -sI "$FIX_URL" | sed -n '1,20p'
 
-      # 💬 Envoi sur Discord avec lien fixe + aperçu sans cache
+      # 💬 Discord uniquement si on a vraiment une mise à jour
       - name: Notifier Discord avec lien FIXE + aperçu rafraîchi
+        if: steps.commit.outputs.committed == 'true'
         env:
           WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
@@ -86,4 +102,3 @@ jobs:
           EOF
 
           curl -sS -H "Content-Type: application/json" -d "$PAYLOAD" "$WEBHOOK"
-
