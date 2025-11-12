@@ -1,97 +1,89 @@
-name: Run Python script every 15 min
-
+name: cron15
 on:
   schedule:
-    - cron: "*/15 * * * *"   # Toutes les 15 minutes (UTC)
-  workflow_dispatch:         # Permet de le lancer manuellement
-
-concurrency:
-  group: python-cron
-  cancel-in-progress: false
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
 
 jobs:
   run:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
-    env:
-      WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
-      SFTP_HOST: ${{ secrets.SFTP_HOST }}
-      SFTP_USER: ${{ secrets.SFTP_USER }}
-      SFTP_PASS: ${{ secrets.SFTP_PASS }}
-
     steps:
-      # 1. Récupération du repo
+      - name: Set up job
+        run: echo "Démarrage du workflow..."
+
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2. Mise en place de Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
-      # 3. Installation des dépendances
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4. Nettoyage du config.ini (fin de ligne + BOM)
-      - name: Sanitize config.ini (LF, no BOM)
+      ####################################################################
+      # 🔧 Génère config.ini à partir des SECRETS GitHub
+      ####################################################################
+      - name: Générer config.ini depuis les secrets
         run: |
-          perl -pi -e 's/\r\n/\n/g' config.ini
-          sed -i '1s/^\xEF\xBB\xBF//' config.ini
+          cat > config.ini << 'EOF'
+          [GITHUB]
+          Enable=false
+          Token=
+          RepoOwner=NeliKkTwitch
+          RepoName=cobbledex-leaderboardV4
+          Branch=main
 
-      # 5. Debug : lecture du mode depuis le config.ini
-      - name: Debug lecture du mode (via Python)
-        run: |
-          python - <<'PY'
-          import configparser
-          cfg = configparser.ConfigParser()
-          cfg.read('config.ini', encoding='utf-8')
-          for section in cfg.sections():
-              print(f"[{section}]")
-              for k, v in cfg.items(section):
-                  print(f"  {k} = {v}")
-          print("\nValeur de mode =", cfg.get('MODE', 'mode', fallback='??'))
-          PY
+          [MODE]
+          mode=sftp
 
-      # 6. Exécution du script principal
+          [SFTP]
+          host=${{ secrets.SFTP_HOST }}
+          port=${{ secrets.SFTP_PORT }}
+          username=${{ secrets.SFTP_USER }}
+          password=${{ secrets.SFTP_PASS }}
+          remote_root=${{ secrets.SFTP_REMOTE_DIR }}
+
+          [LEADERBOARD]
+          Enable=true
+          category=minecraft:custom
+          subcategory=minecraft:pokemon_registered
+          CreateCSV=true
+          CSVPath=total.csv
+          CreateCSVMoney=false
+          CSVPathMoney=money.csv
+
+          [TOPIMAGE]
+          Enable=true
+          NDplayers=30
+          Width=3
+          Height=1
+          ImagePath=images/top3.png
+          Titles=Leaderboard - RANKS 1-10,Leaderboard - RANKS 11-20,Leaderboard - RANKS 21-30
+          Leaderboards=vanilla/minecraft:custom/minecraft:pokemon_registered,vanilla/minecraft:custom/minecraft:pokemon_registered,vanilla/minecraft:custom/minecraft:pokemon_registered
+          EOF
+
+          echo "✅ Fichier config.ini généré avec succès."
+          sed -n '1,60p' config.ini
+
+      ####################################################################
+      # 🧠 Exécute ton script Python principal
+      ####################################################################
       - name: Run python main.py
         run: |
           echo "Lancement du script..."
           python main.py
 
-      # 7. Commit & push (si le script a généré des fichiers)
+      ####################################################################
+      # 📤 Commit & push si des fichiers ont changé
+      ####################################################################
       - name: Commit & push changes (if any)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git diff --cached --quiet || (git commit -m "Auto-update leaderboard from cron" && git push)
-
-      # 8. Purge du cache jsDelivr + réchauffement
-      - name: Purger le cache jsDelivr + réchauffer
-        run: |
-          set -e
-          FILE="images/top3.png"
-          URL="https://cdn.jsdelivr.net/gh/NeliKkTwitch/cobbledex-leaderboardV4@main/${FILE}"
-          PURGE="https://purge.jsdelivr.net/gh/NeliKkTwitch/cobbledex-leaderboardV4@main/${FILE}"
-
-          echo "Purge jsDelivr: $PURGE"
-          curl -sS "$PURGE" > /dev/null || true
-
-          echo "Warm jsDelivr: $URL"
-          curl -s "$URL" | head -c 20 > /dev/null || true
-
-      # 9. Notification Discord avec lien fixe (et aperçu à jour)
-      - name: Notifier Discord avec lien FIXE + aperçu rafraîchi
-        run: |
-          set -e
-          FILE_URL="https://cdn.jsdelivr.net/gh/NeliKkTwitch/cobbledex-leaderboardV4@main/images/top3.png"
-          PAYLOAD=$(jq -n --arg url "$FILE_URL" \
-            '{content: "**📊 Nouveau leaderboard mis à jour !**", embeds: [{image: {url: $url}}]}')
-          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$WEBHOOK"
+          git add images/top3.png total.csv || true
+          if git diff --cached
