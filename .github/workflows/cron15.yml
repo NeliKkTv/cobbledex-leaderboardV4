@@ -91,7 +91,7 @@ jobs:
           echo
 
       - name: Notifier Discord
-        if: ${{ secrets.DISCORD_WEBHOOK_URL }}   # <-- correction ici
+        if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
