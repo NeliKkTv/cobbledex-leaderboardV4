@@ -1,19 +1,16 @@
-name: cron15
+name: Run Python script every 15 min (robust)
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * *"   # toutes les 15 min (UTC)
+    - cron: "*/15 * * * *"    # toutes les 15 minutes (UTC)
+  workflow_dispatch:          # exécutable à la main
 
 permissions:
   contents: write
 
-env:
-  STABLE_FILE: images/top3.png
-  # Lien fixe (à mettre dans ton projecteur en jeu) :
-  JSDELIVR: https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/images/top3.png
-  PURGE:    https://purge.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/images/top3.png
-  WEBHOOK:  ${{ secrets.DISCORD_WEBHOOK_URL }}  # si tu n’as pas de secret, la step Discord sera skip
+concurrency:
+  group: python-cron
+  cancel-in-progress: false
 
 jobs:
   run:
@@ -33,49 +30,91 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Ensure folders
+      # --- SANITIZE config.ini : retire BOM + convertit CRLF -> LF
+      - name: Sanitize config.ini (LF, no BOM)
+        if: ${{ hashFiles('config.ini') != '' }}
         run: |
-          mkdir -p images data staticdata
+          # convertit CRLF en LF
+          perl -pi -e 's/\r\n/\n/g' config.ini
+          # retire un éventuel BOM UTF-8
+          (printf '\xEF\xBB\xBF' | cmp -s - <(head -c 3 config.ini)) && tail -c +4 config.ini > config.tmp && mv config.tmp config.ini || true
 
+      # --- DEBUG & AUTOFIX : affiche et corrige le mode si nécessaire
+      - name: Debug lecture du mode (via Python)
+        if: ${{ hashFiles('config.ini') != '' }}
+        run: |
+          python - << 'PY'
+          import configparser, sys, io, os
+          p='config.ini'
+          if not os.path.exists(p):
+              print("config.ini introuvable"); sys.exit(1)
+          # lecture BOM-safe
+          with open(p,'r',encoding='utf-8-sig') as f:
+              raw=f.read()
+          cfg = configparser.ConfigParser()
+          try:
+              cfg.read_string(raw)
+          except Exception as e:
+              print("Erreur de parsing:", e); sys.exit(1)
+
+          if 'MODE' not in cfg: cfg['MODE'] = {}
+          mode = cfg['MODE'].get('mode','').strip().lower()
+          print("MODE actuel lu dans config.ini =>", repr(mode))
+
+          valid = {'manual','local','ftp','sftp'}
+          if mode not in valid:
+              print("Mode invalide. Correction automatique -> sftp")
+              cfg['MODE']['mode'] = 'sftp'
+              with open(p,'w',encoding='utf-8') as f:
+                  cfg.write(f)
+          PY
+
+      # --- (optionnel) Affiche les 40 premières lignes pour contrôle
+      - name: Aperçu config.ini (40 premières lignes)
+        if: ${{ hashFiles('config.ini') != '' }}
+        run: sed -n '1,40p' config.ini || true
+
+      # --- LANCE TON SCRIPT
       - name: Run python main.py
         run: |
-          echo "Lancement du script…"
+          echo "Lancement du script..."
           python main.py
 
+      # --- Commit l'image si elle a changé
       - name: Commit & push changes (images/top3.png)
         run: |
           git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          if git ls-files --error-unmatch "${{ env.STABLE_FILE }}" >/dev/null 2>&1; then
-            git add "${{ env.STABLE_FILE }}"
-          fi
-
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/top3.png || true
           if ! git diff --cached --quiet; then
-            git commit -m "Auto-update leaderboard image"
+            git commit -m "Auto-update from cron: $(date +%s)"
             git push
           else
-            echo "Aucun changement à pousser."
+            echo "Rien à committer"
           fi
 
+      # --- Purge jsDelivr et réchauffement (URL FIXE)
       - name: Purger le cache jsDelivr + réchauffer
         run: |
           set -e
-          echo "Purge: ${{ env.PURGE }}"
-          curl -sS "${{ env.PURGE }}" >/dev/null || true
+          FILE="images/top3.png"
+          URL="https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/$FILE"
+          PURGE="https://purge.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/$FILE"
 
-          echo "Warm:  ${{ env.JSDELIVR }}"
-          # On “tire” l’image pour remplir le cache
-          curl -sI "${{ env.JSDELIVR }}" | sed -n '1,12p' || true
+          echo "Purge jsDelivr : $PURGE"
+          curl -sS "$PURGE" > /dev/null || true
 
-      - name: Notifier Discord (lien FIXE + aperçu rafraîchi)
-        if: env.WEBHOOK != ''
+          echo "Warm jsDelivr : $URL"
+          curl -sS "$URL"  | head -c 8 || true
+          echo
+
+      # --- Envoi sur Discord avec lien FIXE (facultatif si tu l’as déjà)
+      - name: Notifier Discord avec lien FIXE + aperçu rafraîchi
+        if: ${{ env.DISCORD_WEBHOOK_URL != '' }}
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           set -e
-          now=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          payload=$(jq -n \
-            --arg content "**Leaderboard mis à jour** — $now\nLien fixe (sans cache) :\n${{ env.JSDELIVR }}?t=$(date +%s)" \
-            '{content: $content}')
-          curl -sS -H "Content-Type: application/json" \
-               -d "$payload" \
-               "${{ env.WEBHOOK }}" >/dev/null || true
+          IMAGE_URL="https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/images/top3.png"
+          JSON_PAYLOAD=$(jq -n --arg content "Leaderboard mis à jour ✅\n$IMAGE_URL" '{content: $content}')
+          curl -sS -H "Content-Type: application/json" -d "$JSON_PAYLOAD" "$DISCORD_WEBHOOK_URL" || true
