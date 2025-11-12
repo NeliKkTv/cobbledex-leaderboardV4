@@ -41,7 +41,10 @@
       "mountains": "2025-11-11 02:11:40 +0100",
       "silver_birch_forest": "2025-11-10 15:47:05 +0100",
       "temperate_grove": "2025-11-11 02:16:18 +0100",
+      "frozen_tundra": "2025-11-12 12:32:51 +0100",
       "cold_river": "2025-11-10 15:28:16 +0100",
+      "pine_slopes": "2025-11-12 13:40:45 +0100",
+      "cold_deciduous_forest": "2025-11-12 12:45:22 +0100",
       "grassy_beach": "2025-11-11 02:16:19 +0100",
       "boreal_forest": "2025-11-11 02:12:03 +0100",
       "rocky_meadow": "2025-11-11 02:55:27 +0100",
@@ -50,7 +53,9 @@
       "gravel_beach": "2025-11-11 02:12:56 +0100",
       "highland_fields": "2025-11-10 15:38:34 +0100",
       "maple_forest": "2025-11-10 15:02:56 +0100",
+      "frozen_pine_taiga": "2025-11-12 12:17:21 +0100",
       "autumnal_maple_forest": "2025-11-11 02:12:21 +0100",
+      "icy_heights": "2025-11-12 12:44:19 +0100",
       "magnolia_highlands": "2025-11-10 15:02:14 +0100",
       "lupine_plains": "2025-11-10 15:36:33 +0100"
     },
@@ -62,7 +67,10 @@
       "mountains": "2025-11-11 02:11:40 +0100",
       "silver_birch_forest": "2025-11-10 15:47:05 +0100",
       "temperate_grove": "2025-11-11 02:16:18 +0100",
+      "frozen_tundra": "2025-11-12 12:32:51 +0100",
       "cold_river": "2025-11-10 15:28:16 +0100",
+      "pine_slopes": "2025-11-12 13:40:45 +0100",
+      "cold_deciduous_forest": "2025-11-12 12:45:22 +0100",
       "grassy_beach": "2025-11-11 02:16:19 +0100",
       "boreal_forest": "2025-11-11 02:12:03 +0100",
       "rocky_meadow": "2025-11-11 02:55:27 +0100",
@@ -71,7 +79,9 @@
       "gravel_beach": "2025-11-11 02:12:56 +0100",
       "highland_fields": "2025-11-10 15:38:34 +0100",
       "maple_forest": "2025-11-10 15:02:56 +0100",
+      "frozen_pine_taiga": "2025-11-12 12:17:21 +0100",
       "autumnal_maple_forest": "2025-11-11 02:12:21 +0100",
+      "icy_heights": "2025-11-12 12:44:19 +0100",
       "magnolia_highlands": "2025-11-10 15:02:14 +0100",
       "lupine_plains": "2025-11-10 15:36:33 +0100"
     },
@@ -103,9 +113,12 @@
   },
   "cobblemon:craft_base_balls": {
     "criteria": {
+      "roseate_ball": "2025-11-12 12:18:45 +0100",
       "poke_ball": "2025-11-10 15:16:30 +0100",
       "premier_ball": "2025-11-11 02:46:15 +0100",
-      "verdant_ball": "2025-11-10 15:12:48 +0100"
+      "azure_ball": "2025-11-12 12:16:47 +0100",
+      "verdant_ball": "2025-11-10 15:12:48 +0100",
+      "citrine_ball": "2025-11-12 12:31:20 +0100"
     },
     "done": false
   },
@@ -153,10 +166,15 @@
   },
   "cobblemon:craft_all_balls": {
     "criteria": {
+      "roseate_ball": "2025-11-12 12:18:45 +0100",
+      "great_ball": "2025-11-12 13:35:06 +0100",
       "poke_ball": "2025-11-10 15:16:30 +0100",
       "master_ball": "2025-11-10 15:25:37 +0100",
       "premier_ball": "2025-11-11 02:46:15 +0100",
-      "verdant_ball": "2025-11-10 15:12:48 +0100"
+      "azure_ball": "2025-11-12 12:16:47 +0100",
+      "verdant_ball": "2025-11-10 15:12:48 +0100",
+      "dream_ball": "2025-11-12 13:33:24 +0100",
+      "citrine_ball": "2025-11-12 12:31:20 +0100"
     },
     "done": false
   },
@@ -277,16 +295,28 @@
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
-      "minecraft:old_growth_birch_forest": "2025-11-10 17:16:09 +0100",
+      "minecraft:cold_ocean": "2025-11-12 12:50:12 +0100",
+      "minecraft:beach": "2025-11-12 12:58:18 +0100",
       "minecraft:forest": "2025-11-10 15:28:19 +0100",
+      "minecraft:taiga": "2025-11-12 12:56:42 +0100",
+      "minecraft:river": "2025-11-10 15:15:09 +0100",
+      "minecraft:stony_shore": "2025-11-10 17:15:44 +0100",
+      "minecraft:snowy_plains": "2025-11-12 12:11:07 +0100",
+      "minecraft:dripstone_caves": "2025-11-11 02:56:53 +0100",
+      "minecraft:snowy_taiga": "2025-11-12 11:59:06 +0100",
+      "minecraft:deep_cold_ocean": "2025-11-12 12:54:22 +0100",
+      "minecraft:old_growth_birch_forest": "2025-11-10 17:16:09 +0100",
+      "minecraft:frozen_ocean": "2025-11-12 12:34:07 +0100",
+      "minecraft:frozen_river": "2025-11-12 11:59:31 +0100",
+      "minecraft:windswept_forest": "2025-11-12 13:08:36 +0100",
       "minecraft:ocean": "2025-11-10 17:16:13 +0100",
       "minecraft:jungle": "2025-11-10 17:17:49 +0100",
       "minecraft:cherry_grove": "2025-11-10 17:16:39 +0100",
-      "minecraft:river": "2025-11-10 15:15:09 +0100",
+      "minecraft:grove": "2025-11-12 12:46:27 +0100",
+      "minecraft:swamp": "2025-11-12 13:00:47 +0100",
       "minecraft:meadow": "2025-11-10 15:32:46 +0100",
       "minecraft:birch_forest": "2025-11-10 17:16:05 +0100",
-      "minecraft:stony_shore": "2025-11-10 17:15:44 +0100",
-      "minecraft:dripstone_caves": "2025-11-11 02:56:53 +0100",
+      "minecraft:windswept_hills": "2025-11-12 13:08:29 +0100",
       "minecraft:savanna": "2025-11-10 17:16:42 +0100",
       "minecraft:plains": "2025-11-10 15:53:00 +0100"
     },
@@ -3086,7 +3116,11 @@
   },
   "biomeswevegone:biomeswevegone/adventure/oh_the_biomes_weve_gone": {
     "criteria": {
-      "biomeswevegone:allium_shrubland": "2025-11-10 17:16:18 +0100"
+      "biomeswevegone:cypress_wetlands": "2025-11-12 13:00:39 +0100",
+      "biomeswevegone:zelkova_forest": "2025-11-12 13:26:00 +0100",
+      "biomeswevegone:allium_shrubland": "2025-11-10 17:16:18 +0100",
+      "biomeswevegone:overgrowth_woodlands": "2025-11-12 11:55:41 +0100",
+      "biomeswevegone:forgotten_forest": "2025-11-12 11:58:58 +0100"
     },
     "done": false
   },
@@ -4995,6 +5029,805 @@
   "minecraft:recipes/misc/gold_nugget_from_blasting": {
     "criteria": {
       "has_golden_axe": "2025-11-11 20:15:31 +0100"
+    },
+    "done": true
+  },
+  "mighty_mail:recipes/decorations/mangrove_mail_box": {
+    "criteria": {
+      "has_plank": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/light_blue_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/building_blocks/prismaglass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/relic_coin_pouch": {
+    "criteria": {
+      "has_coin": "2025-11-12 13:24:43 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mangrove_drawer": {
+    "criteria": {
+      "has_mangrove_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mangrove_sink_counter": {
+    "criteria": {
+      "has_mangrove_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/orange_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/mossy_stone_brick_wall": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "hopo:minecraft/adventure/locate_all_underwater_structures": {
+    "criteria": {
+      "locate_shipwreck": "2025-11-12 12:41:50 +0100",
+      "locate_underwater_small_ruins": "2025-11-12 12:50:34 +0100"
+    },
+    "done": false
+  },
+  "biomeswevegone:recipes/building_blocks/sandy_dirt": {
+    "criteria": {
+      "has_sand": "2025-11-12 11:21:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/mangrove_pressure_plate": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/red_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "sophisticatedstorage:recipes/misc/mangrove_limited_barrel_4": {
+    "criteria": {
+      "has_mangrove_plank": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "sophisticatedstorage:recipes/misc/mangrove_limited_barrel_3": {
+    "criteria": {
+      "has_mangrove_plank": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "sophisticatedstorage:recipes/misc/mangrove_limited_barrel_2": {
+    "criteria": {
+      "has_mangrove_plank": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "sophisticatedstorage:recipes/misc/mangrove_limited_barrel_1": {
+    "criteria": {
+      "has_mangrove_plank": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_fountain_spout_stonecutting": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/light_gray_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_dining_bench": {
+    "criteria": {
+      "has_mangrove_dining_bench": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mangrove_desk": {
+    "criteria": {
+      "has_mangrove_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_table": {
+    "criteria": {
+      "has_mangrove_table": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "biomeswevegone:recipes/building_blocks/black_sand": {
+    "criteria": {
+      "has_sand": "2025-11-12 11:21:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/mangrove_sign": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/blend_type/wooded_badlands": {
+    "criteria": {
+      "has_ingredients": "2025-11-12 13:25:21 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mangrove_storage_counter": {
+    "criteria": {
+      "has_mangrove_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "another_furniture:recipes/mangrove_table": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_couch": {
+    "criteria": {
+      "has_mangrove_couch": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/green_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/blue_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mangrove_stairs": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/blocks/sun_stone_block": {
+    "criteria": {
+      "has_sun_stone": "2025-11-12 13:24:37 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_fountain_shaped": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/lime_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_bathtub": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/prismarine_bricks": {
+    "criteria": {
+      "has_prismarine_shard": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_bench": {
+    "criteria": {
+      "has_mangrove_bench": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/redstone": {
+    "criteria": {
+      "has_redstone_block": "2025-11-12 12:51:09 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_desk": {
+    "criteria": {
+      "has_mangrove_desk": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_fountain_stonecutting": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/white_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/blend_type/frozen_river": {
+    "criteria": {
+      "has_ingredients": "2025-11-12 12:53:08 +0100"
+    },
+    "done": true
+  },
+  "beautify:bookstack": {
+    "criteria": {
+      "requirement": "2025-11-12 12:12:26 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/blocks/fossil_analyzer": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/glass_bottle": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/held/damp_rock": {
+    "criteria": {
+      "has_stone": "2025-11-12 12:18:42 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/dried_kelp_block": {
+    "criteria": {
+      "has_dried_kelp": "2025-11-12 12:10:23 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/held/heat_rock": {
+    "criteria": {
+      "has_stone": "2025-11-12 12:18:42 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_corner_trim": {
+    "criteria": {
+      "has_mangrove_corner_trim": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "pokeblocks:recipes/decorations/gigantic_pokedoll_snorlax": {
+    "criteria": {
+      "has_pokedoll_snorlax": "2025-11-12 13:35:06 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_stone_brick_stairs": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/citrine_rod": {
+    "criteria": {
+      "has_ball": "2025-11-12 12:31:20 +0100"
+    },
+    "done": false
+  },
+  "minecraft:recipes/redstone/mangrove_trapdoor": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mangrove_counter": {
+    "criteria": {
+      "has_mangrove_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/purple_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sandstone": {
+    "criteria": {
+      "has_sand": "2025-11-12 11:21:17 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_drawer": {
+    "criteria": {
+      "has_mangrove_drawer": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sea_lantern": {
+    "criteria": {
+      "has_prismarine_crystals": "2025-11-12 13:17:55 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_pillar_trim": {
+    "criteria": {
+      "has_mangrove_pillar_trim": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mangrove_slab": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/evolution/reaper_cloth": {
+    "criteria": {
+      "has_membrane": "2025-11-12 13:12:26 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_chimney": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/prismarine": {
+    "criteria": {
+      "has_prismarine_shard": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/dream_rod": {
+    "criteria": {
+      "has_ball": "2025-11-12 13:33:24 +0100"
+    },
+    "done": false
+  },
+  "biomeswevegone:recipes/building_blocks/white_sand": {
+    "criteria": {
+      "has_sand": "2025-11-12 11:21:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/snow": {
+    "criteria": {
+      "has_snowball": "2025-11-12 12:21:36 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/blocks/monitor": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_counter": {
+    "criteria": {
+      "has_mangrove_counter": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/blocks/display_case": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/pink_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/black_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/gray_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:recipes/misc/n_solarizer": {
+    "criteria": {
+      "has_sunstone": "2025-11-12 13:24:37 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_shelf": {
+    "criteria": {
+      "has_mangrove_shelf": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/azure_rod": {
+    "criteria": {
+      "has_ball": "2025-11-12 12:16:47 +0100"
+    },
+    "done": false
+  },
+  "minecraft:recipes/building_blocks/mossy_stone_brick_slab": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mangrove_table": {
+    "criteria": {
+      "has_mangrove_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mangrove_wall_mirror": {
+    "criteria": {
+      "has_mangrove_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_fountain_spout_shaped": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_chair": {
+    "criteria": {
+      "has_mangrove_chair": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/blend_type/snowy_beach": {
+    "criteria": {
+      "has_ingredients": "2025-11-12 11:21:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cyan_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/held/wise_glasses": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/cherish_rod": {
+    "criteria": {
+      "has_ball": "2025-11-12 12:31:20 +0100"
+    },
+    "done": false
+  },
+  "minecraft:recipes/brewing/cauldron": {
+    "criteria": {
+      "has_water_bucket": "2025-11-12 12:53:08 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/blocks/thunder_stone_block": {
+    "criteria": {
+      "has_thunder_stone": "2025-11-12 12:24:25 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_stone_brick_stairs_from_mossy_stone_brick_stonecutting": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/spectral_arrow": {
+    "criteria": {
+      "has_glowstone_dust": "2025-11-12 12:19:26 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/phantom_trophy": {
+    "criteria": {
+      "has_phantom_trophy": "2025-11-12 13:12:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/mossy_stone_brick_slab_from_mossy_stone_brick_stonecutting": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "beautify:progression/blinds": {
+    "criteria": {
+      "obtain": "2025-11-12 12:08:02 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/held/soft_sand": {
+    "criteria": {
+      "has_sand": "2025-11-12 11:21:17 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:full_party": {
+    "criteria": {
+      "full_party": "2025-11-12 12:02:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/brown_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/held/black_belt": {
+    "criteria": {
+      "has_kelp": "2025-11-12 12:10:23 +0100"
+    },
+    "done": true
+  },
+  "eternal_starlight:recipes/brewing/cauldron_from_swamp_silver_ingot": {
+    "criteria": {
+      "has_water_bucket": "2025-11-12 12:53:08 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/great_rod": {
+    "criteria": {
+      "has_ball": "2025-11-12 13:35:06 +0100"
+    },
+    "done": false
+  },
+  "minecraft:recipes/building_blocks/glass": {
+    "criteria": {
+      "has_smelts_to_glass": "2025-11-12 11:21:17 +0100"
+    },
+    "done": true
+  },
+  "another_furniture:recipes/mangrove_shelf": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/roseate_rod": {
+    "criteria": {
+      "has_ball": "2025-11-12 12:18:45 +0100"
+    },
+    "done": false
+  },
+  "waystones:recipes/decorations/mossy_waystone_from_vines": {
+    "criteria": {
+      "has_waystone": "2025-11-12 12:12:03 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mangrove_chair": {
+    "criteria": {
+      "has_mangrove_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "another_furniture:recipes/mangrove_chair": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/mangrove_door": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "biomeswevegone:recipes/building_blocks/purple_sand": {
+    "criteria": {
+      "has_sand": "2025-11-12 11:21:17 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/blocks/restoration_tank": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/dark_prismarine": {
+    "criteria": {
+      "has_prismarine_shard": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "waystones:recipes/decorations/mossy_waystone_from_moss_blocks": {
+    "criteria": {
+      "has_waystone": "2025-11-12 12:12:03 +0100"
+    },
+    "done": true
+  },
+  "pokeblocks:recipes/decorations/gigantic_pokedoll_mimikyu": {
+    "criteria": {
+      "has_pokedoll_mimikyu": "2025-11-12 12:10:23 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/glass_pane": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/magenta_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/held/mystic_water": {
+    "criteria": {
+      "has_water": "2025-11-12 12:18:42 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/mossy_stone_brick_sink": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/blocks/water_stone_block": {
+    "criteria": {
+      "has_water_stone": "2025-11-12 12:18:42 +0100"
+    },
+    "done": true
+  },
+  "biomeswevegone:recipes/building_blocks/blue_sand": {
+    "criteria": {
+      "has_sand": "2025-11-12 11:21:17 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_fancy_bed": {
+    "criteria": {
+      "has_mangrove_fancy_bed": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "sophisticatedstorage:recipes/misc/mangrove_chest": {
+    "criteria": {
+      "has_mangrove_plank": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "pokeblocks:recipes/decorations/gigantic_pokedoll_snorunt": {
+    "criteria": {
+      "has_pokedoll_snorunt": "2025-11-12 13:11:19 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/mangrove_fence": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/blend_type/river": {
+    "criteria": {
+      "has_ingredients": "2025-11-12 12:53:08 +0100"
+    },
+    "done": true
+  },
+  "sophisticatedstorage:recipes/misc/mangrove_barrel": {
+    "criteria": {
+      "has_mangrove_plank": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/mangrove_fence_gate": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_nightstand": {
+    "criteria": {
+      "has_mangrove_nightstand": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/held/covert_cloak": {
+    "criteria": {
+      "has_membrane": "2025-11-12 13:12:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/yellow_stained_glass": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:first_shiny_catch": {
+    "criteria": {
+      "catch": "2025-11-12 12:02:48 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/mangrove_button": {
+    "criteria": {
+      "has_planks": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "biomeswevegone:recipes/building_blocks/pink_sand": {
+    "criteria": {
+      "has_sand": "2025-11-12 11:21:17 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/glowstone": {
+    "criteria": {
+      "has_glowstone_dust": "2025-11-12 12:19:26 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/glass_lamp": {
+    "criteria": {
+      "has_glass": "2025-11-12 11:23:16 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/mossy_stone_brick_wall_from_mossy_stone_brick_stonecutting": {
+    "criteria": {
+      "has_mossy_stone_bricks": "2025-11-12 12:55:09 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_side_table": {
+    "criteria": {
+      "has_mangrove_side_table": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/mangrove_cupboard": {
+    "criteria": {
+      "has_mangrove_cupboard": "2025-11-12 12:09:37 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/snow_block": {
+    "criteria": {
+      "has_snowball": "2025-11-12 12:21:36 +0100"
     },
     "done": true
   },
