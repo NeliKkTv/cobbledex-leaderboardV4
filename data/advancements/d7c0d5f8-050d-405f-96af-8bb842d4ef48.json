@@ -790,10 +790,12 @@
       "minecraft:lush_caves": "2025-11-11 21:39:22 +0100",
       "minecraft:frozen_ocean": "2025-11-12 01:08:46 +0100",
       "minecraft:frozen_river": "2025-11-12 00:27:30 +0100",
+      "minecraft:windswept_forest": "2025-11-12 02:57:29 +0100",
       "minecraft:ocean": "2025-11-11 02:40:43 +0100",
       "minecraft:sunflower_plains": "2025-11-11 16:26:55 +0100",
       "minecraft:cherry_grove": "2025-11-12 01:40:35 +0100",
       "minecraft:birch_forest": "2025-11-10 21:56:23 +0100",
+      "minecraft:windswept_hills": "2025-11-12 02:55:47 +0100",
       "minecraft:old_growth_spruce_taiga": "2025-11-12 01:45:24 +0100",
       "minecraft:snowy_beach": "2025-11-12 01:08:41 +0100",
       "minecraft:beach": "2025-11-10 23:33:16 +0100",
@@ -807,6 +809,7 @@
       "minecraft:deep_dark": "2025-11-10 21:28:09 +0100",
       "minecraft:grove": "2025-11-11 14:26:44 +0100",
       "minecraft:meadow": "2025-11-10 21:01:24 +0100",
+      "minecraft:windswept_gravelly_hills": "2025-11-12 02:54:54 +0100",
       "minecraft:plains": "2025-11-10 20:54:45 +0100",
       "minecraft:jagged_peaks": "2025-11-11 14:16:14 +0100"
     },
@@ -6843,6 +6846,7 @@
   },
   "biomeswevegone:biomeswevegone/adventure/oh_the_biomes_weve_gone": {
     "criteria": {
+      "biomeswevegone:cika_woods": "2025-11-12 02:34:13 +0100",
       "biomeswevegone:maple_taiga": "2025-11-11 20:03:50 +0100",
       "biomeswevegone:skyrise_vale": "2025-11-12 01:32:20 +0100",
       "biomeswevegone:temperate_grove": "2025-11-11 21:39:11 +0100",
@@ -9469,6 +9473,18 @@
     },
     "done": false
   },
+  "cozyhome:recipes/building_blocks/iron_sink": {
+    "criteria": {
+      "has_iron_bars": "2025-11-12 02:45:55 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/jungle_wood": {
+    "criteria": {
+      "has_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
   "cobblemon:rainbow_apricorns": {
     "criteria": {
       "place_white": "2025-11-12 02:05:16 +0100",
@@ -9478,6 +9494,12 @@
       "place_blue": "2025-11-12 02:04:16 +0100"
     },
     "done": false
+  },
+  "handcrafted:recipes/misc/kitchen_hood": {
+    "criteria": {
+      "has_kitchen_hood": "2025-11-12 02:45:55 +0100"
+    },
+    "done": true
   },
   "eternal_starlight:all_starlight_biomes": {
     "criteria": {
@@ -9494,6 +9516,18 @@
     },
     "done": false
   },
+  "cozyhome:recipes/building_blocks/jungle_large_stump": {
+    "criteria": {
+      "has_jungle_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cut_copper_stairs_from_copper_block_stonecutting": {
+    "criteria": {
+      "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_great_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
@@ -9505,6 +9539,12 @@
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "cozyhome:recipes/building_blocks/dark_oak_large_stump": {
+    "criteria": {
+      "has_dark_oak_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
   },
   "cobblemon:recipes/misc/safari_rod": {
     "criteria": {
@@ -9525,6 +9565,12 @@
     },
     "done": false
   },
+  "cobblemon:recipes/consumables/max_revive": {
+    "criteria": {
+      "has_revive": "2025-11-12 02:51:39 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_ultra_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
@@ -9543,6 +9589,12 @@
     },
     "done": false
   },
+  "regions_unexplored:recipes/decorations/jungle_branch_from_jungle_log": {
+    "criteria": {
+      "has_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/love_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
@@ -9560,6 +9612,12 @@
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "minecraft:nether/obtain_crying_obsidian": {
+    "criteria": {
+      "crying_obsidian": "2025-11-12 02:54:19 +0100"
+    },
+    "done": true
   },
   "minecraft:recipes/misc/blend_type/wooded_badlands": {
     "criteria": {
@@ -9597,15 +9655,45 @@
     },
     "done": false
   },
+  "minecraft:recipes/building_blocks/copper_grate_from_copper_block_stonecutting": {
+    "criteria": {
+      "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/heal_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
   },
+  "minecraft:recipes/building_blocks/cut_copper_from_copper_block_stonecutting": {
+    "criteria": {
+      "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/iron_ingot_from_smelting_deepslate_iron_ore": {
+    "criteria": {
+      "has_deepslate_iron_ore": "2025-11-12 02:48:27 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/held/choice_band": {
     "criteria": {
       "has_band": "2025-11-12 00:39:20 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/kitchen_hood_pipe": {
+    "criteria": {
+      "has_kitchen_hood_pipe": "2025-11-12 02:45:55 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/respawn_anchor": {
+    "criteria": {
+      "has_obsidian": "2025-11-12 02:54:19 +0100"
     },
     "done": true
   },
@@ -9615,9 +9703,21 @@
     },
     "done": false
   },
+  "minecraft:recipes/misc/iron_ingot_from_blasting_deepslate_iron_ore": {
+    "criteria": {
+      "has_deepslate_iron_ore": "2025-11-12 02:48:27 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/sea_lantern": {
     "criteria": {
       "has_prismarine_crystals": "2025-11-11 23:29:29 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cut_copper_slab_from_copper_block_stonecutting": {
+    "criteria": {
+      "has_copper_block": "2025-11-12 02:51:57 +0100"
     },
     "done": true
   },
@@ -9652,11 +9752,59 @@
     },
     "done": true
   },
+  "regions_unexplored:recipes/decorations/dark_oak_branch_from_dark_oak_log": {
+    "criteria": {
+      "has_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/birch_wood": {
+    "criteria": {
+      "has_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/birch_large_stump": {
+    "criteria": {
+      "has_birch_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cut_copper": {
+    "criteria": {
+      "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/chiseled_copper_from_copper_block_stonecutting": {
+    "criteria": {
+      "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/waxed_copper_block_from_honeycomb": {
+    "criteria": {
+      "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/nest_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "minecraft:recipes/redstone/copper_bulb": {
+    "criteria": {
+      "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/copper_grate": {
+    "criteria": {
+      "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
   },
   "cobblemon:recipes/misc/ancient_citrine_rod": {
     "criteria": {
@@ -9719,6 +9867,24 @@
     },
     "done": false
   },
+  "minecraft:recipes/building_blocks/dark_oak_planks": {
+    "criteria": {
+      "has_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/jungle_planks": {
+    "criteria": {
+      "has_logs": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
+  "regions_unexplored:recipes/decorations/birch_branch_from_birch_log": {
+    "criteria": {
+      "has_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_slate_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
@@ -9730,6 +9896,18 @@
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "minecraft:recipes/building_blocks/dark_oak_wood": {
+    "criteria": {
+      "has_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
+  "cozyhome:recipes/building_blocks/iron_bathtub": {
+    "criteria": {
+      "has_iron_bars": "2025-11-12 02:45:55 +0100"
+    },
+    "done": true
   },
   "minecraft:recipes/building_blocks/muddy_mangrove_roots": {
     "criteria": {
