@@ -1,105 +1,99 @@
-name: Cron leaderboard (robuste)
+name: Cron leaderboard (Pages)
 
 on:
-  schedule:
-    - cron: "*/15 * * * *"
   workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"   # toutes les 15 minutes
 
 permissions:
-  contents: write
-  actions: write
+  contents: read
+  pages: write        # obligatoire pour déployer Pages
+  id-token: write     # obligatoire pour déployer Pages
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
 
     steps:
-      - name: Checkout repository
+      # 1) Récupérer le repo
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: true
 
+      # 2) Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      # 3) Installer les dépendances si requirements.txt existe
+      - name: Install dependencies (if any)
         run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            echo "Aucun requirements.txt détecté — on continue."
+          fi
 
-      - name: Vérification du fichier config.ini
-        run: |
-          echo "=== Vérification config.ini ==="
-          test -f config.ini || { echo "::error ::config.ini manquant"; exit 1; }
-          sed -n '1,120p' config.ini
-
-      - name: Normaliser/forcer config.ini (mode=sftp)
-        shell: bash
-        run: |
-          python - <<'PY'
-          import pathlib, re
-          p = pathlib.Path("config.ini")
-          data = p.read_text(encoding="utf-8").replace("\r\n","\n")
-          if "[MODE]" not in data:
-              data = "[MODE]\nmode = sftp\n\n" + data
-          else:
-              data = re.sub(r"(?<=mode\s*=\s*)(\w+)", "sftp", data)
-          p.write_text(data, encoding="utf-8")
-          print("✅ config.ini normalisé (mode=sftp)")
-          PY
-
-      - name: Exécution du script principal
+      # 4) Lancer ton script Python
+      - name: Run python main.py
         run: |
           echo "=== Lancement du script Python ==="
           python main.py
+          echo "=== Fin du script ==="
 
-      - name: Diagnostiquer l’image générée
+      # 5) Vérifier que l'image existe
+      - name: Check generated image
         run: |
-          echo "=== Diagnostics PNG ==="
-          set -x
-          ls -lah images || true
-          if [ -f images/top3.png ]; then
-            du -h images/top3.png
-            sha256sum images/top3.png
-          else
-            echo "⚠️ images/top3.png introuvable"
-          fi
-          set +x
+          test -f images/top3.png || (echo "❌ images/top3.png introuvable" && exit 1)
+          echo "✅ Image générée : images/top3.png"
 
-      - name: Commit & push (même sans diff)
+      # 6) Préparer le répertoire public pour GitHub Pages
+      - name: Prepare site folder
         run: |
-          echo "=== Commit/Push PNG ==="
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main || true
+          rm -rf public
+          mkdir -p public/images
+          cp images/top3.png public/images/top3.png
+          # petite page d'aperçu (optionnel)
+          cat > public/index.html <<'HTML'
+          <!doctype html>
+          <meta charset="utf-8">
+          <title>Leaderboard</title>
+          <style>
+            body{margin:0;background:#0b0e14;color:#ddd;font-family:system-ui,Segoe UI,Roboto,Arial}
+            main{max-width:1200px;margin:40px auto;padding:0 16px}
+            h1{font-weight:600;margin:0 0 16px}
+            img{max-width:100%;height:auto;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+            a{color:#8ab4ff}
+          </style>
+          <main>
+            <h1>Leaderboard</h1>
+            <p>Image publiée via GitHub Pages (mise à jour par le workflow).</p>
+            <p><a href="./images/top3.png">Ouvrir l'image seule</a></p>
+            <img src="./images/top3.png" alt="Leaderboard">
+          </main>
+          HTML
 
-          git status -s
-          if [ -f images/top3.png ]; then
-            # Ajoute et tente un commit si diff
-            git add images/top3.png
-            git commit -m "Update leaderboard image [auto]" || echo "Aucun diff: commit vide forcé"
-          else
-            echo "⚠️ PNG absent: commit vide pour forcer un push"
-            git commit --allow-empty -m "Keep-alive commit (no image)"
-          fi
+      # 7) Uploader l'artefact "site" pour Pages
+      - name: Upload artifact to Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
 
-          git push origin HEAD:main || true
+      # 8) Déployer sur GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
 
-      - name: Purger jsDelivr + réchauffer l’URL
+      # 9) Afficher le lien final vers l'image
+      - name: Show final URL
         run: |
-          set -x
-          URL="https://cdn.jsdelivr.net/gh/NelikkTv/cobbledex-leaderboardV4/images/top3.png"
-          echo "Purge jsDelivr…"
-          curl -fsS -X PURGE "$URL" || true
-          echo "Pause puis warm (remplit le cache avec la nouvelle image)…"
-          sleep 3
-          curl -fsS -I "$URL" || true
-          echo "Lien fixe: $URL"
-
-      - name: Fin
-        run: |
-          echo "✅ Terminé."
-          echo "Lien fixe : https://cdn.jsdelivr.net/gh/NelikkTv/cobbledex-leaderboardV4/images/top3.png"
+          PAGE_URL="${{ steps.deploy.outputs.page_url }}"
+          FINAL_URL="${PAGE_URL}images/top3.png"
+          echo "✅ Lien fixe (Pages) : ${FINAL_URL}"
+          echo "::notice title=URL de l'image::${FINAL_URL}"
