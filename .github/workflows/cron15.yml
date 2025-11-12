@@ -77,7 +77,7 @@ jobs:
         if: env.SHOULD_RUN == 'true' && github.event_name == 'schedule'
         run: |
           REPO_PATH="${GITHUB_REPOSITORY}"
-          URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/leaderboard.png"
+          URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
           echo "📤 Envoi du lien stable sur Discord : $URL"
           curl -s -H "Content-Type: application/json" -X POST \
                -d "{\"content\":\"🏆 Nouveau leaderboard généré : ${URL}\"}" \
