@@ -271,10 +271,11 @@ class SFTPManager(ConnectionManager):
         return self.sftp.getcwd()
     
     def return_to_root(self):
-        current = self.connection.getcwd() or "/"
+        current = self.sftp.getcwd() or "/"
         depth = len([x for x in current.split("/") if x]) if current != "/" else 0
-        if depth > 0:
-            self.change_directory("../" * depth)
+        for _ in range(depth):
+            self.sftp.chdir("..")
+
     
     def close(self):
         self.sftp.close()
