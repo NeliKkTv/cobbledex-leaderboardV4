@@ -41,6 +41,7 @@
       "silver_birch_forest": "2025-11-10 20:53:47 +0100",
       "shrubland": "2025-11-11 16:17:06 +0100",
       "deciduous_forest": "2025-11-11 16:22:43 +0100",
+      "cold_deciduous_forest": "2025-11-12 01:25:42 +0100",
       "boreal_forest": "2025-11-11 00:15:39 +0100",
       "pine_taiga": "2025-11-11 02:19:46 +0100",
       "muddy_river": "2025-11-10 23:42:10 +0100",
@@ -74,6 +75,7 @@
       "silver_birch_forest": "2025-11-10 20:53:47 +0100",
       "shrubland": "2025-11-11 16:17:06 +0100",
       "deciduous_forest": "2025-11-11 16:22:43 +0100",
+      "cold_deciduous_forest": "2025-11-12 01:25:42 +0100",
       "boreal_forest": "2025-11-11 00:15:39 +0100",
       "pine_taiga": "2025-11-11 02:19:46 +0100",
       "muddy_river": "2025-11-10 23:42:10 +0100",
@@ -252,16 +254,20 @@
   },
   "cobblemon:craft_all_balls": {
     "criteria": {
-      "roseate_ball": "2025-11-10 20:45:05 +0100",
       "dusk_ball": "2025-11-11 14:45:49 +0100",
       "slate_ball": "2025-11-10 20:57:38 +0100",
+      "ancient_verdant_ball": "2025-11-12 00:54:41 +0100",
       "poke_ball": "2025-11-10 20:45:05 +0100",
+      "azure_ball": "2025-11-10 20:37:39 +0100",
+      "citrine_ball": "2025-11-11 04:46:40 +0100",
+      "net_ball": "2025-11-12 01:27:51 +0100",
+      "dive_ball": "2025-11-12 01:27:51 +0100",
+      "roseate_ball": "2025-11-10 20:45:05 +0100",
+      "safari_ball": "2025-11-12 01:27:51 +0100",
       "master_ball": "2025-11-10 23:02:09 +0100",
       "premier_ball": "2025-11-11 02:58:34 +0100",
-      "azure_ball": "2025-11-10 20:37:39 +0100",
       "dream_ball": "2025-11-11 02:47:30 +0100",
       "verdant_ball": "2025-11-11 02:13:08 +0100",
-      "citrine_ball": "2025-11-11 04:46:40 +0100",
       "ultra_ball": "2025-11-11 20:15:25 +0100"
     },
     "done": false
@@ -298,9 +304,10 @@
   },
   "cobblemon:recipes/misc/azure_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-10 20:37:39 +0100"
     },
-    "done": false
+    "done": true
   },
   "cobblemon:recipes/misc/pokedex_yellow": {
     "criteria": {
@@ -743,9 +750,10 @@
   },
   "cobblemon:recipes/misc/roseate_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-10 20:45:05 +0100"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/tools/fishing_rod": {
     "criteria": {
@@ -755,9 +763,10 @@
   },
   "cobblemon:recipes/misc/poke_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-10 20:45:05 +0100"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/building_blocks/white_wool_from_string": {
     "criteria": {
@@ -775,21 +784,27 @@
     "criteria": {
       "minecraft:cold_ocean": "2025-11-11 20:20:04 +0100",
       "minecraft:snowy_slopes": "2025-11-11 14:26:05 +0100",
-      "minecraft:beach": "2025-11-10 23:33:16 +0100",
-      "minecraft:dark_forest": "2025-11-10 21:59:02 +0100",
       "minecraft:forest": "2025-11-10 20:49:26 +0100",
-      "minecraft:river": "2025-11-10 20:47:48 +0100",
-      "minecraft:stony_shore": "2025-11-11 20:16:41 +0100",
+      "minecraft:taiga": "2025-11-12 01:32:57 +0100",
       "minecraft:lush_caves": "2025-11-11 21:39:22 +0100",
-      "minecraft:dripstone_caves": "2025-11-10 21:54:24 +0100",
-      "minecraft:old_growth_birch_forest": "2025-11-10 23:05:51 +0100",
+      "minecraft:frozen_ocean": "2025-11-12 01:08:46 +0100",
       "minecraft:frozen_river": "2025-11-12 00:27:30 +0100",
-      "minecraft:deep_dark": "2025-11-10 21:28:09 +0100",
       "minecraft:ocean": "2025-11-11 02:40:43 +0100",
       "minecraft:sunflower_plains": "2025-11-11 16:26:55 +0100",
+      "minecraft:cherry_grove": "2025-11-12 01:40:35 +0100",
+      "minecraft:birch_forest": "2025-11-10 21:56:23 +0100",
+      "minecraft:snowy_beach": "2025-11-12 01:08:41 +0100",
+      "minecraft:beach": "2025-11-10 23:33:16 +0100",
+      "minecraft:dark_forest": "2025-11-10 21:59:02 +0100",
+      "minecraft:river": "2025-11-10 20:47:48 +0100",
+      "minecraft:stony_shore": "2025-11-11 20:16:41 +0100",
+      "minecraft:snowy_plains": "2025-11-12 00:53:34 +0100",
+      "minecraft:dripstone_caves": "2025-11-10 21:54:24 +0100",
+      "minecraft:snowy_taiga": "2025-11-12 00:57:57 +0100",
+      "minecraft:old_growth_birch_forest": "2025-11-10 23:05:51 +0100",
+      "minecraft:deep_dark": "2025-11-10 21:28:09 +0100",
       "minecraft:grove": "2025-11-11 14:26:44 +0100",
       "minecraft:meadow": "2025-11-10 21:01:24 +0100",
-      "minecraft:birch_forest": "2025-11-10 21:56:23 +0100",
       "minecraft:plains": "2025-11-10 20:54:45 +0100",
       "minecraft:jagged_peaks": "2025-11-11 14:16:14 +0100"
     },
@@ -1537,9 +1552,10 @@
   },
   "cobblemon:recipes/misc/cherish_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-10 20:57:24 +0100"
     },
-    "done": false
+    "done": true
   },
   "handcrafted:recipes/misc/oak_drawer": {
     "criteria": {
@@ -1801,9 +1817,10 @@
   },
   "cobblemon:recipes/misc/slate_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-10 20:57:38 +0100"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/misc/blend_type/snowy_plains": {
     "criteria": {
@@ -2094,7 +2111,8 @@
       "obtain_elixir": "2025-11-11 04:46:42 +0100",
       "obtain_hyper_potion": "2025-11-11 02:13:20 +0100",
       "obtain_super_potion": "2025-11-11 02:24:45 +0100",
-      "obtain_max_potion": "2025-11-10 20:58:26 +0100"
+      "obtain_max_potion": "2025-11-10 20:58:26 +0100",
+      "obtain_ether": "2025-11-12 01:37:51 +0100"
     },
     "done": false
   },
@@ -4516,9 +4534,10 @@
   },
   "cobblemon:recipes/misc/master_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-10 23:02:09 +0100"
     },
-    "done": false
+    "done": true
   },
   "cobblemon:full_party": {
     "criteria": {
@@ -6779,9 +6798,10 @@
   },
   "cobblemon:recipes/misc/verdant_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-11 02:13:08 +0100"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/misc/firework_rocket_simple": {
     "criteria": {
@@ -6822,6 +6842,7 @@
   "biomeswevegone:biomeswevegone/adventure/oh_the_biomes_weve_gone": {
     "criteria": {
       "biomeswevegone:maple_taiga": "2025-11-11 20:03:50 +0100",
+      "biomeswevegone:skyrise_vale": "2025-11-12 01:32:20 +0100",
       "biomeswevegone:temperate_grove": "2025-11-11 21:39:11 +0100",
       "biomeswevegone:allium_shrubland": "2025-11-11 02:19:25 +0100",
       "biomeswevegone:coconino_meadow": "2025-11-11 20:16:27 +0100"
@@ -7046,15 +7067,17 @@
   },
   "cobblemon:recipes/misc/dream_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-11 02:47:30 +0100"
     },
-    "done": false
+    "done": true
   },
   "cobblemon:recipes/misc/premier_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-11 02:58:34 +0100"
     },
-    "done": false
+    "done": true
   },
   "regions_unexplored:recipes/misc/light_gray_dye_from_daisy": {
     "criteria": {
@@ -7418,9 +7441,10 @@
   },
   "cobblemon:recipes/misc/citrine_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-11 04:46:40 +0100"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/building_blocks/smooth_stone_slab": {
     "criteria": {
@@ -8162,9 +8186,10 @@
   },
   "cobblemon:recipes/misc/dusk_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-11 14:45:49 +0100"
     },
-    "done": false
+    "done": true
   },
   "cobblemon:first_battle_victory": {
     "criteria": {
@@ -8728,9 +8753,10 @@
   },
   "cobblemon:recipes/misc/ultra_rod": {
     "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
       "has_ball": "2025-11-11 20:15:25 +0100"
     },
-    "done": false
+    "done": true
   },
   "pokeblocks:recipes/decorations/gigantic_pokedoll_shiny_snorunt": {
     "criteria": {
@@ -9434,11 +9460,135 @@
     },
     "done": true
   },
+  "cobblemon:recipes/misc/ancient_ivory_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "eternal_starlight:all_starlight_biomes": {
+    "criteria": {
+      "in_scarlet_forest": "2025-11-12 01:20:06 +0100",
+      "in_crystallized_desert": "2025-11-12 01:14:27 +0100",
+      "in_starlight_forest": "2025-11-12 01:12:59 +0100",
+      "in_shimmer_river": "2025-11-12 01:16:03 +0100",
+      "in_ether_river": "2025-11-12 01:20:35 +0100",
+      "in_torreya_forest": "2025-11-12 01:20:50 +0100",
+      "in_dark_swamp": "2025-11-12 01:14:05 +0100",
+      "in_spiral_kelp_forest": "2025-11-12 01:19:22 +0100",
+      "in_warm_shore": "2025-11-12 01:17:05 +0100",
+      "in_starlit_sea": "2025-11-12 01:17:07 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_great_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_origin_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/safari_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
+      "has_ball": "2025-11-12 01:27:51 +0100"
+    },
+    "done": true
+  },
+  "eternal_starlight:enter_crystallized_desert": {
+    "criteria": {
+      "in_biome": "2025-11-12 01:14:27 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/friend_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_ultra_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_feather_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_roseate_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/love_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "eternal_starlight:in_ether_fluid": {
+    "criteria": {
+      "in_fluid": "2025-11-12 01:20:44 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/sport_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
   "minecraft:recipes/misc/blend_type/wooded_badlands": {
     "criteria": {
       "has_ingredients": "2025-11-11 23:23:11 +0100"
     },
     "done": true
+  },
+  "cobblemon:recipes/misc/repeat_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/beast_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_poke_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_heavy_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/park_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/heal_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
   },
   "cobblemon:recipes/held/choice_band": {
     "criteria": {
@@ -9446,15 +9596,150 @@
     },
     "done": true
   },
+  "cobblemon:recipes/misc/ancient_leaden_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
   "minecraft:recipes/building_blocks/sea_lantern": {
     "criteria": {
       "has_prismarine_crystals": "2025-11-11 23:29:29 +0100"
     },
     "done": true
   },
+  "cobblemon:recipes/misc/ancient_gigaton_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/quick_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/timer_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/level_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/net_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
+      "has_ball": "2025-11-12 01:27:51 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/nest_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_citrine_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/pokerod_smithing_template": {
+    "criteria": {
+      "has_pokerod_smithing_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/great_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_azure_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/lure_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:craft_ancient_balls": {
+    "criteria": {
+      "ancient_verdant_ball": "2025-11-12 00:54:41 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_jet_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/dive_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
+      "has_ball": "2025-11-12 01:27:51 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/luxury_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/fast_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_slate_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/heavy_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
   "minecraft:recipes/building_blocks/muddy_mangrove_roots": {
     "criteria": {
       "has_mangrove_roots": "2025-11-11 23:23:11 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/misc/ancient_wing_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/moon_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
+    },
+    "done": false
+  },
+  "cobblemon:recipes/misc/ancient_verdant_rod": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 01:27:51 +0100",
+      "has_ball": "2025-11-12 00:54:41 +0100"
     },
     "done": true
   },
