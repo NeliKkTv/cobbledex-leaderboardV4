@@ -2,8 +2,8 @@ name: Run Python script every 15 min
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # toutes les 15 min (UTC)
-  workflow_dispatch:         # exécution manuelle possible
+    - cron: "*/15 * * * *"   # Toutes les 15 minutes (UTC)
+  workflow_dispatch:         # Permet de le lancer manuellement
 
 concurrency:
   group: python-cron
@@ -14,88 +14,84 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write        # nécessaire pour commit/push
+      contents: write
 
     env:
-      # Secrets SFTP (Nitroserv)
+      WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
       SFTP_HOST: ${{ secrets.SFTP_HOST }}
       SFTP_USER: ${{ secrets.SFTP_USER }}
       SFTP_PASS: ${{ secrets.SFTP_PASS }}
 
-      # Discord (optionnel : si non défini, on skippe l’envoi)
-      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-
-      # Fichier image généré (chemin dans le repo)
-      FILE: images/top3.png
-
     steps:
+      # 1. Récupération du repo
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # 2. Mise en place de Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
+      # 3. Installation des dépendances
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install -r requirements.txt
 
+      # 4. Nettoyage du config.ini (fin de ligne + BOM)
+      - name: Sanitize config.ini (LF, no BOM)
+        run: |
+          perl -pi -e 's/\r\n/\n/g' config.ini
+          sed -i '1s/^\xEF\xBB\xBF//' config.ini
+
+      # 5. Debug : lecture du mode depuis le config.ini
+      - name: Debug lecture du mode (via Python)
+        run: |
+          python - <<'PY'
+          import configparser
+          cfg = configparser.ConfigParser()
+          cfg.read('config.ini', encoding='utf-8')
+          for section in cfg.sections():
+              print(f"[{section}]")
+              for k, v in cfg.items(section):
+                  print(f"  {k} = {v}")
+          print("\nValeur de mode =", cfg.get('MODE', 'mode', fallback='??'))
+          PY
+
+      # 6. Exécution du script principal
       - name: Run python main.py
         run: |
-          set -e
-          echo "Lancement du script…"
+          echo "Lancement du script..."
           python main.py
 
+      # 7. Commit & push (si le script a généré des fichiers)
       - name: Commit & push changes (if any)
         run: |
-          set -e
-          git add -A
-          if git diff --staged --quiet; then
-            echo "Aucun changement à committer."
-          else
-            git -c user.name="github-actions[bot]" \
-                -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-                commit -m "Auto-update from cron: $(date -u +%s)"
-            git push
-          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || (git commit -m "Auto-update leaderboard from cron" && git push)
 
+      # 8. Purge du cache jsDelivr + réchauffement
       - name: Purger le cache jsDelivr + réchauffer
         run: |
           set -e
-          URL="https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/${FILE}"
-          PURGE="https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/${FILE}"
+          FILE="images/top3.png"
+          URL="https://cdn.jsdelivr.net/gh/NeliKkTwitch/cobbledex-leaderboardV4@main/${FILE}"
+          PURGE="https://purge.jsdelivr.net/gh/NeliKkTwitch/cobbledex-leaderboardV4@main/${FILE}"
 
-          echo "Purge jsDelivr : ${PURGE}"
-          curl -sS "${PURGE}" -o /dev/null
+          echo "Purge jsDelivr: $PURGE"
+          curl -sS "$PURGE" > /dev/null || true
 
-          echo "Warm jsDelivr : ${URL}"
-          sleep 2
-          curl -sS "${URL}" -o /dev/null
+          echo "Warm jsDelivr: $URL"
+          curl -s "$URL" | head -c 20 > /dev/null || true
 
+      # 9. Notification Discord avec lien fixe (et aperçu à jour)
       - name: Notifier Discord avec lien FIXE + aperçu rafraîchi
-        if: ${{ env.DISCORD_WEBHOOK_URL != '' }}
         run: |
           set -e
-          WEBHOOK="${DISCORD_WEBHOOK_URL}"
-          FIX_URL="https://cdn.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/${FILE}"
-          # Cache-buster juste pour l’aperçu Discord (lien cliquable = FIX_URL)
-          PREVIEW="${FIX_URL}?_=$(date +%s)"
-
-          read -r -d '' PAYLOAD <<'JSON'
-          {
-            "content": "**Leaderboard mis à jour** ✅",
-            "embeds": [{
-              "title": "Aperçu du leaderboard",
-              "url": "FIX_URL",
-              "image": {"url": "PREVIEW"}
-            }]
-          }
-          JSON
-
-          PAYLOAD="${PAYLOAD/FIX_URL/$FIX_URL}"
-          PAYLOAD="${PAYLOAD/PREVIEW/$PREVIEW}"
-
-          curl -sS -H "Content-Type: application/json" \
-               -d "$PAYLOAD" "$WEBHOOK" -o /dev/null
+          FILE_URL="https://cdn.jsdelivr.net/gh/NeliKkTwitch/cobbledex-leaderboardV4@main/images/top3.png"
+          PAYLOAD=$(jq -n --arg url "$FILE_URL" \
+            '{content: "**📊 Nouveau leaderboard mis à jour !**", embeds: [{image: {url: $url}}]}')
+          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$WEBHOOK"
