@@ -3,14 +3,14 @@ name: Run Python script every 15 min (robust)
 on:
   schedule:
     - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
-  workflow_dispatch:        # exécutable à la main
+  workflow_dispatch:
 
 concurrency:
   group: python-cron
   cancel-in-progress: false
 
 permissions:
-  contents: write   # nécessaire pour commit/push
+  contents: write
 
 jobs:
   run:
@@ -40,9 +40,6 @@ jobs:
         run: |
           python main.py
 
-      # -----------------------------------------------------
-      # Commit & push seulement s'il y a un changement
-      # -----------------------------------------------------
       - name: Commit & push changes (if any)
         id: commit
         run: |
@@ -59,9 +56,6 @@ jobs:
             echo "committed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      # -----------------------------------------------------
-      # Purge jsDelivr + "warm" l'URL (uniquement si commit)
-      # -----------------------------------------------------
       - name: Purger le cache jsDelivr + réchauffer
         if: steps.commit.outputs.committed == 'true'
         run: |
@@ -75,58 +69,37 @@ jobs:
           curl -sS "$PURGE" > /dev/null || true
 
           echo "Warm jsDelivr: $CDN"
-          # on recharge l’URL (et on affiche les 1ères lignes pour debug)
           sleep 3
           curl -sS "$CDN" | sed -n '1,2p' || true
 
-      # -----------------------------------------------------
-      # Discord : lien fixe (jsDelivr) + aperçu rafraîchi
-      # -----------------------------------------------------
       - name: Notifier Discord avec lien FIXE + aperçu rafraîchi
         if: steps.commit.outputs.committed == 'true'
         env:
           WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           set -e
-
-          # 1) Secret présent ?
           if [ -z "${WEBHOOK:-}" ]; then
-            echo "WEBHOOK (DISCORD_WEBHOOK_URL) est manquant -> on ignore l'étape."
+            echo "WEBHOOK (DISCORD_WEBHOOK_URL) manquant, on saute l'étape."
             exit 0
           fi
 
-          # 2) URLs : lien fixe + aperçu busté
           REPO="${{ github.repository }}"
           FIX_URL="https://cdn.jsdelivr.net/gh/${REPO}@main/images/top3.png"
-          PREVIEW_URL="${FIX_URL}?t=${{ github.run_id }}"   # force un nouveau fetch côté Discord
+          PREVIEW_URL="${FIX_URL}?t=${{ github.run_id }}"
 
-          # 3) Payload JSON (sans jq)
-          payload=$(cat <<'JSON'
-{
-  "content": "**Leaderboard mis à jour !**",
-  "embeds": [
-    {
-      "description": "Lien fixe : %%URL%%",
-      "image": { "url": "%%IMG%%" },
-      "color": 5814783
-    }
-  ]
-}
-JSON
-)
-          payload=${payload//%%URL%%/$FIX_URL}
-          payload=${payload//%%IMG%%/$PREVIEW_URL}
+          # JSON compact pour éviter les soucis YAML
+          payload="{\"content\":\"**Leaderboard mis à jour !**\",\
+\"embeds\":[{\"description\":\"Lien fixe : ${FIX_URL}\",\
+\"image\":{\"url\":\"${PREVIEW_URL}\"},\"color\":5814783}]}"
 
-          # 4) Envoi Discord + logs utiles
           http_code=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
             -H "Content-Type: application/json" \
             -d "$payload" "$WEBHOOK" || true)
 
           echo "Discord HTTP: $http_code"
-          echo "Réponse Discord:"
           cat /tmp/resp.txt || true
 
           case "$http_code" in
-            2*) echo "Notification Discord OK.";;
-            *)  echo "Échec Discord (HTTP $http_code)"; exit 1;;
+            2*) echo "Notification Discord OK." ;;
+            *)  echo "Échec Discord (HTTP $http_code)"; exit 1 ;;
           esac
