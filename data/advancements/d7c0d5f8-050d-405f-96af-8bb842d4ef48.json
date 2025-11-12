@@ -47,6 +47,7 @@
       "pine_taiga": "2025-11-11 02:19:46 +0100",
       "muddy_river": "2025-11-10 23:42:10 +0100",
       "autumnal_maple_forest": "2025-11-10 23:42:45 +0100",
+      "towering_cliffs": "2025-11-12 03:16:33 +0100",
       "cold_boreal_taiga": "2025-11-12 00:27:39 +0100",
       "willow_forest": "2025-11-10 20:48:03 +0100",
       "temperate_grove": "2025-11-11 02:16:35 +0100",
@@ -83,6 +84,7 @@
       "pine_taiga": "2025-11-11 02:19:46 +0100",
       "muddy_river": "2025-11-10 23:42:10 +0100",
       "autumnal_maple_forest": "2025-11-10 23:42:45 +0100",
+      "towering_cliffs": "2025-11-12 03:16:33 +0100",
       "cold_boreal_taiga": "2025-11-12 00:27:39 +0100",
       "willow_forest": "2025-11-10 20:48:03 +0100",
       "temperate_grove": "2025-11-11 02:16:35 +0100",
@@ -9706,6 +9708,12 @@
   "eternal_starlight:in_ether_fluid": {
     "criteria": {
       "in_fluid": "2025-11-12 01:20:44 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/grindstone": {
+    "criteria": {
+      "has_stone_slab": "2025-11-12 03:14:57 +0100"
     },
     "done": true
   },
