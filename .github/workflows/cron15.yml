@@ -1,28 +1,9 @@
-https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/images/top3.png
-```)  
-est un **lien CDN** (Content Delivery Network).
-
-Ce type de lien sert à accélérer le chargement, mais il **garde une copie en cache** pendant un moment.  
-Résultat :  
-🔸 l’image est bien mise à jour dans ton dépôt GitHub  
-🔸 mais jsDelivr affiche encore l’ancienne pendant quelques secondes (parfois 1 à 2 minutes maximum).
-
----
-
-## ⚙️ Solution n°1 : Forcer la mise à jour (purge du cache jsDelivr)
-On va dire au workflow GitHub de “vider” le cache du CDN après chaque mise à jour.  
-Ajoute cette version **complète** de ton fichier `.github/workflows/cron15.yml` :  
-
----
-
-### 🧾 Nouveau code complet (en français)
-```yaml
 name: Exécuter le script Python toutes les 15 minutes
 
 on:
   schedule:
     - cron: "*/15 * * * *"     # toutes les 15 minutes (UTC)
-  workflow_dispatch:           # permet aussi de le lancer à la main
+  workflow_dispatch:           # permet de lancer à la main
 
 permissions:
   contents: write              # autorise le push vers le repo
@@ -79,7 +60,7 @@ jobs:
           CDN_PATH="gh/${OWNER}/${REPO}@main/images/top3.png"
           echo "Purge du cache jsDelivr pour ${CDN_PATH}"
           curl -sS "https://purge.jsdelivr.net/${CDN_PATH}"
-          sleep 2   # petite pause pour laisser le CDN se rafraîchir
+          sleep 2
 
       - name: Envoyer l'image sur Discord
         if: env.CHANGED == 'true'
@@ -91,10 +72,9 @@ jobs:
         run: |
           if [ -n "$DISCORD_WEBHOOK_URL" ]; then
             STABLE="https://cdn.jsdelivr.net/gh/${OWNER}/${REPO}@main/images/top3.png"
-            # Ajoute un paramètre ?v= pour forcer la mise à jour de l'image
             NOCACHE="${STABLE}?v=${RUN_ID}"
 
-            MSG="🔁 **Leaderboard mis à jour automatiquement !**\n🔗 Lien fixe : ${STABLE}\n🚀 Version à jour : ${NOCACHE}"
+            MSG="🔁 **Leaderboard mis à jour !**\n🔗 Lien fixe : ${STABLE}\n🚀 Lien sans cache : ${NOCACHE}"
             curl -sS -H "Content-Type: application/json" \
                  -d "{\"content\":\"${MSG}\"}" \
                  "$DISCORD_WEBHOOK_URL"
