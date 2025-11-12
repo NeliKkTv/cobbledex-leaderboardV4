@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up job
-        run: echo "Démarrage du workflow..."
-
       - name: Checkout repo
         uses: actions/checkout@v4
 
@@ -25,10 +22,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # (Optionnel) Vérifie que secrets/vars existent (n'imprime rien de sensible)
+      - name: Sanity check secrets/vars
+        run: |
+          test -n "${{ secrets.SFTP_PASS }}" || (echo "❌ Secret SFTP_PASS manquant"; exit 1)
+          test -n "${{ secrets.DISCORD_WEBHOOK_URL }}" || (echo "❌ Secret DISCORD_WEBHOOK_URL manquant"; exit 1)
+          test -n "${{ vars.SFTP_HOST }}" || (echo "❌ Var SFTP_HOST manquante"; exit 1)
+          test -n "${{ vars.SFTP_PORT }}" || (echo "❌ Var SFTP_PORT manquante"; exit 1)
+          test -n "${{ vars.SFTP_USER }}" || (echo "❌ Var SFTP_USER manquante"; exit 1)
+          test -n "${{ vars.SFTP_REMOTE_DIR }}" || (echo "❌ Var SFTP_REMOTE_DIR manquante"; exit 1)
+
       ####################################################################
-      # 🔧 Génère config.ini à partir des SECRETS GitHub
+      # 🔧 Génère config.ini à partir des Variables + Secrets GitHub
       ####################################################################
-      - name: Générer config.ini depuis les secrets
+      - name: Générer config.ini depuis variables + secrets
         run: |
           cat > config.ini << 'EOF'
           [GITHUB]
@@ -42,11 +49,11 @@ jobs:
           mode=sftp
 
           [SFTP]
-          host=${{ secrets.SFTP_HOST }}
-          port=${{ secrets.SFTP_PORT }}
-          username=${{ secrets.SFTP_USER }}
+          host=${{ vars.SFTP_HOST }}
+          port=${{ vars.SFTP_PORT }}
+          username=${{ vars.SFTP_USER }}
           password=${{ secrets.SFTP_PASS }}
-          remote_root=${{ secrets.SFTP_REMOTE_DIR }}
+          remote_root=${{ vars.SFTP_REMOTE_DIR }}
 
           [LEADERBOARD]
           Enable=true
@@ -66,24 +73,49 @@ jobs:
           Titles=Leaderboard - RANKS 1-10,Leaderboard - RANKS 11-20,Leaderboard - RANKS 21-30
           Leaderboards=vanilla/minecraft:custom/minecraft:pokemon_registered,vanilla/minecraft:custom/minecraft:pokemon_registered,vanilla/minecraft:custom/minecraft:pokemon_registered
           EOF
+          echo "✅ Fichier config.ini généré."
 
-          echo "✅ Fichier config.ini généré avec succès."
-          sed -n '1,60p' config.ini
-
-      ####################################################################
-      # 🧠 Exécute ton script Python principal
-      ####################################################################
       - name: Run python main.py
         run: |
-          echo "Lancement du script..."
+          echo "Lancement du script…"
           python main.py
 
-      ####################################################################
-      # 📤 Commit & push si des fichiers ont changé
-      ####################################################################
       - name: Commit & push changes (if any)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add images/top3.png total.csv || true
-          if git diff --cached
+          if git diff --cached --quiet; then
+            echo "Aucun changement à valider."
+          else
+            git commit -m "Auto-update leaderboard + image"
+            git push
+          fi
+
+      - name: Purger le cache jsDelivr + réchauffer
+        run: |
+          set -e
+          FILE="images/top3.png"
+          URL="https://cdn.jsdelivr.net/gh/NeliKkTwitch/cobbledex-leaderboardV4@main/${FILE}"
+          PURGE="https://purge.jsdelivr.net/gh/NeliKkTwitch/cobbledex-leaderboardV4@main/${FILE}"
+
+          echo "Purge jsDelivr: $PURGE"
+          curl -sS "$PURGE" > /dev/null
+
+          echo "Pause 3s..."
+          sleep 3
+
+          echo "Warm jsDelivr: $URL"
+          curl -sI "$URL" | sed -n '1,2p'
+
+      - name: Notifier Discord avec lien FIXE + aperçu rafraîchi
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          set -e
+          URL="https://cdn.jsdelivr.net/gh/NeliKkTwitch/cobbledex-leaderboardV4@main/images/top3.png"
+          payload=$(jq -n --arg content "**Leaderboard mis à jour !** 🏆\n$URL" '{content: $content}')
+          curl -H "Content-Type: application/json" -d "$payload" "$DISCORD_WEBHOOK_URL"
+
+      - name: Done
+        run: echo "✅ Terminé"
