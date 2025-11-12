@@ -44,7 +44,7 @@ jobs:
         id: commit
         run: |
           set -e
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           if git diff --cached --quiet; then
@@ -65,12 +65,12 @@ jobs:
           CDN="https://cdn.jsdelivr.net/gh/${REPO}@main/${FILE}"
           PURGE="https://purge.jsdelivr.net/gh/${REPO}@main/${FILE}"
 
-          echo "Purge jsDelivr: $PURGE"
+          echo "Purge jsDelivr : $PURGE"
           curl -sS "$PURGE" > /dev/null || true
 
-          echo "Warm jsDelivr: $CDN"
+          echo "Warm jsDelivr : $CDN"
           sleep 3
-          curl -sS "$CDN" | sed -n '1,2p' || true
+          curl -sS "$CDN" | head -n 2 || true
 
       - name: Notifier Discord avec lien FIXE + aperçu rafraîchi
         if: steps.commit.outputs.committed == 'true'
@@ -79,7 +79,7 @@ jobs:
         run: |
           set -e
           if [ -z "${WEBHOOK:-}" ]; then
-            echo "WEBHOOK (DISCORD_WEBHOOK_URL) manquant, on saute l'étape."
+            echo "WEBHOOK (DISCORD_WEBHOOK_URL) manquant ; on saute l’étape."
             exit 0
           fi
 
@@ -87,19 +87,16 @@ jobs:
           FIX_URL="https://cdn.jsdelivr.net/gh/${REPO}@main/images/top3.png"
           PREVIEW_URL="${FIX_URL}?t=${{ github.run_id }}"
 
-          # JSON compact pour éviter les soucis YAML
-          payload="{\"content\":\"**Leaderboard mis à jour !**\",\
-\"embeds\":[{\"description\":\"Lien fixe : ${FIX_URL}\",\
-\"image\":{\"url\":\"${PREVIEW_URL}\"},\"color\":5814783}]}"
+          payload="{\"content\":\"**Leaderboard mis à jour !**\",\"embeds\":[{\"description\":\"Lien fixe : ${FIX_URL}\",\"image\":{\"url\":\"${PREVIEW_URL}\"},\"color\":5814783}]}"
 
           http_code=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
             -H "Content-Type: application/json" \
             -d "$payload" "$WEBHOOK" || true)
 
-          echo "Discord HTTP: $http_code"
+          echo "Discord HTTP : $http_code"
           cat /tmp/resp.txt || true
 
-          case "$http_code" in
-            2*) echo "Notification Discord OK." ;;
-            *)  echo "Échec Discord (HTTP $http_code)"; exit 1 ;;
-          esac
+          if [[ "$http_code" != 2* ]]; then
+            echo "Échec Discord (HTTP $http_code)"
+            exit 1
+          fi
