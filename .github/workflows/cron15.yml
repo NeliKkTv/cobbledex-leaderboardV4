@@ -1,23 +1,15 @@
-name: Cron leaderboard (robuste)
+name: Cron leaderboard (debug mode)
 
 on:
   schedule:
-    # Toutes les 15 minutes (UTC)
     - cron: "*/15 * * * *"
-  # Permet de le lancer à la main si besoin
   workflow_dispatch:
 
-# Empêche deux jobs simultanés
-concurrency:
-  group: python-cron
-  cancel-in-progress: false
-
-# On a besoin d'écrire dans le repo pour pousser l'image
 permissions:
   contents: write
 
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,48 +17,66 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
+          pip install -r requirements.txt
+
+      - name: Vérification du fichier config.ini
+        run: |
+          echo "==== Vérification du fichier config.ini ===="
+          if [ ! -f "config.ini" ]; then
+            echo "❌ ERREUR : config.ini est introuvable !"
+            exit 1
           fi
+          echo "✅ Fichier config.ini trouvé."
+          echo "----- Contenu brut -----"
+          head -n 30 config.ini || true
+          echo "------------------------"
+
+          echo "Recherche du mode dans le fichier..."
+          MODE=$(grep -E '^mode *= *' config.ini | cut -d '=' -f2 | xargs)
+          if [ -z "$MODE" ]; then
+            echo "❌ Aucun mode trouvé dans config.ini !"
+            exit 1
+          fi
+          echo "🟩 Mode détecté : '$MODE'"
+
+          if [[ "$MODE" != "manual" && "$MODE" != "local" && "$MODE" != "ftp" && "$MODE" != "sftp" ]]; then
+            echo "❌ Mode invalide : $MODE"
+            echo "Le mode doit être 'manual', 'local', 'ftp' ou 'sftp'."
+            exit 1
+          fi
+          echo "✅ Mode valide, on continue."
 
       - name: Run python main.py
         run: |
-          echo "Lancement du script…"
+          echo "Lancement du script..."
           python main.py
 
       - name: Commit & push changes (images/top3.png)
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add images/top3.png || true
+          git commit -m "Auto-update leaderboard" || echo "Rien à commit"
+          git push || echo "Push déjà à jour"
 
-          # Ajoute l'image (et éventuellement des CSV/TXT générés)
-          git add images/top3.png staticdata/*.csv staticdata/*.txt 2>/dev/null || true
-
-          if git diff --staged --quiet; then
-            echo "Rien à committer."
-          else
-            git commit -m "Auto-update leaderboard image"
-            git push
-          fi
-
-      # Garder un lien FIXE via jsDelivr : on purge et on “réchauffe” le cache
       - name: Purger le cache jsDelivr + réchauffer
         run: |
           set -e
           FILE="images/top3.png"
-          PURGE="https://purge.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/$FILE"
-          URL="https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/$FILE"
+          URL="https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/${FILE}"
+          PURGE="https://purge.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/${FILE}"
 
           echo "Purge jsDelivr: $PURGE"
-          curl -sS "$PURGE" >/dev/null || true
+          curl -sS "$PURGE" > /dev/null
 
           sleep 3
           echo "Warm jsDelivr: $URL"
-          curl -sS "$URL" >/dev/null || true
+          curl -I "$URL" | sed -n '1,2p'
+
