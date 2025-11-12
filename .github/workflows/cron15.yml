@@ -2,7 +2,7 @@ name: Cron leaderboard (robuste)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"         # toutes les 15 min (UTC)
+    - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
   workflow_dispatch:
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
             echo "Pas de requirements.txt"
           fi
 
-      - name: "Normaliser et forcer config.ini (mode=sftp) puis propager"
+      - name: "Normaliser/forcer config.ini (mode=sftp) puis propager"
         shell: bash
         run: |
           set -e
@@ -41,39 +41,34 @@ jobs:
             exit 1
           fi
 
-          # 1) Normaliser LF
-          python -c "import pathlib; p=pathlib.Path('config.ini'); p.write_bytes(p.read_bytes().replace(b'\r\n', b'\n')); print('config.ini normalisé (LF).')"
-
-          # 2) Forcer [MODE] / mode = sftp (sans here-doc)
-          cat > _force_mode.py << 'PY'
-import re, pathlib
+          # Un seul bloc Python, encapsulé correctement
+          python - <<'PY'
+import pathlib, re
 p = pathlib.Path('config.ini')
-s = p.read_text(encoding='utf-8')
 
-# Ajouter une section [MODE] si absente
+# 1) Normaliser CRLF -> LF
+p.write_bytes(p.read_bytes().replace(b'\r\n', b'\n'))
+
+# 2) Forcer [MODE] / mode = sftp
+s = p.read_text(encoding='utf-8')
 if '[MODE]' not in s:
     s = s.rstrip() + '\n\n[MODE]\nmode = sftp\n'
-
-# Remplacer/ajouter 'mode = sftp' dans la section [MODE]
 def repl(block):
     sect = block.group(0)
-    if re.search(r'(?mi)^\s*mode\s*=', sect):
+    if re.search(r'(?mi)^\s*mode\s*=.*$', sect):
         sect = re.sub(r'(?mi)^\s*mode\s*=.*$', 'mode = sftp', sect)
     else:
         sect = sect.rstrip() + '\nmode = sftp\n'
     return sect
-
 s = re.sub(r'(?s)\[MODE\].*?(?=\n\[|\Z)', repl, s)
 p.write_text(s, encoding='utf-8')
-print('[MODE] -> mode = sftp')
+print('[OK] config.ini normalisé + mode=sftp')
 PY
-          python _force_mode.py
-          rm -f _force_mode.py
 
           echo "----- Aperçu config.ini (début) -----"
-          sed -n '1,120p' config.ini
+          sed -n '1,120p' config.ini || true
 
-          # 3) Propager ce config.ini vers tout autre config.ini trouvé dans le repo
+          # 3) Propager ce config.ini vers tout autre config.ini
           while IFS= read -r -d '' f; do
             if [ "$f" != "./config.ini" ]; then
               echo "Propagate vers $f"
@@ -88,7 +83,7 @@ PY
           ls -la
           python main.py
 
-      - name: "Commit & push changes (images/top3.png)"
+      - name: "Commit & push changes (images/*)"
         if: always()
         run: |
           set -e
