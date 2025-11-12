@@ -6854,10 +6854,13 @@
   },
   "biomeswevegone:biomeswevegone/adventure/oh_the_biomes_weve_gone": {
     "criteria": {
+      "biomeswevegone:frosted_coniferous_forest": "2025-11-12 03:22:42 +0100",
       "biomeswevegone:cika_woods": "2025-11-12 02:34:13 +0100",
       "biomeswevegone:maple_taiga": "2025-11-11 20:03:50 +0100",
+      "biomeswevegone:cypress_swamplands": "2025-11-12 03:22:33 +0100",
       "biomeswevegone:skyrise_vale": "2025-11-12 01:32:20 +0100",
       "biomeswevegone:temperate_grove": "2025-11-11 21:39:11 +0100",
+      "biomeswevegone:zelkova_forest": "2025-11-12 03:22:28 +0100",
       "biomeswevegone:allium_shrubland": "2025-11-11 02:19:25 +0100",
       "biomeswevegone:coniferous_forest": "2025-11-12 01:45:29 +0100",
       "biomeswevegone:coconino_meadow": "2025-11-11 20:16:27 +0100"
@@ -8719,7 +8722,8 @@
   },
   "cobblemon:recipes/balls/level_ball": {
     "criteria": {
-      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100"
+      "has_yellow_apricorn": "2025-11-11 20:06:26 +0100",
+      "has_pink_apricorn": "2025-11-12 03:23:05 +0100"
     },
     "done": false
   },
@@ -8793,7 +8797,8 @@
   },
   "cobblemon:recipes/balls/dream_ball": {
     "criteria": {
-      "has_blue_apricorn": "2025-11-11 20:23:14 +0100"
+      "has_blue_apricorn": "2025-11-11 20:23:14 +0100",
+      "has_pink_apricorn": "2025-11-12 03:23:05 +0100"
     },
     "done": false
   },
@@ -9747,6 +9752,12 @@
     },
     "done": true
   },
+  "cobblemon:recipes/balls/heal_ball": {
+    "criteria": {
+      "has_pink_apricorn": "2025-11-12 03:23:05 +0100"
+    },
+    "done": false
+  },
   "cobblemon:recipes/misc/repeat_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
@@ -9824,6 +9835,12 @@
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "minecraft:recipes/misc/coast_armor_trim_smithing_template_smithing_trim": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 03:25:37 +0100"
+    },
+    "done": true
   },
   "minecraft:recipes/building_blocks/cut_copper_from_copper_block_stonecutting": {
     "criteria": {
@@ -9993,6 +10010,12 @@
     },
     "done": true
   },
+  "cobblemon:recipes/agriculture/pink_apricorn_smelt_to_dye": {
+    "criteria": {
+      "has_apricorn": "2025-11-12 03:23:05 +0100"
+    },
+    "done": true
+  },
   "stoneworks:recipes/building_blocks/blackstone_tile_wall_from_blackstone_or_blackstone_tiles_stonecutting": {
     "criteria": {
       "has_blackstone_or_blackstone_tiles": "2025-11-12 03:04:26 +0100"
@@ -10008,6 +10031,12 @@
   "cozyhome:recipes/building_blocks/stone_brick_fountain_spout_shaped": {
     "criteria": {
       "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/eye_armor_trim_smithing_template_smithing_trim": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 03:24:44 +0100"
     },
     "done": true
   },
@@ -10186,6 +10215,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/misc/coast_armor_trim_smithing_template": {
+    "criteria": {
+      "has_coast_armor_trim_smithing_template": "2025-11-12 03:25:37 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/copper_grate": {
     "criteria": {
       "has_copper_block": "2025-11-12 02:51:57 +0100"
@@ -10270,6 +10305,12 @@
     },
     "done": true
   },
+  "cobblemon:recipes/balls/love_ball": {
+    "criteria": {
+      "has_pink_apricorn": "2025-11-12 03:23:05 +0100"
+    },
+    "done": false
+  },
   "cobblemon:recipes/misc/ancient_azure_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
@@ -10291,6 +10332,12 @@
   "stoneworks:recipes/building_blocks/blackstone_shingle_slab_from_blackstone_or_blackstone_shingles_stonecutting": {
     "criteria": {
       "has_blackstone_or_blackstone_shingles": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/balls/roseate_ball": {
+    "criteria": {
+      "has_pink_apricorn": "2025-11-12 03:23:05 +0100"
     },
     "done": true
   },
@@ -10406,6 +10453,12 @@
   "minecraft:recipes/building_blocks/polished_blackstone": {
     "criteria": {
       "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/eye_armor_trim_smithing_template": {
+    "criteria": {
+      "has_eye_armor_trim_smithing_template": "2025-11-12 03:24:44 +0100"
     },
     "done": true
   },
