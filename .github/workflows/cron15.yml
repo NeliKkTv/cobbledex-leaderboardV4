@@ -26,7 +26,6 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # 1) Normalisation de config.ini (CRLF -> LF, BOM retiré)
       - name: Normaliser config.ini
         run: |
           if [ ! -f config.ini ]; then
@@ -36,32 +35,25 @@ jobs:
           (printf '\xEF\xBB\xBF' | cmp -s - <(head -c 3 config.ini)) \
             && tail -c +4 config.ini > config.tmp && mv config.tmp config.ini || true
 
-      # 2) Forcer le mode = sftp dans [MODE] (correction automatique)
       - name: Forcer [MODE].mode = sftp
         run: |
           python - << 'PY'
-          import configparser, io
+          import configparser
           from pathlib import Path
           p = Path("config.ini")
           txt = p.read_text(encoding="utf-8", errors="ignore")
-          # Tolérance aux fichiers sans header ou un header étrange
           cp = configparser.ConfigParser()
           try:
-            cp.read_string(txt)
+              cp.read_string(txt)
           except Exception:
-            # En dernier recours, on préfixe par une section neutre
-            txt = "[DEFAULT]\n" + txt
-            cp.read_string(txt)
-
+              txt = "[DEFAULT]\n" + txt
+              cp.read_string(txt)
           if 'MODE' not in cp: cp['MODE'] = {}
           cp['MODE']['mode'] = 'sftp'
-
-          p.write_text("", encoding="utf-8")  # réécrit proprement
           with p.open("w", encoding="utf-8") as f:
-            cp.write(f)
+              cp.write(f)
           PY
 
-      # 3) Montrer ce qui sera lu
       - name: Aperçu config.ini (lignes utiles)
         run: |
           echo "----- [MODE] -----"
@@ -69,13 +61,11 @@ jobs:
           echo "----- 1..60 -----"
           sed -n '1,60p' config.ini || true
 
-      # 4) Lancer ton script
       - name: Run python main.py
         run: |
           echo "Lancement du script…"
           python main.py
 
-      # 5) Commit si l'image a changé
       - name: Commit & push (images/top3.png)
         run: |
           git config user.name  "github-actions[bot]"
@@ -88,7 +78,6 @@ jobs:
             echo "Aucun changement"
           fi
 
-      # 6) Purge / Warm jsDelivr (lien fixe)
       - name: Purger cache jsDelivr + warm
         run: |
           set -e
@@ -101,9 +90,8 @@ jobs:
           curl -sS "$URL" | head -c 8 || true
           echo
 
-      # 7) Discord (facultatif)
       - name: Notifier Discord
-        if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
+        if: ${{ secrets.DISCORD_WEBHOOK_URL }}   # <-- correction ici
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
