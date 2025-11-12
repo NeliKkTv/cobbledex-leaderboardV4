@@ -18,7 +18,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          fetch-depth: 0
+          persist-credentials: true
 
       # 2️⃣ Installer Python
       - name: Set up Python
@@ -74,20 +75,20 @@ jobs:
           echo "=== Lancement du script Python ==="
           python main.py
 
-      # 7️⃣ Commit & push de l’image générée (fonctionne en repo public)
+      # 7️⃣ Commit & push de l’image générée (HTTPS, public)
       - name: Commit & push updated leaderboard
         if: success()
         run: |
           echo "=== Commit et push du leaderboard ==="
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git pull origin main --rebase || true
 
           if [ -f images/top3.png ]; then
             echo "✅ Fichier top3.png trouvé, préparation du commit..."
             git add images/top3.png
             git commit -m "Update leaderboard image [auto]" || echo "Aucun changement à commit."
-            git pull origin main --rebase || true
-            git push https://github.com/NelikkTv/cobbledex-leaderboardV4.git HEAD:main || true
+            git push https://github.com/NelikkTv/cobbledex-leaderboardV4.git HEAD:main || echo "⚠️ Aucun push possible (aucun changement)"
           else
             echo "⚠️ Aucun fichier images/top3.png trouvé, aucun push effectué."
           fi
@@ -99,11 +100,3 @@ jobs:
           echo "=== Purge du cache jsDelivr ==="
           curl -X PURGE "https://cdn.jsdelivr.net/gh/NelikkTv/cobbledex-leaderboardV4/images/top3.png" || true
           echo "✅ Cache jsDelivr rafraîchi."
-
-      # 9️⃣ (Optionnel) Étape Discord à activer plus tard
-      # - name: Envoyer notification Discord
-      #   if: success()
-      #   run: |
-      #     curl -H "Content-Type: application/json" \
-      #          -d '{"content":"🎉 Nouveau leaderboard généré !\nhttps://cdn.jsdelivr.net/gh/NelikkTv/cobbledex-leaderboardV4/images/top3.png"}' \
-      #          ${{ secrets.DISCORD_WEBHOOK_URL }}
