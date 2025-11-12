@@ -1,12 +1,19 @@
 name: cron15
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
-  workflow_dispatch:         # lance aussi à la main
+    - cron: "*/15 * * * *"   # toutes les 15 min (UTC)
 
 permissions:
-  contents: write            # autorise le push avec GITHUB_TOKEN
+  contents: write
+
+env:
+  STABLE_FILE: images/top3.png
+  # Lien fixe (à mettre dans ton projecteur en jeu) :
+  JSDELIVR: https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/images/top3.png
+  PURGE:    https://purge.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/images/top3.png
+  WEBHOOK:  ${{ secrets.DISCORD_WEBHOOK_URL }}  # si tu n’as pas de secret, la step Discord sera skip
 
 jobs:
   run:
@@ -26,89 +33,49 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # Crée username.txt / password.txt à partir des SECRETS si présents.
-      # (Si tu as déjà ces fichiers dans le repo/runner, on ne les touche pas.)
-      - name: Prepare SFTP credential files
-        env:
-          SFTP_USER: ${{ secrets.SFTP_USER }}
-          SFTP_PASS: ${{ secrets.SFTP_PASS }}
+      - name: Ensure folders
         run: |
-          set -e
-          if [ -n "${SFTP_USER}" ] && [ ! -f username.txt ]; then
-            echo -n "${SFTP_USER}" > username.txt
-          fi
-          if [ -n "${SFTP_PASS}" ] && [ ! -f password.txt ]; then
-            echo -n "${SFTP_PASS}" > password.txt
-          fi
-          ls -l username.txt password.txt || echo "⚠️ username.txt / password.txt non présents"
+          mkdir -p images data staticdata
 
-      # (Optionnel) Affiche les 20 premières lignes du config.ini pour vérifier
-      - name: Show config.ini head (debug)
+      - name: Run python main.py
         run: |
-          sed -n '1,120p' config.ini || true
-
-      # Exécute ton script avec le token GitHub auto disponible en env (Token=auto)
-      - name: Run main.py
-        env:
-          GH_TOKEN: ${{ github.token }}     # ton script peut lire GH_TOKEN ou GITHUB_TOKEN
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          set -e
+          echo "Lancement du script…"
           python main.py
 
-      # Commit & push uniquement s'il y a des changements (image/CSV)
-      - name: Commit & push changes (if any)
-        id: commit
+      - name: Commit & push changes (images/top3.png)
         run: |
-          set -e
           git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "committed=false" >> "$GITHUB_OUTPUT"
-            echo "Aucun changement à committer."
-            exit 0
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git ls-files --error-unmatch "${{ env.STABLE_FILE }}" >/dev/null 2>&1; then
+            git add "${{ env.STABLE_FILE }}"
           fi
-          git commit -m "Auto-update leaderboard from cron: ${GITHUB_RUN_ID}"
-          git push
-          echo "committed=true" >> "$GITHUB_OUTPUT"
 
-      # Purge le cache jsDelivr et "réchauffe" l'URL (uniquement si commit)
-      - name: Purge jsDelivr cache + warm
-        if: steps.commit.outputs.committed == 'true'
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto-update leaderboard image"
+            git push
+          else
+            echo "Aucun changement à pousser."
+          fi
+
+      - name: Purger le cache jsDelivr + réchauffer
         run: |
           set -e
-          FILE="images/top3.png"   # doit correspondre à ImagePath de ton config.ini
-          REPO="${{ github.repository }}"
-          CDN="https://cdn.jsdelivr.net/gh/${REPO}@main/${FILE}"
-          PURGE="https://purge.jsdelivr.net/gh/${REPO}@main/${FILE}"
+          echo "Purge: ${{ env.PURGE }}"
+          curl -sS "${{ env.PURGE }}" >/dev/null || true
 
-          echo "Purge: $PURGE"
-          curl -sS "$PURGE" > /dev/null || true
-          sleep 2
-          echo "Warm:  $CDN"
-          curl -sI "$CDN" | sed -n '1,20p' || true
+          echo "Warm:  ${{ env.JSDELIVR }}"
+          # On “tire” l’image pour remplir le cache
+          curl -sI "${{ env.JSDELIVR }}" | sed -n '1,12p' || true
 
-      # Envoi Discord (optionnel) avec lien FIXE + aperçu rafraîchi
-      - name: Notify Discord (fixed link + fresh preview)
-        if: steps.commit.outputs.committed == 'true' && secrets.DISCORD_WEBHOOK_URL != ''
-        env:
-          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      - name: Notifier Discord (lien FIXE + aperçu rafraîchi)
+        if: env.WEBHOOK != ''
         run: |
           set -e
-          REPO="${{ github.repository }}"
-          FIX_URL="https://cdn.jsdelivr.net/gh/${REPO}@main/images/top3.png"
-          PREVIEW_URL="${FIX_URL}?t=${{ github.run_id }}"   # bust cache aperçu
-
-          payload="{\"content\":\"**Leaderboard mis à jour !**\",\"embeds\":[{\"description\":\"Lien fixe : ${FIX_URL}\",\"image\":{\"url\":\"${PREVIEW_URL}\"},\"color\":5814783}]}"
-          http_code=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
-            -H "Content-Type: application/json" \
-            -d "$payload" "$WEBHOOK" || true)
-
-          echo "Discord HTTP: $http_code"
-          cat /tmp/resp.txt || true
-
-          case "$http_code" in
-            2*) echo "Notification Discord OK." ;;
-            *)  echo "Échec Discord (HTTP $http_code)"; exit 1 ;;
-          esac
+          now=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          payload=$(jq -n \
+            --arg content "**Leaderboard mis à jour** — $now\nLien fixe (sans cache) :\n${{ env.JSDELIVR }}?t=$(date +%s)" \
+            '{content: $content}')
+          curl -sS -H "Content-Type: application/json" \
+               -d "$payload" \
+               "${{ env.WEBHOOK }}" >/dev/null || true
