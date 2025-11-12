@@ -1,23 +1,20 @@
-name: Run Python script every 15 min
+name: Run Python script every 15 min (robust)
 
 on:
   schedule:
     - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
-  workflow_dispatch:         # exécution manuelle possible
+  workflow_dispatch:        # exécutable à la main
 
 concurrency:
   group: python-cron
   cancel-in-progress: false
 
+permissions:
+  contents: write   # nécessaire pour commit/push
+
 jobs:
   run:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write   # nécessaire pour push l’image
-
-    env:
-      WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
 
     steps:
       - name: Checkout repo
@@ -31,74 +28,105 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
 
       - name: Ensure required folders exist
-        run: mkdir -p data stats images staticdata
+        run: |
+          mkdir -p data stats images staticdata
 
-      - name: Run script
-        run: python main.py
+      - name: Run python main.py
+        run: |
+          python main.py
 
-      # ✅ Step robuste: ne plante pas si rien à commiter
+      # -----------------------------------------------------
+      # Commit & push seulement s'il y a un changement
+      # -----------------------------------------------------
       - name: Commit & push changes (if any)
         id: commit
         run: |
           set -e
           git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # On stage tout le repo (y compris images/top3.png si changé)
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-
-          # S'il n'y a RIEN de staged, on n'essaie pas de commit
           if git diff --cached --quiet; then
             echo "No changes to commit."
             echo "committed=false" >> "$GITHUB_OUTPUT"
-            exit 0
+          else
+            git commit -m "Auto-update from cron: ${GITHUB_RUN_ID}"
+            git push
+            echo "committed=true" >> "$GITHUB_OUTPUT"
           fi
 
-          git commit -m "Auto-update leaderboard from cron: ${{ github.run_id }}"
-          git push
-          echo "committed=true" >> "$GITHUB_OUTPUT"
-
-      # 🧹 Purge jsDelivr uniquement si on a poussé une nouvelle image
+      # -----------------------------------------------------
+      # Purge jsDelivr + "warm" l'URL (uniquement si commit)
+      # -----------------------------------------------------
       - name: Purger le cache jsDelivr + réchauffer
         if: steps.commit.outputs.committed == 'true'
         run: |
           set -e
-          FILE="images/top3.png"
           REPO="${{ github.repository }}"
-          FIX_URL="https://cdn.jsdelivr.net/gh/${REPO}@main/${FILE}"
-          PURGE_URL="https://purge.jsdelivr.net/gh/${REPO}@main/${FILE}"
+          FILE="images/top3.png"
+          CDN="https://cdn.jsdelivr.net/gh/${REPO}@main/${FILE}"
+          PURGE="https://purge.jsdelivr.net/gh/${REPO}@main/${FILE}"
 
-          echo "Purge jsDelivr: $PURGE_URL"
-          curl -sS "$PURGE_URL" > /dev/null || true
+          echo "Purge jsDelivr: $PURGE"
+          curl -sS "$PURGE" > /dev/null || true
 
+          echo "Warm jsDelivr: $CDN"
+          # on recharge l’URL (et on affiche les 1ères lignes pour debug)
           sleep 3
-          echo "Warm jsDelivr: $FIX_URL"
-          curl -sI "$FIX_URL" | sed -n '1,20p'
+          curl -sS "$CDN" | sed -n '1,2p' || true
 
-      # 💬 Discord uniquement si on a vraiment une mise à jour
+      # -----------------------------------------------------
+      # Discord : lien fixe (jsDelivr) + aperçu rafraîchi
+      # -----------------------------------------------------
       - name: Notifier Discord avec lien FIXE + aperçu rafraîchi
         if: steps.commit.outputs.committed == 'true'
         env:
           WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           set -e
+
+          # 1) Secret présent ?
+          if [ -z "${WEBHOOK:-}" ]; then
+            echo "WEBHOOK (DISCORD_WEBHOOK_URL) est manquant -> on ignore l'étape."
+            exit 0
+          fi
+
+          # 2) URLs : lien fixe + aperçu busté
           REPO="${{ github.repository }}"
           FIX_URL="https://cdn.jsdelivr.net/gh/${REPO}@main/images/top3.png"
-          PREVIEW_URL="${FIX_URL}?t=${{ github.run_id }}"
+          PREVIEW_URL="${FIX_URL}?t=${{ github.run_id }}"   # force un nouveau fetch côté Discord
 
-          read -r -d '' PAYLOAD <<EOF
-          {
-            "content": "**Leaderboard mis à jour !**\\nLien fixe : ${FIX_URL}",
-            "embeds": [
-              {
-                "image": { "url": "${PREVIEW_URL}" },
-                "color": 5814783
-              }
-            ]
-          }
-          EOF
+          # 3) Payload JSON (sans jq)
+          payload=$(cat <<'JSON'
+{
+  "content": "**Leaderboard mis à jour !**",
+  "embeds": [
+    {
+      "description": "Lien fixe : %%URL%%",
+      "image": { "url": "%%IMG%%" },
+      "color": 5814783
+    }
+  ]
+}
+JSON
+)
+          payload=${payload//%%URL%%/$FIX_URL}
+          payload=${payload//%%IMG%%/$PREVIEW_URL}
 
-          curl -sS -H "Content-Type: application/json" -d "$PAYLOAD" "$WEBHOOK"
+          # 4) Envoi Discord + logs utiles
+          http_code=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
+            -H "Content-Type: application/json" \
+            -d "$payload" "$WEBHOOK" || true)
+
+          echo "Discord HTTP: $http_code"
+          echo "Réponse Discord:"
+          cat /tmp/resp.txt || true
+
+          case "$http_code" in
+            2*) echo "Notification Discord OK.";;
+            *)  echo "Échec Discord (HTTP $http_code)"; exit 1;;
+          esac
