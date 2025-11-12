@@ -38,6 +38,7 @@
   "regions_unexplored:regions_explored": {
     "criteria": {
       "mountains": "2025-11-11 02:11:40 +0100",
+      "sparse_redwoods": "2025-11-12 03:54:03 +0100",
       "silver_birch_forest": "2025-11-10 20:53:47 +0100",
       "shrubland": "2025-11-11 16:17:06 +0100",
       "deciduous_forest": "2025-11-11 16:22:43 +0100",
@@ -45,6 +46,7 @@
       "boreal_forest": "2025-11-11 00:15:39 +0100",
       "fen": "2025-11-12 03:09:26 +0100",
       "pine_taiga": "2025-11-11 02:19:46 +0100",
+      "bayou": "2025-11-12 04:14:59 +0100",
       "muddy_river": "2025-11-10 23:42:10 +0100",
       "autumnal_maple_forest": "2025-11-10 23:42:45 +0100",
       "towering_cliffs": "2025-11-12 03:16:33 +0100",
@@ -54,6 +56,7 @@
       "frozen_tundra": "2025-11-12 00:35:14 +0100",
       "cold_river": "2025-11-10 20:50:01 +0100",
       "pine_slopes": "2025-11-11 14:34:02 +0100",
+      "old_growth_bayou": "2025-11-12 04:15:55 +0100",
       "grassy_beach": "2025-11-11 02:16:21 +0100",
       "scorching_caves": "2025-11-11 01:51:33 +0100",
       "spires": "2025-11-12 03:10:27 +0100",
@@ -63,6 +66,7 @@
       "flower_fields": "2025-11-11 16:42:20 +0100",
       "gravel_beach": "2025-11-11 02:12:57 +0100",
       "highland_fields": "2025-11-10 20:45:39 +0100",
+      "redwoods": "2025-11-12 03:53:57 +0100",
       "maple_forest": "2025-11-10 20:37:02 +0100",
       "frozen_pine_taiga": "2025-11-12 00:44:33 +0100",
       "icy_heights": "2025-11-12 00:27:54 +0100",
@@ -75,6 +79,7 @@
   "regions_unexplored:pioneer": {
     "criteria": {
       "mountains": "2025-11-11 02:11:40 +0100",
+      "sparse_redwoods": "2025-11-12 03:54:03 +0100",
       "silver_birch_forest": "2025-11-10 20:53:47 +0100",
       "shrubland": "2025-11-11 16:17:06 +0100",
       "deciduous_forest": "2025-11-11 16:22:43 +0100",
@@ -82,6 +87,7 @@
       "boreal_forest": "2025-11-11 00:15:39 +0100",
       "fen": "2025-11-12 03:09:26 +0100",
       "pine_taiga": "2025-11-11 02:19:46 +0100",
+      "bayou": "2025-11-12 04:14:59 +0100",
       "muddy_river": "2025-11-10 23:42:10 +0100",
       "autumnal_maple_forest": "2025-11-10 23:42:45 +0100",
       "towering_cliffs": "2025-11-12 03:16:33 +0100",
@@ -91,6 +97,7 @@
       "frozen_tundra": "2025-11-12 00:35:14 +0100",
       "cold_river": "2025-11-10 20:50:01 +0100",
       "pine_slopes": "2025-11-11 14:34:02 +0100",
+      "old_growth_bayou": "2025-11-12 04:15:55 +0100",
       "grassy_beach": "2025-11-11 02:16:21 +0100",
       "spires": "2025-11-12 03:10:27 +0100",
       "blackwood_taiga": "2025-11-10 20:44:52 +0100",
@@ -99,6 +106,7 @@
       "flower_fields": "2025-11-11 16:42:20 +0100",
       "gravel_beach": "2025-11-11 02:12:57 +0100",
       "highland_fields": "2025-11-10 20:45:39 +0100",
+      "redwoods": "2025-11-12 03:53:57 +0100",
       "maple_forest": "2025-11-10 20:37:02 +0100",
       "frozen_pine_taiga": "2025-11-12 00:44:33 +0100",
       "icy_heights": "2025-11-12 00:27:54 +0100",
@@ -793,19 +801,23 @@
       "minecraft:old_growth_pine_taiga": "2025-11-12 01:45:21 +0100",
       "minecraft:forest": "2025-11-10 20:49:26 +0100",
       "minecraft:taiga": "2025-11-12 01:32:57 +0100",
+      "minecraft:deep_ocean": "2025-11-12 04:11:12 +0100",
       "minecraft:lush_caves": "2025-11-11 21:39:22 +0100",
       "minecraft:frozen_ocean": "2025-11-12 01:08:46 +0100",
       "minecraft:frozen_river": "2025-11-12 00:27:30 +0100",
       "minecraft:windswept_forest": "2025-11-12 02:57:29 +0100",
       "minecraft:ocean": "2025-11-11 02:40:43 +0100",
+      "minecraft:jungle": "2025-11-12 03:53:45 +0100",
       "minecraft:sunflower_plains": "2025-11-11 16:26:55 +0100",
       "minecraft:cherry_grove": "2025-11-12 01:40:35 +0100",
       "minecraft:birch_forest": "2025-11-10 21:56:23 +0100",
       "minecraft:windswept_hills": "2025-11-12 02:55:47 +0100",
       "minecraft:old_growth_spruce_taiga": "2025-11-12 01:45:24 +0100",
       "minecraft:snowy_beach": "2025-11-12 01:08:41 +0100",
+      "minecraft:bamboo_jungle": "2025-11-12 03:54:00 +0100",
       "minecraft:beach": "2025-11-10 23:33:16 +0100",
       "minecraft:dark_forest": "2025-11-10 21:59:02 +0100",
+      "minecraft:sparse_jungle": "2025-11-12 03:58:10 +0100",
       "minecraft:river": "2025-11-10 20:47:48 +0100",
       "minecraft:stony_shore": "2025-11-11 20:16:41 +0100",
       "minecraft:snowy_plains": "2025-11-12 00:53:34 +0100",
@@ -817,6 +829,7 @@
       "minecraft:swamp": "2025-11-12 03:06:03 +0100",
       "minecraft:meadow": "2025-11-10 21:01:24 +0100",
       "minecraft:windswept_gravelly_hills": "2025-11-12 02:54:54 +0100",
+      "minecraft:savanna": "2025-11-12 04:00:59 +0100",
       "minecraft:plains": "2025-11-10 20:54:45 +0100",
       "minecraft:jagged_peaks": "2025-11-11 14:16:14 +0100"
     },
@@ -2113,17 +2126,19 @@
   },
   "cobblemon:brew_all": {
     "criteria": {
-      "obtain_full_heal": "2025-11-11 04:45:46 +0100",
-      "obtain_ice_heal": "2025-11-11 21:41:15 +0100",
-      "obtain_potion": "2025-11-10 23:28:55 +0100",
+      "obtain_max_elixir": "2025-11-12 03:39:28 +0100",
       "obtain_awakening": "2025-11-10 20:57:49 +0100",
-      "obtain_antidote": "2025-11-11 20:24:41 +0100",
       "obtain_paralyze_heal": "2025-11-11 02:18:22 +0100",
-      "obtain_full_restore": "2025-11-11 01:35:22 +0100",
-      "obtain_elixir": "2025-11-11 04:46:42 +0100",
       "obtain_hyper_potion": "2025-11-11 02:13:20 +0100",
       "obtain_super_potion": "2025-11-11 02:24:45 +0100",
       "obtain_max_potion": "2025-11-10 20:58:26 +0100",
+      "obtain_full_heal": "2025-11-11 04:45:46 +0100",
+      "obtain_ice_heal": "2025-11-11 21:41:15 +0100",
+      "obtain_burn_heal": "2025-11-12 03:39:28 +0100",
+      "obtain_potion": "2025-11-10 23:28:55 +0100",
+      "obtain_antidote": "2025-11-11 20:24:41 +0100",
+      "obtain_full_restore": "2025-11-11 01:35:22 +0100",
+      "obtain_elixir": "2025-11-11 04:46:42 +0100",
       "obtain_ether": "2025-11-12 01:37:51 +0100"
     },
     "done": false
@@ -6856,14 +6871,17 @@
     "criteria": {
       "biomeswevegone:frosted_coniferous_forest": "2025-11-12 03:22:42 +0100",
       "biomeswevegone:cika_woods": "2025-11-12 02:34:13 +0100",
+      "biomeswevegone:orchard": "2025-11-12 04:04:59 +0100",
+      "biomeswevegone:amaranth_grassland": "2025-11-12 04:04:16 +0100",
+      "biomeswevegone:skyrise_vale": "2025-11-12 01:32:20 +0100",
+      "biomeswevegone:allium_shrubland": "2025-11-11 02:19:25 +0100",
+      "biomeswevegone:coconino_meadow": "2025-11-11 20:16:27 +0100",
       "biomeswevegone:maple_taiga": "2025-11-11 20:03:50 +0100",
       "biomeswevegone:cypress_swamplands": "2025-11-12 03:22:33 +0100",
-      "biomeswevegone:skyrise_vale": "2025-11-12 01:32:20 +0100",
       "biomeswevegone:temperate_grove": "2025-11-11 21:39:11 +0100",
       "biomeswevegone:zelkova_forest": "2025-11-12 03:22:28 +0100",
-      "biomeswevegone:allium_shrubland": "2025-11-11 02:19:25 +0100",
       "biomeswevegone:coniferous_forest": "2025-11-12 01:45:29 +0100",
-      "biomeswevegone:coconino_meadow": "2025-11-11 20:16:27 +0100"
+      "biomeswevegone:aspen_boreal": "2025-11-12 04:10:25 +0100"
     },
     "done": false
   },
@@ -8319,7 +8337,8 @@
   },
   "hopo:minecraft/adventure/locate_all_underwater_structures": {
     "criteria": {
-      "locate_shipwreck": "2025-11-11 16:21:46 +0100"
+      "locate_shipwreck": "2025-11-11 16:21:46 +0100",
+      "locate_underwater_small_ruins": "2025-11-12 04:12:31 +0100"
     },
     "done": false
   },
@@ -9510,6 +9529,12 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/dye_gray_chalk": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "cobblemon:rainbow_apricorns": {
     "criteria": {
       "place_white": "2025-11-12 02:05:16 +0100",
@@ -9620,6 +9645,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/decorations/gray_candle": {
+    "criteria": {
+      "has_gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "cozyhome:recipes/building_blocks/mossy_stone_brick_fountain_spout_stonecutting": {
     "criteria": {
       "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
@@ -9629,6 +9660,12 @@
   "minecraft:recipes/building_blocks/blackstone_stairs": {
     "criteria": {
       "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "comforts:recipes/building_blocks/dye_hammock_gray": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
     },
     "done": true
   },
@@ -9728,9 +9765,21 @@
     },
     "done": false
   },
+  "pokeblocks:recipes/decorations/gigantic_pokedoll_swinub": {
+    "criteria": {
+      "has_pokedoll_swinub": "2025-11-12 04:35:29 +0100"
+    },
+    "done": true
+  },
   "cozyhome:recipes/building_blocks/stone_brick_fountain_shaped": {
     "criteria": {
       "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "handcrafted:recipes/misc/fancy_painting": {
+    "criteria": {
+      "has_fancy_painting": "2025-11-12 04:34:16 +0100"
     },
     "done": true
   },
@@ -9770,6 +9819,12 @@
     },
     "done": false
   },
+  "arts_and_crafts:recipes/building_blocks/gray_soapstone_wall_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "stoneworks:recipes/building_blocks/blackstone_tile_slab_from_blackstone_or_blackstone_tiles_stonecutting": {
     "criteria": {
       "has_blackstone_or_blackstone_tiles": "2025-11-12 03:04:26 +0100"
@@ -9787,6 +9842,12 @@
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "arts_and_crafts:recipes/building_blocks/dye_gray_flower_pot_with_bleached_flower_pots": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
   },
   "stoneworks:recipes/building_blocks/cobbled_blackstone_stairs_from_blackstone_or_cobbled_blackstone_stonecutting": {
     "criteria": {
@@ -9806,6 +9867,18 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/gray_mud_brick_stairs_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "mega_showdown:mega_showdown/mega/get_any_mega_stone": {
+    "criteria": {
+      "obtained_mega_stones": "2025-11-12 03:39:52 +0100"
+    },
+    "done": true
+  },
   "stoneworks:recipes/building_blocks/blackstone_shingles_from_blackstone_stonecutting": {
     "criteria": {
       "has_blackstone": "2025-11-12 03:04:26 +0100"
@@ -9817,6 +9890,12 @@
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "arts_and_crafts:recipes/building_blocks/gray_polished_soapstone_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
   },
   "minecraft:recipes/building_blocks/copper_grate_from_copper_block_stonecutting": {
     "criteria": {
@@ -9830,11 +9909,29 @@
     },
     "done": true
   },
+  "cobblemon:recipes/held/loaded_dice": {
+    "criteria": {
+      "has_ball": "2025-11-12 04:34:26 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/tools/gray_paintbrush": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/heal_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "arts_and_crafts:recipes/building_blocks/gray_soapstone_slab_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
   },
   "minecraft:recipes/misc/coast_armor_trim_smithing_template_smithing_trim": {
     "criteria": {
@@ -9872,6 +9969,12 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/dye_gray_bed_with_bleached_bed": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/held/choice_band": {
     "criteria": {
       "has_band": "2025-11-12 00:39:20 +0100"
@@ -9881,6 +9984,12 @@
   "stoneworks:recipes/building_blocks/blackstone_tiles_from_blackstone_stonecutting": {
     "criteria": {
       "has_blackstone": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/building_blocks/dye_gray_carpet_with_bleached_carpet": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
     },
     "done": true
   },
@@ -9926,15 +10035,39 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/gray_terracotta_shingle_slab_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "stoneworks:recipes/building_blocks/blackstone_tile_stairs_from_blackstone_or_blackstone_tiles_stonecutting": {
     "criteria": {
       "has_blackstone_or_blackstone_tiles": "2025-11-12 03:04:26 +0100"
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/dye_gray_wool_with_bleached_wool": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "stoneworks:recipes/building_blocks/mossy_blackstone_brick_wall_from_blackstone_or_mossy_blackstone_bricks_stonecutting": {
     "criteria": {
       "has_blackstone_or_mossy_blackstone_bricks": "2025-11-12 03:04:26 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/building_blocks/dye_gray_flower_pot": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/held/charcoal_stick": {
+    "criteria": {
+      "has_fire": "2025-11-12 03:46:59 +0100"
     },
     "done": true
   },
@@ -9998,11 +10131,35 @@
     },
     "done": true
   },
+  "minecraft:recipes/building_blocks/dye_gray_wool": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/building_blocks/gray_terracotta_shingle_wall_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/dye_gray_bed": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_gigaton_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
     },
     "done": false
+  },
+  "arts_and_crafts:recipes/building_blocks/gray_soapstone_bricks_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
   },
   "cozyhome:recipes/building_blocks/stone_brick_chimney": {
     "criteria": {
@@ -10013,6 +10170,12 @@
   "cobblemon:recipes/agriculture/pink_apricorn_smelt_to_dye": {
     "criteria": {
       "has_apricorn": "2025-11-12 03:23:05 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/building_blocks/gray_terracotta_shingles_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
     },
     "done": true
   },
@@ -10082,6 +10245,12 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/gray_mud_bricks_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/stone_brick_stairs": {
     "criteria": {
       "has_stone_bricks": "2025-11-12 03:11:13 +0100"
@@ -10119,6 +10288,12 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/gray_mud_brick_wall_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/mossy_stone_brick_slab": {
     "criteria": {
       "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
@@ -10134,6 +10309,12 @@
   "minecraft:recipes/building_blocks/cut_copper": {
     "criteria": {
       "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/blocks/fire_stone_block": {
+    "criteria": {
+      "has_fire_stone": "2025-11-12 03:46:59 +0100"
     },
     "done": true
   },
@@ -10167,11 +10348,23 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/gray_soapstone_brick_wall_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/waxed_copper_block_from_honeycomb": {
     "criteria": {
       "has_copper_block": "2025-11-12 02:51:57 +0100"
     },
     "done": true
+  },
+  "mega_showdown:mega_showdown/mega/craft_mega_stones": {
+    "criteria": {
+      "sablenite": "2025-11-12 03:39:52 +0100"
+    },
+    "done": false
   },
   "stoneworks:recipes/building_blocks/blackstone_plate_wall_from_blackstone_or_blackstone_plates_stonecutting": {
     "criteria": {
@@ -10203,9 +10396,33 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/gray_soapstone_brick_stairs_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/light_gray_dye_from_gray_white_dye": {
+    "criteria": {
+      "has_gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/redstone/copper_bulb": {
     "criteria": {
       "has_copper_block": "2025-11-12 02:51:57 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/building_blocks/gray_mud_brick_slab_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "cobblemon:recipes/consumables/pp_max": {
+    "criteria": {
+      "has_pp_up": "2025-11-12 04:09:02 +0100"
     },
     "done": true
   },
@@ -10233,6 +10450,18 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/gray_polished_soapstone_stairs_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "comforts:recipes/building_blocks/dye_sleeping_bag_gray": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_citrine_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
@@ -10245,9 +10474,21 @@
     },
     "done": true
   },
+  "regions_unexplored:light_as_a_frog": {
+    "criteria": {
+      "lily_pad": "2025-11-12 04:16:33 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/mossy_stone_brick_stairs_from_mossy_stone_brick_stonecutting": {
     "criteria": {
       "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
+  "eternal_starlight:recipes/building_blocks/dye_gray_yeti_fur_carpet": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
     },
     "done": true
   },
@@ -10263,6 +10504,12 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/gray_soapstone_stairs_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/pokerod_smithing_template": {
     "criteria": {
       "has_pokerod_smithing_template": "2025-11-12 01:27:51 +0100"
@@ -10272,6 +10519,18 @@
   "minecraft:recipes/decorations/stone_brick_wall": {
     "criteria": {
       "has_stone_bricks": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/building_blocks/dye_gray_glazed_terracotta": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/building_blocks/gray_polished_soapstone_slab_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
     },
     "done": true
   },
@@ -10305,6 +10564,18 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/dye_gray_chalk_stick": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/vex_armor_trim_smithing_template_smithing_trim": {
+    "criteria": {
+      "has_smithing_trim_template": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/balls/love_ball": {
     "criteria": {
       "has_pink_apricorn": "2025-11-12 03:23:05 +0100"
@@ -10320,6 +10591,18 @@
   "minecraft:recipes/building_blocks/chiseled_stone_bricks": {
     "criteria": {
       "has_tag": "2025-11-12 03:11:13 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/building_blocks/gray_soapstone_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/building_blocks/gray_plaster_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
     },
     "done": true
   },
@@ -10371,6 +10654,12 @@
     },
     "done": false
   },
+  "minecraft:recipes/misc/vex_armor_trim_smithing_template": {
+    "criteria": {
+      "has_vex_armor_trim_smithing_template": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/chiseled_polished_blackstone_from_blackstone_stonecutting": {
     "criteria": {
       "has_blackstone": "2025-11-12 03:04:26 +0100"
@@ -10396,6 +10685,12 @@
     },
     "done": false
   },
+  "arts_and_crafts:recipes/building_blocks/gray_soapstone_brick_slab_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/fast_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
@@ -10405,6 +10700,12 @@
   "minecraft:recipes/building_blocks/dark_oak_planks": {
     "criteria": {
       "has_log": "2025-11-12 02:47:32 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/dye_gray_carpet": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
     },
     "done": true
   },
@@ -10486,6 +10787,18 @@
     },
     "done": true
   },
+  "arts_and_crafts:recipes/building_blocks/gray_polished_soapstone_wall_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "eternal_starlight:recipes/building_blocks/dye_gray_yeti_fur": {
+    "criteria": {
+      "has_needed_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
   "cobblemon:recipes/misc/ancient_wing_rod": {
     "criteria": {
       "has_smithing_trim_template": "2025-11-12 01:27:51 +0100"
@@ -10501,6 +10814,18 @@
   "minecraft:recipes/decorations/mossy_stone_brick_wall_from_mossy_stone_brick_stonecutting": {
     "criteria": {
       "has_mossy_stone_bricks": "2025-11-12 03:11:25 +0100"
+    },
+    "done": true
+  },
+  "arts_and_crafts:recipes/building_blocks/gray_terracotta_shingle_stairs_dye_recipe": {
+    "criteria": {
+      "gray_dye": "2025-11-12 03:49:10 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/raw_copper": {
+    "criteria": {
+      "has_raw_copper_block": "2025-11-12 04:34:53 +0100"
     },
     "done": true
   },
