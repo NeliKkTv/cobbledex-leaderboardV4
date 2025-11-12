@@ -2,9 +2,17 @@ name: Cron leaderboard (robuste)
 
 on:
   schedule:
+    # Toutes les 15 minutes (UTC)
     - cron: "*/15 * * * *"
+  # Permet de le lancer à la main si besoin
   workflow_dispatch:
 
+# Empêche deux jobs simultanés
+concurrency:
+  group: python-cron
+  cancel-in-progress: false
+
+# On a besoin d'écrire dans le repo pour pousser l'image
 permissions:
   contents: write
 
@@ -13,88 +21,52 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      - name: Normaliser config.ini
-        run: |
-          if [ ! -f config.ini ]; then
-            echo "config.ini introuvable à la racine"; exit 1
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
           fi
-          perl -pi -e 's/\r\n/\n/g' config.ini
-          (printf '\xEF\xBB\xBF' | cmp -s - <(head -c 3 config.ini)) \
-            && tail -c +4 config.ini > config.tmp && mv config.tmp config.ini || true
-
-      - name: Forcer [MODE].mode = sftp
-        run: |
-          python - << 'PY'
-          import configparser
-          from pathlib import Path
-          p = Path("config.ini")
-          txt = p.read_text(encoding="utf-8", errors="ignore")
-          cp = configparser.ConfigParser()
-          try:
-              cp.read_string(txt)
-          except Exception:
-              txt = "[DEFAULT]\n" + txt
-              cp.read_string(txt)
-          if 'MODE' not in cp: cp['MODE'] = {}
-          cp['MODE']['mode'] = 'sftp'
-          with p.open("w", encoding="utf-8") as f:
-              cp.write(f)
-          PY
-
-      - name: Aperçu config.ini (lignes utiles)
-        run: |
-          echo "----- [MODE] -----"
-          awk '/^\[MODE\]/{f=1;print;next} /^\[/{f=0} f' config.ini || true
-          echo "----- 1..60 -----"
-          sed -n '1,60p' config.ini || true
 
       - name: Run python main.py
         run: |
           echo "Lancement du script…"
           python main.py
 
-      - name: Commit & push (images/top3.png)
+      - name: Commit & push changes (images/top3.png)
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add images/top3.png || true
-          if ! git diff --cached --quiet; then
-            git commit -m "Auto-update from cron: $(date +%s)"
-            git push
+
+          # Ajoute l'image (et éventuellement des CSV/TXT générés)
+          git add images/top3.png staticdata/*.csv staticdata/*.txt 2>/dev/null || true
+
+          if git diff --staged --quiet; then
+            echo "Rien à committer."
           else
-            echo "Aucun changement"
+            git commit -m "Auto-update leaderboard image"
+            git push
           fi
 
-      - name: Purger cache jsDelivr + warm
+      # Garder un lien FIXE via jsDelivr : on purge et on “réchauffe” le cache
+      - name: Purger le cache jsDelivr + réchauffer
         run: |
           set -e
           FILE="images/top3.png"
-          URL="https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/$FILE"
           PURGE="https://purge.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/$FILE"
-          echo "Purge: $PURGE"
-          curl -sS "$PURGE" > /dev/null || true
-          echo "Warm:  $URL"
-          curl -sS "$URL" | head -c 8 || true
-          echo
+          URL="https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/$FILE"
 
-      - name: Notifier Discord
-        if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: |
-          IMAGE_URL="https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/images/top3.png"
-          jq -n --arg content "Leaderboard mis à jour ✅\n$IMAGE_URL" '{content:$content}' \
-            | curl -sS -H "Content-Type: application/json" -d @- "$DISCORD_WEBHOOK_URL" || true
+          echo "Purge jsDelivr: $PURGE"
+          curl -sS "$PURGE" >/dev/null || true
+
+          sleep 3
+          echo "Warm jsDelivr: $URL"
+          curl -sS "$URL" >/dev/null || true
