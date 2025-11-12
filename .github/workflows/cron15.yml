@@ -1,12 +1,16 @@
-name: cron15
+name: Run Python script every 15 min
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
-  workflow_dispatch:
+    - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
+  workflow_dispatch:         # pour tester à la main
+
+concurrency:
+  group: python-cron
+  cancel-in-progress: false
 
 jobs:
-  r:
+  run:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -18,49 +22,33 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Decide window
-        run: |
-          TS=$(date -u +%s)
-          REM=$(( (TS/60) % 15 ))
-          MIN=$(date -u +%M)
-          echo "UTC now: $(date -u) | minute=$MIN | remainder=$REM (0..14)"
-          # Fenêtre élargie : on accepte 0..4 (= jusqu'à +5 min après 00/15/30/45)
-          if [ $REM -le 4 ]; then
-            echo "SHOULD_RUN=true" >> "$GITHUB_ENV"
-            echo "Inside 5-min window after a quarter-hour -> will run."
-          else
-            echo "SHOULD_RUN=false" >> "$GITHUB_ENV"
-            echo "Outside window -> skip heavy steps."
-          fi
-
       - name: Set up Python
-        if: env.SHOULD_RUN == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
-        if: env.SHOULD_RUN == 'true'
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Ensure required folders exist
-        if: env.SHOULD_RUN == 'true'
         run: |
-          mkdir -p data/stats data/usercache data/playerdata data/cobblemonplayerdata data/vanilla images staticdata
+          mkdir -p data/stats
+          mkdir -p data/usercache
+          mkdir -p data/playerdata
+          mkdir -p data/cobblemonplayerdata
+          mkdir -p data/vanilla
+          mkdir -p images
+          mkdir -p staticdata
 
       - name: Run script
-        if: env.SHOULD_RUN == 'true'
         run: |
           set -o pipefail
           python main.py | tee script_output.log
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
 
+      # push robuste (évite les erreurs de type non fast-forward)
       - name: Commit & push changes (if any)
-        if: env.SHOULD_RUN == 'true'
         run: |
           set -e
           git config user.name  "github-actions[bot]"
@@ -69,26 +57,32 @@ jobs:
           git pull --rebase --autostash origin main || true
           git add -A
           if ! git diff --cached --quiet; then
-            git commit -m "cron $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git commit -m "Auto-update from cron: $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
             git push || { git pull --rebase --autostash origin main && git push; }
+          else
+            echo "No changes to commit."
           fi
 
+      # --- envoie le lien jsDelivr (fixe) + l'image jointe (seulement en 'schedule') ---
       - name: Send stable link + image to Discord
-        if: env.SHOULD_RUN == 'true' && github.event_name == 'schedule'
+        if: success() && github.event_name == 'schedule'
         run: |
-          REPO_PATH="${GITHUB_REPOSITORY}"
-          URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
-          echo "📤 Envoi du lien stable sur Discord : $URL"
-          curl -s -H "Content-Type: application/json" -X POST \
-               -d "{\"content\":\"🏆 Nouveau leaderboard généré : ${URL}\"}" \
-               "$WEBHOOK"
+          set -e
+          # URL stable (repo public requis)
+          REPO_PATH="${GITHUB_REPOSITORY}"   # ex: NeliKkTv/cobbledex-leaderboardV4
+          STABLE_URL="https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/images/top3.png"
 
-      - name: Log execution time
-        if: env.SHOULD_RUN == 'true'
-        run: |
-          echo "UTC:    $(date -u '+%Y-%m-%d %H:%M:%S')"
-          echo "FR:     $(TZ='Europe/Paris' date '+%Y-%m-%d %H:%M:%S')"
+          # 1) message avec lien fixe
+          MSG="🏆 Leaderboard mis à jour\n${STABLE_URL}"
+          PAYLOAD=$(printf '{"content":"%s"}' "$MSG")
+          curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK"
 
-      - name: Skipped (outside window)
-        if: env.SHOULD_RUN != 'true'
-        run: echo "skip (not in 5-min window after 00/15/30/45 UTC)"
+          # 2) image en pièce jointe (aperçu dans Discord)
+          if [ -f images/top3.png ]; then
+            curl -s -X POST \
+              -F "payload_json={\"content\":\"\"}" \
+              -F "file=@images/top3.png;type=image/png" \
+              "$WEBHOOK"
+          else
+            echo "images/top3.png introuvable; envoi uniquement du lien."
+          fi
