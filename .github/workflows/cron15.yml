@@ -2,7 +2,7 @@ name: Cron leaderboard (robuste)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # Exécution toutes les 15 minutes
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -14,89 +14,92 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Cloner le dépôt
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: true
 
-      # 2️⃣ Installer Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      # 3️⃣ Installer les dépendances
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # 4️⃣ Vérification du fichier config.ini
       - name: Vérification du fichier config.ini
         run: |
-          echo "=== Vérification du fichier config.ini ==="
-          if [ ! -f config.ini ]; then
-            echo "::error ::config.ini introuvable à la racine du dépôt."
-            exit 1
-          fi
-          echo "✅ Fichier config.ini trouvé."
-          echo "----- Contenu brut -----"
-          cat config.ini
-          echo "------------------------"
+          echo "=== Vérification config.ini ==="
+          test -f config.ini || { echo "::error ::config.ini manquant"; exit 1; }
+          sed -n '1,120p' config.ini
 
-      # 5️⃣ Normaliser et forcer le mode SFTP
       - name: Normaliser/forcer config.ini (mode=sftp)
         shell: bash
         run: |
-          echo "==> Normalisation du fichier config.ini..."
           python - <<'PY'
           import pathlib, re
-
           p = pathlib.Path("config.ini")
-          if not p.exists():
-              raise SystemExit("❌ Fichier config.ini introuvable")
-
-          data = p.read_text(encoding="utf-8").replace("\r\n", "\n")
-
+          data = p.read_text(encoding="utf-8").replace("\r\n","\n")
           if "[MODE]" not in data:
               data = "[MODE]\nmode = sftp\n\n" + data
           else:
               data = re.sub(r"(?<=mode\s*=\s*)(\w+)", "sftp", data)
-
           p.write_text(data, encoding="utf-8")
-          print("✅ config.ini normalisé et mode forcé à sftp.")
+          print("✅ config.ini normalisé (mode=sftp)")
           PY
 
-      # 6️⃣ Exécution du script principal Python
       - name: Exécution du script principal
         run: |
           echo "=== Lancement du script Python ==="
           python main.py
 
-      # 7️⃣ Commit & push de l’image générée (HTTPS, public)
-      - name: Commit & push updated leaderboard
-        if: success()
+      - name: Diagnostiquer l’image générée
         run: |
-          echo "=== Commit et push du leaderboard ==="
+          echo "=== Diagnostics PNG ==="
+          set -x
+          ls -lah images || true
+          if [ -f images/top3.png ]; then
+            du -h images/top3.png
+            sha256sum images/top3.png
+          else
+            echo "⚠️ images/top3.png introuvable"
+          fi
+          set +x
+
+      - name: Commit & push (même sans diff)
+        run: |
+          echo "=== Commit/Push PNG ==="
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git pull origin main --rebase || true
+          git pull --rebase origin main || true
 
+          git status -s
           if [ -f images/top3.png ]; then
-            echo "✅ Fichier top3.png trouvé, préparation du commit..."
+            # Ajoute et tente un commit si diff
             git add images/top3.png
-            git commit -m "Update leaderboard image [auto]" || echo "Aucun changement à commit."
-            git push https://github.com/NelikkTv/cobbledex-leaderboardV4.git HEAD:main || echo "⚠️ Aucun push possible (aucun changement)"
+            git commit -m "Update leaderboard image [auto]" || echo "Aucun diff: commit vide forcé"
           else
-            echo "⚠️ Aucun fichier images/top3.png trouvé, aucun push effectué."
+            echo "⚠️ PNG absent: commit vide pour forcer un push"
+            git commit --allow-empty -m "Keep-alive commit (no image)"
           fi
 
-      # 8️⃣ Purger le cache jsDelivr (rafraîchit ton lien public)
-      - name: Purger le cache jsDelivr
-        if: success()
+          git push origin HEAD:main || true
+
+      - name: Purger jsDelivr + réchauffer l’URL
         run: |
-          echo "=== Purge du cache jsDelivr ==="
-          curl -X PURGE "https://cdn.jsdelivr.net/gh/NelikkTv/cobbledex-leaderboardV4/images/top3.png" || true
-          echo "✅ Cache jsDelivr rafraîchi."
+          set -x
+          URL="https://cdn.jsdelivr.net/gh/NelikkTv/cobbledex-leaderboardV4/images/top3.png"
+          echo "Purge jsDelivr…"
+          curl -fsS -X PURGE "$URL" || true
+          echo "Pause puis warm (remplit le cache avec la nouvelle image)…"
+          sleep 3
+          curl -fsS -I "$URL" || true
+          echo "Lien fixe: $URL"
+
+      - name: Fin
+        run: |
+          echo "✅ Terminé."
+          echo "Lien fixe : https://cdn.jsdelivr.net/gh/NelikkTv/cobbledex-leaderboardV4/images/top3.png"
