@@ -1,15 +1,15 @@
-name: Cron leaderboard (debug mode)
+name: Cron leaderboard (robuste)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/15 * * * *"  # toutes les 15 minutes
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  run-leaderboard:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,66 +17,79 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Vérification du fichier config.ini
-        run: |
-          echo "==== Vérification du fichier config.ini ===="
-          if [ ! -f "config.ini" ]; then
-            echo "❌ ERREUR : config.ini est introuvable !"
-            exit 1
-          fi
-          echo "✅ Fichier config.ini trouvé."
-          echo "----- Contenu brut -----"
-          head -n 30 config.ini || true
-          echo "------------------------"
-
-          echo "Recherche du mode dans le fichier..."
-          MODE=$(grep -E '^mode *= *' config.ini | cut -d '=' -f2 | xargs)
-          if [ -z "$MODE" ]; then
-            echo "❌ Aucun mode trouvé dans config.ini !"
-            exit 1
-          fi
-          echo "🟩 Mode détecté : '$MODE'"
-
-          if [[ "$MODE" != "manual" && "$MODE" != "local" && "$MODE" != "ftp" && "$MODE" != "sftp" ]]; then
-            echo "❌ Mode invalide : $MODE"
-            echo "Le mode doit être 'manual', 'local', 'ftp' ou 'sftp'."
-            exit 1
-          fi
-          echo "✅ Mode valide, on continue."
-
-      - name: Run python main.py
-        run: |
-          echo "Lancement du script..."
-          python main.py
-
-      - name: Commit & push changes (images/top3.png)
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add images/top3.png || true
-          git commit -m "Auto-update leaderboard" || echo "Rien à commit"
-          git push || echo "Push déjà à jour"
-
-      - name: Purger le cache jsDelivr + réchauffer
+      # 🧩 Vérification avancée du fichier config.ini
+      - name: Vérification du fichier config.ini (robuste)
         run: |
           set -e
-          FILE="images/top3.png"
-          URL="https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/${FILE}"
-          PURGE="https://purge.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/${FILE}"
+          echo "==== Vérification du fichier config.ini ===="
 
-          echo "Purge jsDelivr: $PURGE"
-          curl -sS "$PURGE" > /dev/null
+          if [ ! -f config.ini ]; then
+            echo "::error::config.ini introuvable à la racine du repo."
+            exit 1
+          fi
 
-          sleep 3
-          echo "Warm jsDelivr: $URL"
-          curl -I "$URL" | sed -n '1,2p'
+          echo "✅ Fichier config.ini trouvé."
+          echo "----- Contenu brut (quelques lignes) -----"
+          sed -n '1,120p' config.ini | sed -e 's/\t/␉/g'
 
+          # 1️⃣ Supprimer BOM et retours chariot Windows
+          sed -i '1s/^\xEF\xBB\xBF//' config.ini
+          sed -i 's/\r//g' config.ini
+
+          echo "-----------------------------------------"
+          echo "Recherche du mode dans le fichier..."
+
+          # 2️⃣ Extraire la valeur du mode
+          MODE=$(
+            awk -F'=' '
+              BEGIN{IGNORECASE=1}
+              /^\s*\[MODE\]\s*$/ {inmode=1; next}
+              inmode && /^\s*\[/ {inmode=0}
+              inmode && /^\s*mode\s*=/ {
+                v=$2
+                gsub(/\r/,"",v)
+                gsub(/^[ \t"]+|[ \t"]+$/,"",v)
+                print tolower(v)
+                exit
+              }
+            ' config.ini
+          )
+
+          HEX=$(echo -n "$MODE" | xxd -p)
+          echo "🟢 Mode détecté   : '$MODE'"
+          echo "🔎 Mode en hex    : $HEX"
+
+          # 3️⃣ Validation
+          case "$MODE" in
+            manual|local|ftp|sftp)
+              echo "✅ Mode valide : $MODE"
+              ;;
+            *)
+              echo "::error::Mode invalide : '$MODE'. Le mode doit être 'manual', 'local', 'ftp' ou 'sftp'."
+              exit 1
+              ;;
+          esac
+
+      # 🚀 Lancement du script Python
+      - name: Run python main.py
+        run: |
+          echo "Lancement du script Python..."
+          python main.py
+
+      # ✅ Commit automatique si des fichiers sont modifiés (par ex. images générées)
+      - name: Commit & push changes (images/top3.png)
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add images/*.png || true
+          git commit -m "Update leaderboard images [bot]" || echo "Aucun changement à commit"
+          git push || echo "Aucun push nécessaire"
