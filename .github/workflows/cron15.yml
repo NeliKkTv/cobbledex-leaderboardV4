@@ -2,7 +2,7 @@ name: Cron leaderboard (robuste)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"  # Toutes les 15 minutes
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -29,7 +29,7 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # 4️⃣ Vérifier le fichier config.ini
+      # 4️⃣ Vérification du fichier config.ini
       - name: Vérification du fichier config.ini
         run: |
           echo "=== Vérification du fichier config.ini ==="
@@ -42,22 +42,25 @@ jobs:
           cat config.ini
           echo "------------------------"
 
-      # 5️⃣ Normaliser les fins de ligne et forcer le mode SFTP
+      # 5️⃣ Normaliser le fichier config.ini et forcer mode=sftp
       - name: Normaliser/forcer config.ini (mode=sftp)
         shell: bash
         run: |
           echo "==> Normalisation du fichier config.ini..."
           python - <<'PY'
-import pathlib
+import pathlib, re
+
 p = pathlib.Path("config.ini")
 if not p.exists():
     raise SystemExit("❌ Fichier config.ini introuvable")
+
 data = p.read_text(encoding="utf-8").replace("\r\n", "\n")
+
 if "[MODE]" not in data:
     data = "[MODE]\nmode = sftp\n\n" + data
 else:
-    import re
     data = re.sub(r"(?<=mode\s*=\s*)(\w+)", "sftp", data)
+
 p.write_text(data, encoding="utf-8")
 print("✅ config.ini normalisé et mode forcé à sftp.")
 PY
