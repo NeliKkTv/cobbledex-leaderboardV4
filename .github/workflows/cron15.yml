@@ -2,7 +2,7 @@ name: Cron leaderboard (robuste)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
+    - cron: "*/15 * * * *"      # toutes les 15 minutes
   workflow_dispatch:
 
 permissions:
@@ -13,25 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout"
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: "Setup Python"
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: "Install dependencies (si présents)"
+      - name: Install dependencies
         run: |
-          set -e
-          if [ -f requirements.txt ]; then
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-          else
-            echo "Pas de requirements.txt"
-          fi
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: "Normaliser/forcer config.ini (mode=sftp) puis propager"
+      - name: Normaliser/forcer config.ini (mode=sftp) puis propager
         shell: bash
         run: |
           set -e
@@ -41,7 +36,6 @@ jobs:
             exit 1
           fi
 
-          # Un seul bloc Python, encapsulé correctement
           python - <<'PY'
 import pathlib, re
 p = pathlib.Path('config.ini')
@@ -53,6 +47,7 @@ p.write_bytes(p.read_bytes().replace(b'\r\n', b'\n'))
 s = p.read_text(encoding='utf-8')
 if '[MODE]' not in s:
     s = s.rstrip() + '\n\n[MODE]\nmode = sftp\n'
+
 def repl(block):
     sect = block.group(0)
     if re.search(r'(?mi)^\s*mode\s*=.*$', sect):
@@ -60,6 +55,7 @@ def repl(block):
     else:
         sect = sect.rstrip() + '\nmode = sftp\n'
     return sect
+
 s = re.sub(r'(?s)\[MODE\].*?(?=\n\[|\Z)', repl, s)
 p.write_text(s, encoding='utf-8')
 print('[OK] config.ini normalisé + mode=sftp')
@@ -68,7 +64,7 @@ PY
           echo "----- Aperçu config.ini (début) -----"
           sed -n '1,120p' config.ini || true
 
-          # 3) Propager ce config.ini vers tout autre config.ini
+          # 3) Propager le config.ini racine vers tous les autres config.ini
           while IFS= read -r -d '' f; do
             if [ "$f" != "./config.ini" ]; then
               echo "Propagate vers $f"
@@ -76,23 +72,36 @@ PY
             fi
           done < <(find . -type f -name "config.ini" -print0)
 
-      - name: "Run python main.py (racine)"
+      - name: Run python main.py
         run: |
-          set -e
-          python --version
-          ls -la
+          echo "Lancement du script Python..."
           python main.py
 
-      - name: "Commit & push changes (images/*)"
-        if: always()
+      - name: Commit & push changes (images/*.png)
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          if ! git diff --cached --quiet; then
-            git commit -m "Auto-update from cron"
-            git push
-          else
-            echo "Aucun changement à pousser."
+          if git diff --cached --quiet; then
+            echo "Aucun changement à committer."
+            exit 0
           fi
+          git commit -m "Auto-update: leaderboard images + data [skip ci]"
+          git push
+
+      - name: Purger jsDelivr + réchauffer (top3.png)
+        if: always()
+        run: |
+          set -e
+          FILE="images/top3.png"   # <-- change si ton image s'appelle autrement
+          RAW="https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/${FILE}"
+          PURGE="https://purge.jsdelivr.net/gh/${{ github.repository }}@main/${FILE}"
+
+          echo "Purge jsDelivr: $PURGE"
+          curl -sS "$PURGE" > /dev/null || true
+
+          echo "Warm jsDelivr: $RAW"
+          curl -sSI "$RAW" | sed -n '1,12p' || true
