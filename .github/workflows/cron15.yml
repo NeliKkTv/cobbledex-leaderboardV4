@@ -1,87 +1,82 @@
-name: Run Python script every 15 min (robust)
+name: Cron leaderboard (robuste)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"    # toutes les 15 minutes (UTC)
-  workflow_dispatch:          # exécutable à la main
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
-
-concurrency:
-  group: python-cron
-  cancel-in-progress: false
 
 jobs:
   run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install deps
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # --- SANITIZE config.ini : retire BOM + convertit CRLF -> LF
-      - name: Sanitize config.ini (LF, no BOM)
-        if: ${{ hashFiles('config.ini') != '' }}
+      # 1) Normalisation de config.ini (CRLF -> LF, BOM retiré)
+      - name: Normaliser config.ini
         run: |
-          # convertit CRLF en LF
+          if [ ! -f config.ini ]; then
+            echo "config.ini introuvable à la racine"; exit 1
+          fi
           perl -pi -e 's/\r\n/\n/g' config.ini
-          # retire un éventuel BOM UTF-8
-          (printf '\xEF\xBB\xBF' | cmp -s - <(head -c 3 config.ini)) && tail -c +4 config.ini > config.tmp && mv config.tmp config.ini || true
+          (printf '\xEF\xBB\xBF' | cmp -s - <(head -c 3 config.ini)) \
+            && tail -c +4 config.ini > config.tmp && mv config.tmp config.ini || true
 
-      # --- DEBUG & AUTOFIX : affiche et corrige le mode si nécessaire
-      - name: Debug lecture du mode (via Python)
-        if: ${{ hashFiles('config.ini') != '' }}
+      # 2) Forcer le mode = sftp dans [MODE] (correction automatique)
+      - name: Forcer [MODE].mode = sftp
         run: |
           python - << 'PY'
-          import configparser, sys, io, os
-          p='config.ini'
-          if not os.path.exists(p):
-              print("config.ini introuvable"); sys.exit(1)
-          # lecture BOM-safe
-          with open(p,'r',encoding='utf-8-sig') as f:
-              raw=f.read()
-          cfg = configparser.ConfigParser()
+          import configparser, io
+          from pathlib import Path
+          p = Path("config.ini")
+          txt = p.read_text(encoding="utf-8", errors="ignore")
+          # Tolérance aux fichiers sans header ou un header étrange
+          cp = configparser.ConfigParser()
           try:
-              cfg.read_string(raw)
-          except Exception as e:
-              print("Erreur de parsing:", e); sys.exit(1)
+            cp.read_string(txt)
+          except Exception:
+            # En dernier recours, on préfixe par une section neutre
+            txt = "[DEFAULT]\n" + txt
+            cp.read_string(txt)
 
-          if 'MODE' not in cfg: cfg['MODE'] = {}
-          mode = cfg['MODE'].get('mode','').strip().lower()
-          print("MODE actuel lu dans config.ini =>", repr(mode))
+          if 'MODE' not in cp: cp['MODE'] = {}
+          cp['MODE']['mode'] = 'sftp'
 
-          valid = {'manual','local','ftp','sftp'}
-          if mode not in valid:
-              print("Mode invalide. Correction automatique -> sftp")
-              cfg['MODE']['mode'] = 'sftp'
-              with open(p,'w',encoding='utf-8') as f:
-                  cfg.write(f)
+          p.write_text("", encoding="utf-8")  # réécrit proprement
+          with p.open("w", encoding="utf-8") as f:
+            cp.write(f)
           PY
 
-      # --- (optionnel) Affiche les 40 premières lignes pour contrôle
-      - name: Aperçu config.ini (40 premières lignes)
-        if: ${{ hashFiles('config.ini') != '' }}
-        run: sed -n '1,40p' config.ini || true
+      # 3) Montrer ce qui sera lu
+      - name: Aperçu config.ini (lignes utiles)
+        run: |
+          echo "----- [MODE] -----"
+          awk '/^\[MODE\]/{f=1;print;next} /^\[/{f=0} f' config.ini || true
+          echo "----- 1..60 -----"
+          sed -n '1,60p' config.ini || true
 
-      # --- LANCE TON SCRIPT
+      # 4) Lancer ton script
       - name: Run python main.py
         run: |
-          echo "Lancement du script..."
+          echo "Lancement du script…"
           python main.py
 
-      # --- Commit l'image si elle a changé
-      - name: Commit & push changes (images/top3.png)
+      # 5) Commit si l'image a changé
+      - name: Commit & push (images/top3.png)
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -90,31 +85,28 @@ jobs:
             git commit -m "Auto-update from cron: $(date +%s)"
             git push
           else
-            echo "Rien à committer"
+            echo "Aucun changement"
           fi
 
-      # --- Purge jsDelivr et réchauffement (URL FIXE)
-      - name: Purger le cache jsDelivr + réchauffer
+      # 6) Purge / Warm jsDelivr (lien fixe)
+      - name: Purger cache jsDelivr + warm
         run: |
           set -e
           FILE="images/top3.png"
           URL="https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/$FILE"
           PURGE="https://purge.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/$FILE"
-
-          echo "Purge jsDelivr : $PURGE"
+          echo "Purge: $PURGE"
           curl -sS "$PURGE" > /dev/null || true
-
-          echo "Warm jsDelivr : $URL"
-          curl -sS "$URL"  | head -c 8 || true
+          echo "Warm:  $URL"
+          curl -sS "$URL" | head -c 8 || true
           echo
 
-      # --- Envoi sur Discord avec lien FIXE (facultatif si tu l’as déjà)
-      - name: Notifier Discord avec lien FIXE + aperçu rafraîchi
-        if: ${{ env.DISCORD_WEBHOOK_URL != '' }}
+      # 7) Discord (facultatif)
+      - name: Notifier Discord
+        if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
-          set -e
           IMAGE_URL="https://cdn.jsdelivr.net/gh/NeliKkTv/cobbledex-leaderboardV4@main/images/top3.png"
-          JSON_PAYLOAD=$(jq -n --arg content "Leaderboard mis à jour ✅\n$IMAGE_URL" '{content: $content}')
-          curl -sS -H "Content-Type: application/json" -d "$JSON_PAYLOAD" "$DISCORD_WEBHOOK_URL" || true
+          jq -n --arg content "Leaderboard mis à jour ✅\n$IMAGE_URL" '{content:$content}' \
+            | curl -sS -H "Content-Type: application/json" -d @- "$DISCORD_WEBHOOK_URL" || true
