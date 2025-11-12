@@ -6,7 +6,7 @@ on:
   workflow_dispatch:           # exécution manuelle possible
 
 permissions:
-  contents: write              # nécessaire pour commit/push
+  contents: write              # permet le push GitHub
 
 jobs:
   run:
@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-      uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -61,7 +61,7 @@ jobs:
         run: |
           if [ -n "$DISCORD_WEBHOOK_URL" ]; then
             CDN_URL="https://cdn.jsdelivr.net/gh/${OWNER}/${REPO}@main/images/top3.png"
-            MSG="🔁 **Leaderboard mis à jour**\n${CDN_URL}"
+            MSG="🔁 **Leaderboard mis à jour automatiquement !**\n${CDN_URL}"
             curl -sS -H "Content-Type: application/json" \
                  -d "{\"content\":\"${MSG}\"}" \
                  "$DISCORD_WEBHOOK_URL"
