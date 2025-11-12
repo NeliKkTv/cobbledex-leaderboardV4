@@ -9469,6 +9469,16 @@
     },
     "done": false
   },
+  "cobblemon:rainbow_apricorns": {
+    "criteria": {
+      "place_white": "2025-11-12 02:05:16 +0100",
+      "place_pink": "2025-11-12 02:04:00 +0100",
+      "place_yellow": "2025-11-12 02:05:09 +0100",
+      "place_red": "2025-11-12 02:04:05 +0100",
+      "place_blue": "2025-11-12 02:04:16 +0100"
+    },
+    "done": false
+  },
   "eternal_starlight:all_starlight_biomes": {
     "criteria": {
       "in_scarlet_forest": "2025-11-12 01:20:06 +0100",
