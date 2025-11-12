@@ -1,90 +1,89 @@
-name: Exécuter le script Python toutes les 15 minutes
+name: Run Python script every 15 min
 
 on:
   schedule:
-    - cron: "*/15 * * * *"     # toutes les 15 minutes (UTC)
-  workflow_dispatch:           # permet de lancer à la main
+    - cron: "*/15 * * * *"   # toutes les 15 minutes (UTC)
+  workflow_dispatch:         # exécution manuelle possible
 
-permissions:
-  contents: write              # autorise le push vers le repo
+concurrency:
+  group: python-cron
+  cancel-in-progress: false
 
 jobs:
   run:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write   # nécessaire pour push l’image
+
+    env:
+      WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
     steps:
-      - name: Récupérer le dépôt
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Installer Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Installer les dépendances (si besoin)
+      - name: Install dependencies
         run: |
-          if [ -f requirements.txt ]; then
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-          fi
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Créer les dossiers nécessaires
-        run: |
-          mkdir -p images
-          mkdir -p fonts
-          mkdir -p data
+      - name: Ensure required folders exist
+        run: mkdir -p data stats images staticdata
 
-      - name: Exécuter le script principal
+      - name: Run script
         run: python main.py
 
-      - name: Commit & push des changements (si besoin)
+      - name: Commit & push changes (if any)
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "Aucun changement détecté."
-            echo "CHANGED=false" >> $GITHUB_ENV
-          else
-            git commit -m "Mise à jour automatique depuis le cron #${{ github.run_number }}"
-            git push
-            echo "CHANGED=true" >> $GITHUB_ENV
-          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add images/top3.png
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update leaderboard from cron: ${{ github.run_id }}" && git push)
 
-      - name: Vider le cache jsDelivr
-        if: env.CHANGED == 'true'
+      # 🧹 Purge le cache jsDelivr après mise à jour
+      - name: Purger le cache jsDelivr + réchauffer
+        if: env.SHOULD_RUN == 'true' || true
+        run: |
+          set -e
+          FILE="images/top3.png"
+          REPO="${{ github.repository }}"
+          FIX_URL="https://cdn.jsdelivr.net/gh/${REPO}@main/${FILE}"
+          PURGE_URL="https://purge.jsdelivr.net/gh/${REPO}@main/${FILE}"
+
+          echo "Purge jsDelivr: $PURGE_URL"
+          curl -sS "$PURGE_URL" > /dev/null || true
+
+          sleep 3
+          echo "Warm jsDelivr: $FIX_URL"
+          curl -sI "$FIX_URL" | sed -n '1,20p'
+
+      # 💬 Envoi sur Discord avec lien fixe + aperçu sans cache
+      - name: Notifier Discord avec lien FIXE + aperçu rafraîchi
         env:
-          OWNER: ${{ github.repository_owner }}
-          REPO:  ${{ github.event.repository.name }}
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
-          CDN_PATH="gh/${OWNER}/${REPO}@main/images/top3.png"
-          echo "Purge du cache jsDelivr pour ${CDN_PATH}"
-          curl -sS "https://purge.jsdelivr.net/${CDN_PATH}"
-          sleep 2
+          set -e
+          REPO="${{ github.repository }}"
+          FIX_URL="https://cdn.jsdelivr.net/gh/${REPO}@main/images/top3.png"
+          PREVIEW_URL="${FIX_URL}?t=${{ github.run_id }}"
 
-      - name: Envoyer l'image sur Discord
-        if: env.CHANGED == 'true'
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          OWNER: ${{ github.repository_owner }}
-          REPO:  ${{ github.event.repository.name }}
-          RUN_ID: ${{ github.run_id }}
-        run: |
-          if [ -n "$DISCORD_WEBHOOK_URL" ]; then
-            STABLE="https://cdn.jsdelivr.net/gh/${OWNER}/${REPO}@main/images/top3.png"
-            NOCACHE="${STABLE}?v=${RUN_ID}"
+          read -r -d '' PAYLOAD <<EOF
+          {
+            "content": "**Leaderboard mis à jour !**\\nLien fixe : ${FIX_URL}",
+            "embeds": [
+              {
+                "image": { "url": "${PREVIEW_URL}" },
+                "color": 5814783
+              }
+            ]
+          }
+          EOF
 
-            MSG="🔁 **Leaderboard mis à jour !**\n🔗 Lien fixe : ${STABLE}\n🚀 Lien sans cache : ${NOCACHE}"
-            curl -sS -H "Content-Type: application/json" \
-                 -d "{\"content\":\"${MSG}\"}" \
-                 "$DISCORD_WEBHOOK_URL"
+          curl -sS -H "Content-Type: application/json" -d "$PAYLOAD" "$WEBHOOK"
 
-            if [ -f "images/top3.png" ]; then
-              curl -sS -X POST \
-                -F "payload_json={\"content\":\"\"}" \
-                -F "file=@images/top3.png" \
-                "$DISCORD_WEBHOOK_URL"
-            fi
-          else
-            echo "Aucun webhook Discord trouvé — envoi ignoré."
-          fi
