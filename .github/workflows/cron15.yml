@@ -1,116 +1,54 @@
-name: Cron leaderboard (robuste)
+name: Simple Cron Leaderboard
 
 on:
   schedule:
-    - cron: "*/15 * * * *"    # toutes les 15 minutes
-  workflow_dispatch:
-
-permissions:
-  contents: write
+    - cron: "*/15 * * * *"   # toutes les 15 minutes
+  workflow_dispatch:          # permet de le lancer manuellement
 
 jobs:
   run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout du dépôt
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Configuration de Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Installation des dépendances
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Normaliser/forcer config.ini (mode=sftp) puis propager
-        shell: bash
+      - name: Vérification du fichier config.ini
         run: |
-          set -e
-          ROOT_CFG="config.ini"
-          if [ ! -f "$ROOT_CFG" ]; then
-            echo "::error ::config.ini introuvable à la racine du repo."
+          echo "=== Vérification de config.ini ==="
+          if [ ! -f config.ini ]; then
+            echo "::error::Le fichier config.ini est introuvable à la racine."
             exit 1
           fi
+          head -n 20 config.ini || true
 
-          echo "==> Normalisation et vérification du fichier config.ini..."
-
-          python - <<'PY'
-import pathlib, re
-
-# Ouvrir le fichier config.ini
-p = pathlib.Path('config.ini')
-
-# 1) Normaliser CRLF -> LF
-p.write_bytes(p.read_bytes().replace(b'\r\n', b'\n'))
-
-# 2) Forcer [MODE] et mode = sftp
-s = p.read_text(encoding='utf-8')
-if '[MODE]' not in s:
-    s = s.rstrip() + '\n\n[MODE]\nmode = sftp\n'
-
-def repl(block):
-    sect = block.group(0)
-    if re.search(r'(?mi)^\s*mode\s*=.*$', sect):
-        sect = re.sub(r'(?mi)^\s*mode\s*=.*$', 'mode = sftp', sect)
-    else:
-        sect = sect.rstrip() + '\nmode = sftp\n'
-    return sect
-
-s = re.sub(r'(?s)\[MODE\].*?(?=\n\[|\Z)', repl, s)
-p.write_text(s, encoding='utf-8')
-
-print("[OK] config.ini normalisé + mode=sftp")
-PY
-
-          echo "----- Aperçu du config.ini -----"
-          sed -n '1,120p' config.ini || true
-
-          # 3) Propager vers tout autre config.ini présent dans le repo
-          echo "==> Propagation du fichier config.ini vers les sous-dossiers..."
-          while IFS= read -r -d '' f; do
-            if [ "$f" != "./config.ini" ]; then
-              echo "Copie vers : $f"
-              cp -f config.ini "$f"
-            fi
-          done < <(find . -type f -name "config.ini" -print0)
-          echo "Propagation terminée."
-
-      - name: Run python main.py
+      - name: Exécution du script principal
         run: |
-          echo "==> Lancement du script Python..."
+          echo "=== Lancement du script Python ==="
           python main.py
 
-      - name: Commit & push changes (images/*.png)
+      - name: Commit & push des images (si modifiées)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          set -e
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add -A
           if git diff --cached --quiet; then
-            echo "Aucun changement à committer."
+            echo "Aucun changement détecté."
             exit 0
           fi
 
-          git commit -m "Auto-update leaderboard images [skip ci]"
+          git commit -m "Auto-update: leaderboard images [skip ci]"
           git push
-
-      - name: Purger et réchauffer jsDelivr (top3.png)
-        if: always()
-        run: |
-          FILE="images/top3.png"   # <-- change le nom si besoin
-          REPO="${{ github.repository }}"
-          RAW="https://cdn.jsdelivr.net/gh/${REPO}@main/${FILE}"
-          PURGE="https://purge.jsdelivr.net/gh/${REPO}@main/${FILE}"
-
-          echo "==> Purge jsDelivr: $PURGE"
-          curl -sS "$PURGE" > /dev/null || true
-
-          echo "==> Warm jsDelivr: $RAW"
-          curl -sSI "$RAW" | sed -n '1,12p' || true
