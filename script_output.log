@@ -49,7 +49,7 @@ Téléchargement: /Minecraft/world/playerdata/d003e788-5098-45bf-b5f6-8e5b7c1098
 ✓ Succès: 5357 bytes transférés
 🔄 Traitement de d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat
 Téléchargement: /Minecraft/world/playerdata/d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat -> data/playerdata/d7c0d5f8-050d-405f-96af-8bb842d4ef48.dat
-✓ Succès: 25869 bytes transférés
+✓ Succès: 25785 bytes transférés
 📁 Listing direct de: /Minecraft/world/advancements
 🔄 Traitement de 3f1eb309-0fee-4b85-83ad-27cd928bd167.json
 Téléchargement: /Minecraft/world/advancements/3f1eb309-0fee-4b85-83ad-27cd928bd167.json -> data/advancements/3f1eb309-0fee-4b85-83ad-27cd928bd167.json
@@ -71,7 +71,7 @@ Téléchargement: /Minecraft/world/advancements/d003e788-5098-45bf-b5f6-8e5b7c10
 ✓ Succès: 58774 bytes transférés
 🔄 Traitement de d7c0d5f8-050d-405f-96af-8bb842d4ef48.json
 Téléchargement: /Minecraft/world/advancements/d7c0d5f8-050d-405f-96af-8bb842d4ef48.json -> data/advancements/d7c0d5f8-050d-405f-96af-8bb842d4ef48.json
-✓ Succès: 266444 bytes transférés
+✓ Succès: 266657 bytes transférés
 Stats saved to total.csv
 
 Generating top leaderboards image...
