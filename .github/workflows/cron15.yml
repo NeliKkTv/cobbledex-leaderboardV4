@@ -2,11 +2,12 @@ name: Cron leaderboard (robuste)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # exécution toutes les 15 minutes
+    - cron: "*/15 * * * *"   # Exécution toutes les 15 minutes
   workflow_dispatch:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   build:
@@ -16,6 +17,8 @@ jobs:
       # 1️⃣ Cloner le dépôt
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       # 2️⃣ Installer Python
       - name: Set up Python
@@ -76,12 +79,18 @@ jobs:
         if: success()
         run: |
           echo "=== Commit et push du leaderboard ==="
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add images/top3.png || echo "⚠️ Aucun fichier top3.png trouvé."
-          git commit -m "Update leaderboard image [auto]" || echo "Aucun changement à commit."
-          git pull origin main --rebase || true
-          git push https://github.com/NelikkTv/cobbledex-leaderboardV4.git HEAD:main || true
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [ -f images/top3.png ]; then
+            echo "✅ Fichier top3.png trouvé, préparation du commit..."
+            git add images/top3.png
+            git commit -m "Update leaderboard image [auto]" || echo "Aucun changement à commit."
+            git pull origin main --rebase || true
+            git push https://github.com/NelikkTv/cobbledex-leaderboardV4.git HEAD:main || true
+          else
+            echo "⚠️ Aucun fichier images/top3.png trouvé, aucun push effectué."
+          fi
 
       # 8️⃣ Purger le cache jsDelivr (rafraîchit ton lien public)
       - name: Purger le cache jsDelivr
@@ -90,3 +99,11 @@ jobs:
           echo "=== Purge du cache jsDelivr ==="
           curl -X PURGE "https://cdn.jsdelivr.net/gh/NelikkTv/cobbledex-leaderboardV4/images/top3.png" || true
           echo "✅ Cache jsDelivr rafraîchi."
+
+      # 9️⃣ (Optionnel) Étape Discord à activer plus tard
+      # - name: Envoyer notification Discord
+      #   if: success()
+      #   run: |
+      #     curl -H "Content-Type: application/json" \
+      #          -d '{"content":"🎉 Nouveau leaderboard généré !\nhttps://cdn.jsdelivr.net/gh/NelikkTv/cobbledex-leaderboardV4/images/top3.png"}' \
+      #          ${{ secrets.DISCORD_WEBHOOK_URL }}
