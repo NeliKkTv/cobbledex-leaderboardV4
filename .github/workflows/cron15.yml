@@ -2,7 +2,7 @@ name: Cron leaderboard (robuste)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"    # toutes les 15 minutes UTC
+    - cron: "*/15 * * * *"         # toutes les 15 min (UTC)
   workflow_dispatch:
 
 permissions:
@@ -13,113 +13,88 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: "Checkout"
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: "Setup Python"
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies (si présents)
+      - name: "Install dependencies (si présents)"
         run: |
           set -e
           if [ -f requirements.txt ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
           else
-            echo "Pas de requirements.txt, on continue."
+            echo "Pas de requirements.txt"
           fi
 
-      - name: Normaliser/forcer le config.ini maître et propager
+      - name: "Normaliser et forcer config.ini (mode=sftp) puis propager"
         shell: bash
         run: |
           set -e
-
-          ROOT_CFG="./config.ini"
+          ROOT_CFG="config.ini"
           if [ ! -f "$ROOT_CFG" ]; then
             echo "::error ::config.ini introuvable à la racine du repo."
             exit 1
           fi
 
-          # 1) Normalise CRLF -> LF
-          python - <<'PY'
-import io
-p = "config.ini"
-with open(p, "rb") as f:
-    data = f.read()
-data = data.replace(b"\r\n", b"\n")
-with open(p, "wb") as f:
-    f.write(data)
-print("config.ini normalisé (LF).")
-PY
+          # 1) Normaliser LF
+          python -c "import pathlib; p=pathlib.Path('config.ini'); p.write_bytes(p.read_bytes().replace(b'\r\n', b'\n')); print('config.ini normalisé (LF).')"
 
-          # 2) Ecrire/forcer mode = sftp dans la section [MODE]
-          python - <<'PY'
-import configparser, io, sys
+          # 2) Forcer [MODE] / mode = sftp (sans here-doc)
+          cat > _force_mode.py << 'PY'
+import re, pathlib
+p = pathlib.Path('config.ini')
+s = p.read_text(encoding='utf-8')
 
-p = "config.ini"
-cfg = configparser.ConfigParser()
-# conserver la casse des options
-cfg.optionxform = str
-with open(p, "r", encoding="utf-8") as f:
-    s = f.read()
+# Ajouter une section [MODE] si absente
+if '[MODE]' not in s:
+    s = s.rstrip() + '\n\n[MODE]\nmode = sftp\n'
 
-# Si pas de section [MODE], on la crée en tête
-if "[MODE]" not in s:
-    s = s.rstrip() + "\n\n[MODE]\nmode = sftp\n"
-
-# On réécrit proprement : remplace la ligne "mode = ..." dans [MODE] par "mode = sftp"
-lines = s.splitlines()
-out = []
-in_mode = False
-touched = False
-for line in lines:
-    if line.strip().startswith("[") and line.strip().endswith("]"):
-        in_mode = (line.strip().lower() == "[mode]")
-        out.append(line)
-        continue
-    if in_mode and line.strip().lower().startswith("mode"):
-        out.append("mode = sftp")
-        touched = True
+# Remplacer/ajouter 'mode = sftp' dans la section [MODE]
+def repl(block):
+    sect = block.group(0)
+    if re.search(r'(?mi)^\s*mode\s*=', sect):
+        sect = re.sub(r'(?mi)^\s*mode\s*=.*$', 'mode = sftp', sect)
     else:
-        out.append(line)
+        sect = sect.rstrip() + '\nmode = sftp\n'
+    return sect
 
-if in_mode and not touched:
-    out.append("mode = sftp")
-
-with open(p, "w", encoding="utf-8") as f:
-    f.write("\n".join(out) + "\n")
-print("Section [MODE] forcée sur 'mode = sftp'.")
+s = re.sub(r'(?s)\[MODE\].*?(?=\n\[|\Z)', repl, s)
+p.write_text(s, encoding='utf-8')
+print('[MODE] -> mode = sftp')
 PY
+          python _force_mode.py
+          rm -f _force_mode.py
 
-          echo "----- config.ini maître (raccourci) -----"
-          sed -n '1,120p' "$ROOT_CFG"
+          echo "----- Aperçu config.ini (début) -----"
+          sed -n '1,120p' config.ini
 
-          # 3) Propager ce config.ini maître à tout autre config.ini éventuellement présent
-          while IFS= read -r f; do
+          # 3) Propager ce config.ini vers tout autre config.ini trouvé dans le repo
+          while IFS= read -r -d '' f; do
             if [ "$f" != "./config.ini" ]; then
               echo "Propagate vers $f"
-              cp -f "$ROOT_CFG" "$f"
+              cp -f config.ini "$f"
             fi
-          done < <(find . -type f -name "config.ini" | sort)
+          done < <(find . -type f -name "config.ini" -print0)
 
-      - name: Run python main.py (racine)
+      - name: "Run python main.py (racine)"
         run: |
           set -e
           python --version
           ls -la
-          # Lancer depuis la racine (main.py doit être à la racine du repo)
           python main.py
 
-      - name: Commit & push changes (images/top3.png)
+      - name: "Commit & push changes (images/top3.png)"
         if: always()
         run: |
           set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          # Ne commit que s'il y a des modifications (image régénérée, etc.)
           if ! git diff --cached --quiet; then
             git commit -m "Auto-update from cron"
             git push
