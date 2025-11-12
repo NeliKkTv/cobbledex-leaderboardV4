@@ -2,7 +2,7 @@ name: Cron leaderboard (robuste)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"      # toutes les 15 minutes
+    - cron: "*/15 * * * *"    # toutes les 15 minutes
   workflow_dispatch:
 
 permissions:
@@ -36,14 +36,18 @@ jobs:
             exit 1
           fi
 
+          echo "==> Normalisation et vérification du fichier config.ini..."
+
           python - <<'PY'
 import pathlib, re
+
+# Ouvrir le fichier config.ini
 p = pathlib.Path('config.ini')
 
 # 1) Normaliser CRLF -> LF
 p.write_bytes(p.read_bytes().replace(b'\r\n', b'\n'))
 
-# 2) Forcer [MODE] / mode = sftp
+# 2) Forcer [MODE] et mode = sftp
 s = p.read_text(encoding='utf-8')
 if '[MODE]' not in s:
     s = s.rstrip() + '\n\n[MODE]\nmode = sftp\n'
@@ -58,23 +62,26 @@ def repl(block):
 
 s = re.sub(r'(?s)\[MODE\].*?(?=\n\[|\Z)', repl, s)
 p.write_text(s, encoding='utf-8')
-print('[OK] config.ini normalisé + mode=sftp')
+
+print("[OK] config.ini normalisé + mode=sftp")
 PY
 
-          echo "----- Aperçu config.ini (début) -----"
+          echo "----- Aperçu du config.ini -----"
           sed -n '1,120p' config.ini || true
 
-          # 3) Propager le config.ini racine vers tous les autres config.ini
+          # 3) Propager vers tout autre config.ini présent dans le repo
+          echo "==> Propagation du fichier config.ini vers les sous-dossiers..."
           while IFS= read -r -d '' f; do
             if [ "$f" != "./config.ini" ]; then
-              echo "Propagate vers $f"
+              echo "Copie vers : $f"
               cp -f config.ini "$f"
             fi
           done < <(find . -type f -name "config.ini" -print0)
+          echo "Propagation terminée."
 
       - name: Run python main.py
         run: |
-          echo "Lancement du script Python..."
+          echo "==> Lancement du script Python..."
           python main.py
 
       - name: Commit & push changes (images/*.png)
@@ -84,24 +91,26 @@ PY
           set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add -A
           if git diff --cached --quiet; then
             echo "Aucun changement à committer."
             exit 0
           fi
-          git commit -m "Auto-update: leaderboard images + data [skip ci]"
+
+          git commit -m "Auto-update leaderboard images [skip ci]"
           git push
 
-      - name: Purger jsDelivr + réchauffer (top3.png)
+      - name: Purger et réchauffer jsDelivr (top3.png)
         if: always()
         run: |
-          set -e
-          FILE="images/top3.png"   # <-- change si ton image s'appelle autrement
-          RAW="https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/${FILE}"
-          PURGE="https://purge.jsdelivr.net/gh/${{ github.repository }}@main/${FILE}"
+          FILE="images/top3.png"   # <-- change le nom si besoin
+          REPO="${{ github.repository }}"
+          RAW="https://cdn.jsdelivr.net/gh/${REPO}@main/${FILE}"
+          PURGE="https://purge.jsdelivr.net/gh/${REPO}@main/${FILE}"
 
-          echo "Purge jsDelivr: $PURGE"
+          echo "==> Purge jsDelivr: $PURGE"
           curl -sS "$PURGE" > /dev/null || true
 
-          echo "Warm jsDelivr: $RAW"
+          echo "==> Warm jsDelivr: $RAW"
           curl -sSI "$RAW" | sed -n '1,12p' || true
